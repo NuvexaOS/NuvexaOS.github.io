@@ -1,60 +1,116 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/main/AsusX.logo.png" width="220" alt="AsusX Logo" />
-</p>
+# The Hacker theme
 
-<h1 align="center">
-  <span style="color:#00fff7; text-shadow: 0 0 10px #00fff7, 0 0 20px #00c8c8;">
-    👾 AsusX — Ultimate Gaming OS
-  </span>
-</h1>
+[![.github/workflows/ci.yaml](https://github.com/pages-themes/hacker/actions/workflows/ci.yaml/badge.svg)](https://github.com/pages-themes/hacker/actions/workflows/ci.yaml) [![Gem Version](https://badge.fury.io/rb/jekyll-theme-hacker.svg)](https://badge.fury.io/rb/jekyll-theme-hacker)
 
-<p align="center">
-  <a href="YOUR_INSTALL_LINK.iso" target="_blank" rel="noopener noreferrer">
-    <img src="https://img.shields.io/badge/🚀%20Install%20Now-Click%20Here-%2300fff7?style=for-the-badge&logo=windows&logoColor=white&labelColor=000000&link=YOUR_INSTALL_LINK.iso" alt="Install Now Button" />
-  </a>
-</p>
+*Hacker is a Jekyll theme for GitHub Pages. You can [preview the theme to see what it looks like](http://pages-themes.github.io/hacker), or even [use it today](#usage).*
 
-<p align="center">
-  <img src="https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif" width="280" alt="Neon Pulse Animation" />
-</p>
+![Thumbnail of Hacker](thumbnail.png)
 
----
+## Usage
 
-## 💻 About AsusX
+To use the Hacker theme:
 
-Welcome to the **AsusX Ghost Spectre OS** — a hyper-optimized, blazing fast, neon-powered Windows 11 build designed for hardcore gamers & creators.  
+1. Add the following to your site's `_config.yml`:
 
-- 🖤 Ultra light & fast  
-- 🎮 Built-in game optimizations  
-- ⚡ NVIDIA & AMD support  
-- ✨ Neon theme vibes throughout  
+    ```yml
+    remote_theme: pages-themes/hacker@v0.2.0
+    plugins:
+    - jekyll-remote-theme # add this line to the plugins list if you already have one
+    ```
 
----
+2. Optionally, if you'd like to preview your site on your computer, add the following to your site's `Gemfile`:
 
-<details>
-  <summary style="font-weight: bold; cursor: pointer;">⚙️ Installation Guide</summary>
+    ```ruby
+    gem "github-pages", group: :jekyll_plugins
+    ```
 
-  1. Download the ISO from the **Install Now** button above.  
-  2. Create a bootable USB with [Rufus](https://rufus.ie/).  
-  3. Boot from the USB and install the OS.  
-  4. Experience ultra-fast gaming performance!  
+## Customizing
 
-</details>
+### Configuration variables
 
----
+Hacker will respect the following variables, if set in your site's `_config.yml`:
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=AsusXAx&show_icons=true&theme=radical&hide_title=true" alt="GitHub Stats" />
-</p>
+```yml
+title: [The title of your site]
+description: [A short description of your site's purpose]
+```
 
-<p align="center">
-  <a href="https://github.com/AsusXAx" target="_blank">
-    <img src="https://img.shields.io/badge/Follow%20Me%20on%20GitHub-%2300fff7?style=for-the-badge&logo=github&logoColor=000000&labelColor=000000" alt="Follow Me" />
-  </a>
-</p>
+Additionally, you may choose to set the following optional variables:
 
----
+```yml
+show_downloads: ["true" or "false" (unquoted) to indicate whether to provide a download URL]
+google_analytics: [Your Google Analytics tracking ID]
+```
 
-<p align="center" style="font-size: 12px; color: #444;">
-  Made with 💙 by AsusX | Neon gaming vibes forever
-</p>
+### Stylesheet
+
+If you'd like to add your own custom styles:
+
+1. Create a file called `/assets/css/style.scss` in your site
+2. Add the following content to the top of the file, exactly as shown:
+    ```scss
+    ---
+    ---
+
+    @import "{{ site.theme }}";
+    ```
+3. Add any custom CSS (or Sass, including imports) you'd like immediately after the `@import` line
+
+*Note: If you'd like to change the theme's Sass variables, you must set new values before the `@import` line in your stylesheet.*
+
+### Layouts
+
+If you'd like to change the theme's HTML layout:
+
+1. For some changes such as a custom `favicon`, you can add custom files in your local `_includes` folder. The files [provided with the theme](https://github.com/pages-themes/hacker/tree/master/_includes) provide a starting point and are included by the [original layout template](https://github.com/pages-themes/hacker/blob/master/_layouts/default.html).
+2. For more extensive changes, [copy the original template](https://github.com/pages-themes/hacker/blob/master/_layouts/default.html) from the theme's repository<br />(*Pro-tip: click "raw" to make copying easier*)
+3. Create a file called `/_layouts/default.html` in your site
+4. Paste the default layout content copied in the first step
+5. Customize the layout as you'd like
+
+### Customizing Google Analytics code
+
+Google has released several iterations to their Google Analytics code over the years since this theme was first created. If you would like to take advantage of the latest code, paste it into `_includes/head-custom-google-analytics.html` in your Jekyll site.
+
+### Overriding GitHub-generated URLs
+
+Templates often rely on URLs supplied by GitHub such as links to your repository or links to download your project. If you'd like to override one or more default URLs:
+
+1. Look at [the template source](https://github.com/pages-themes/hacker/blob/master/_layouts/default.html) to determine the name of the variable. It will be in the form of `{{ site.github.zip_url }}`.
+2. Specify the URL that you'd like the template to use in your site's `_config.yml`. For example, if the variable was `site.github.url`, you'd add the following:
+    ```yml
+    github:
+      zip_url: http://example.com/download.zip
+      another_url: another value
+    ```
+3. When your site is built, Jekyll will use the URL you specified, rather than the default one provided by GitHub.
+
+*Note: You must remove the `site.` prefix, and each variable name (after the `github.`) should be indent with two space below `github:`.*
+
+For more information, see [the Jekyll variables documentation](https://jekyllrb.com/docs/variables/).
+
+## Roadmap
+
+See the [open issues](https://github.com/pages-themes/hacker/issues) for a list of proposed features (and known issues).
+
+## Project philosophy
+
+The Hacker theme is intended to make it quick and easy for GitHub Pages users to create their first (or 100th) website. The theme should meet the vast majority of users' needs out of the box, erring on the side of simplicity rather than flexibility, and provide users the opportunity to opt-in to additional complexity if they have specific needs or wish to further customize their experience (such as adding custom CSS or modifying the default layout). It should also look great, but that goes without saying.
+
+## Contributing
+
+Interested in contributing to Hacker? We'd love your help. Hacker is an open source project, built one contribution at a time by users like you. See [the CONTRIBUTING file](docs/CONTRIBUTING.md) for instructions on how to contribute.
+
+### Previewing the theme locally
+
+If you'd like to preview the theme locally (for example, in the process of proposing a change):
+
+1. Clone down the theme's repository (`git clone https://github.com/pages-themes/hacker`)
+2. `cd` into the theme's directory
+3. Run `script/bootstrap` to install the necessary dependencies
+4. Run `bundle exec jekyll serve` to start the preview server
+5. Visit [`localhost:4000`](http://localhost:4000) in your browser to preview the theme
+
+### Running tests
+
+The theme contains a minimal test suite, to ensure a site with the theme would build successfully. To run the tests, simply run `script/cibuild`. You'll need to run `script/bootstrap` once before the test script will work.

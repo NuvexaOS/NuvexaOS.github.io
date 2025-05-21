@@ -14,15 +14,40 @@
   body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    background: #000; /* pure black */
     color: #eee;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Light streak container */
+  .light-streaks {
+    position: fixed;
+    top: 0;
+    left: -150%;
+    width: 300%;
+    height: 5px;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgba(0,255,255,0.6), transparent);
+    filter: drop-shadow(0 0 10px #0ff);
+    animation: streakMove 4s linear infinite;
+    z-index: 9999;
+  }
+
+  @keyframes streakMove {
+    0% {
+      left: -150%;
+    }
+    100% {
+      left: 150%;
+    }
   }
 
   header {
-    background: rgba(20, 20, 20, 0.8);
+    background: rgba(20, 20, 20, 0.9);
     display: flex;
     align-items: center;
     padding: 10px 20px;
@@ -99,6 +124,8 @@
 </style>
 </head>
 <body>
+<div class="light-streaks"></div>
+
 <header>
   <img src="AsusX.logo.png" alt="AsusXAx Logo" class="logo" />
   <h1>AsusXAx</h1>

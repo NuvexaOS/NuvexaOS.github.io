@@ -47,7 +47,7 @@
   }
 
   header {
-    background: rgba(20, 20, 20, 0.9);
+    background: #000; /* full black */
     display: flex;
     align-items: center;
     padding: 10px 20px;
@@ -91,6 +91,12 @@
     color: #ccc;
   }
 
+  .install-container {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0 60px 0;
+  }
+
   .install-btn {
     background: #00f0ff;
     color: #111;
@@ -114,7 +120,7 @@
   }
 
   footer {
-    background: rgba(20, 20, 20, 0.85);
+    background: #000; /* full black */
     text-align: center;
     padding: 15px 10px;
     font-size: 0.9rem;
@@ -134,8 +140,11 @@
 <main>
   <h2>Welcome to My Cool GitHub Page</h2>
   <p>This site is lit with animations, a sleek black-blue gradient, and a button you'll love to click!</p>
-  <button class="install-btn">Install Now</button>
 </main>
+
+<div class="install-container">
+  <button class="install-btn">Install Now</button>
+</div>
 
 <footer>© 2025 AsusXAx. All rights reserved.</footer>
 </body>

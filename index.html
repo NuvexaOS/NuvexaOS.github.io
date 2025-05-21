@@ -1,155 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>AsusXAx - Cool Site</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AsusXAx - Tweaks Tool</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
 
-  * {
-    box-sizing: border-box;
-  }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: #000; /* pure black */
-    color: #eee;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    overflow-x: hidden;
-    position: relative;
-  }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #000;
+      color: #eee;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-  /* Light streak container */
-  .light-streaks {
-    position: fixed;
-    top: 0;
-    left: -150%;
-    width: 300%;
-    height: 5px;
-    pointer-events: none;
-    background: linear-gradient(90deg, transparent, rgba(0,255,255,0.6), transparent);
-    filter: drop-shadow(0 0 10px #0ff);
-    animation: streakMove 4s linear infinite;
-    z-index: 9999;
-  }
-
-  @keyframes streakMove {
-    0% {
+    .light-streaks {
+      position: fixed;
+      top: 0;
       left: -150%;
+      width: 300%;
+      height: 5px;
+      pointer-events: none;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.6), transparent);
+      filter: drop-shadow(0 0 10px #0ff);
+      animation: streakMove 4s linear infinite;
+      z-index: 9999;
     }
-    100% {
-      left: 150%;
+
+    @keyframes streakMove {
+      0% { left: -150%; }
+      100% { left: 150%; }
     }
-  }
 
-  header {
-    background: #000; /* full black */
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    box-shadow: 0 0 15px #00f0ffaa;
-  }
+    header {
+      background: #000;
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      box-shadow: 0 0 15px #00f0ffaa;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
 
-  header img.logo {
-    height: 40px;
-    margin-right: 15px;
-  }
+    .logo {
+      height: 40px;
+      margin-right: 15px;
+    }
 
-  header h1 {
-    font-weight: 600;
-    font-size: 1.8rem;
-    letter-spacing: 2px;
-    color: #00f0ff;
-    text-shadow: 0 0 8px #00f0ff;
-  }
+    header h1 {
+      font-weight: 600;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+      color: #00f0ff;
+      text-shadow: 0 0 8px #00f0ff;
+    }
 
-  main {
-    flex-grow: 1;
-    padding: 40px 20px;
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-  }
+    main {
+      flex-grow: 1;
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
 
-  main h2 {
-    font-size: 2.8rem;
-    margin-bottom: 20px;
-    text-shadow: 0 0 10px #00f0ff;
-  }
+    main h2 {
+      font-size: 2.6rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #00f0ff;
+    }
 
-  main p {
-    font-size: 1.25rem;
-    line-height: 1.6;
-    margin-bottom: 40px;
-    color: #ccc;
-  }
+    main p {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-bottom: 30px;
+    }
 
-  .install-container {
-    display: flex;
-    justify-content: center;
-    margin: 40px 0 60px 0;
-  }
+    .tool-image {
+      max-width: 80%;
+      margin: 40px auto;
+      display: block;
+      border-radius: 16px;
+      box-shadow: 0 0 25px #00f0ff;
+    }
 
-  .install-btn {
-    background: #00f0ff;
-    color: #111;
-    font-weight: 700;
-    padding: 18px 50px;
-    border: none;
-    border-radius: 50px;
-    font-size: 1.4rem;
-    cursor: pointer;
-    box-shadow: 0 0 15px #00f0ffcc;
-    transition: all 0.3s ease-in-out;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    user-select: none;
-    text-decoration: none; /* For anchor tag */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
+    .install-container {
+      display: flex;
+      justify-content: center;
+      margin: 40px 0;
+    }
 
-  .install-btn:hover {
-    background: #00c9e0;
-    box-shadow: 0 0 25px #00c9e0ff;
-    transform: scale(1.05);
-  }
+    .install-btn {
+      background: #00f0ff;
+      color: #111;
+      font-weight: 700;
+      padding: 16px 40px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.3rem;
+      cursor: pointer;
+      box-shadow: 0 0 15px #00f0ffcc;
+      transition: all 0.3s ease-in-out;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-  footer {
-    background: #000; /* full black */
-    text-align: center;
-    padding: 15px 10px;
-    font-size: 0.9rem;
-    color: #666;
-    letter-spacing: 1px;
-  }
-</style>
+    .install-btn:hover {
+      background: #00c9e0;
+      box-shadow: 0 0 25px #00c9e0ff;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px 10px;
+      background: #000;
+      color: #666;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+  </style>
 </head>
 <body>
-<div class="light-streaks"></div>
 
-<header>
-  <img src="AsusX.logo.png" alt="AsusXAx Logo" class="logo" />
-  <h1>AsusX</h1>
-</header>
+  <div class="light-streaks"></div>
 
-<main>
-  <h2>Install The Best Tweaks Tool Now!</h2>
-  <p>This site is lit with animations, a sleek black-blue gradient, and a button you'll love to click!</p>
-</main>
+  <header>
+    <img src="AsusX.logo.png" alt="AsusXAx Logo" class="logo" />
+    <h1>AsusX</h1>
+  </header>
 
-<div class="install-container">
-  <a href="PUT_YOUR_INSTALLER_LINK_HERE" class="install-btn" target="_blank" rel="noopener noreferrer">Install Now</a>
-</div>
+  <main>
+    <h2>Install The Best Tweaks Tool Now!</h2>
+    <p>Optimized for speed, power, and your inner hacker vibes. Built by AsusXAx.</p>
 
-<footer>© 2025 AsusX. All rights reserved.</footer>
+    <!-- Tool Image -->
+    <img class="tool-image" src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/main/Tool.png" alt="Tool Preview" />
+
+    <!-- Install Button -->
+    <div class="install-container">
+      <a href="PUT_YOUR_INSTALLER_LINK_HERE" class="install-btn" target="_blank" rel="noopener noreferrer">Install Now</a>
+    </div>
+  </main>
+
+  <footer>© 2025 AsusXAx. All rights reserved.</footer>
+
 </body>
 </html>

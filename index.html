@@ -1,120 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AsusXAx Site</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: radial-gradient(circle, #0f0f0f, #000000);
-      font-family: 'Orbitron', sans-serif;
-      color: white;
-      text-align: center;
-      overflow-x: hidden;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: relative;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AsusXAx - Cool Site</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
 
-    /* Top-left fixed logo */
-    .top-left-logo {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      max-width: 80px;
-      filter: drop-shadow(0 0 15px #00f6ff);
-      animation: glow 2s ease-in-out infinite alternate;
-      z-index: 1000;
-    }
+  * {
+    box-sizing: border-box;
+  }
 
-    @keyframes glow {
-      from { filter: drop-shadow(0 0 10px #00f6ff); }
-      to { filter: drop-shadow(0 0 25px #00f6ff); }
-    }
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #eee;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
 
-    /* Centered main logo (optional, can remove if you want only top-left) */
-    .logo {
-      margin-top: 40px;
-      max-width: 150px;
-      animation: glow 2s ease-in-out infinite alternate;
-      filter: drop-shadow(0 0 20px #00f6ff);
-    }
+  header {
+    background: rgba(20, 20, 20, 0.8);
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 0 15px #00f0ffaa;
+  }
 
-    h1 {
-      margin-top: 30px;
-      font-size: 3em;
-      animation: slideIn 1s ease-out forwards;
-      color: #00f6ff;
-    }
+  header img.logo {
+    height: 40px;
+    margin-right: 15px;
+  }
 
-    p {
-      margin-top: 10px;
-      font-size: 1.3em;
-      color: #ccc;
-    }
+  header h1 {
+    font-weight: 600;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    color: #00f0ff;
+    text-shadow: 0 0 8px #00f0ff;
+  }
 
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+  main {
+    flex-grow: 1;
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
 
-    .install-btn {
-      display: inline-block;
-      margin-top: 60px;
-      padding: 20px 50px;
-      background: linear-gradient(145deg, #00c6ff, #0072ff);
-      color: white;
-      font-size: 1.5em;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.3s ease-in-out;
-      box-shadow: 0 0 20px #0072ff;
-      animation: popUp 1s ease-out 1.2s forwards;
-      opacity: 0;
-    }
+  main h2 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #00f0ff;
+  }
 
-    .install-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px #00f6ff;
-    }
+  main p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    color: #ccc;
+  }
 
-    @keyframes popUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+  .install-btn {
+    background: #00f0ff;
+    color: #111;
+    font-weight: 700;
+    padding: 18px 50px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 0 15px #00f0ffcc;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    user-select: none;
+  }
 
-    footer {
-      margin-top: auto;
-      margin-bottom: 20px;
-      color: #555;
-      font-size: 0.9em;
-    }
-  </style>
+  .install-btn:hover {
+    background: #00c9e0;
+    box-shadow: 0 0 25px #00c9e0ff;
+    transform: scale(1.05);
+  }
+
+  footer {
+    background: rgba(20, 20, 20, 0.85);
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 0.9rem;
+    color: #666;
+    letter-spacing: 1px;
+  }
+</style>
 </head>
 <body>
-
-  <!-- Top-left logo -->
-  <img src="AsusX.logo.png" alt="AsusXAx Logo" class="top-left-logo" />
-
-  <!-- Main centered content -->
+<header>
   <img src="AsusX.logo.png" alt="AsusXAx Logo" class="logo" />
+  <h1>AsusXAx</h1>
+</header>
 
-  <h1>Welcome to AsusXAx's World</h1>
-  <p>Cool, Clean, and Supercharged ✨</p>
+<main>
+  <h2>Welcome to My Cool GitHub Page</h2>
+  <p>This site is lit with animations, a sleek black-blue gradient, and a button you'll love to click!</p>
+  <button class="install-btn">Install Now</button>
+</main>
 
-  <!-- Install Button -->
-  <a href="https://your-download-link-here" class="install-btn">Install Now</a>
-
-  <!-- Footer -->
-  <footer>
-    © 2025 AsusXAx. All rights reserved.
-  </footer>
-
+<footer>© 2025 AsusXAx. All rights reserved.</footer>
 </body>
 </html>

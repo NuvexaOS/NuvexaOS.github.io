@@ -132,6 +132,33 @@
       font-size: 0.9rem;
       letter-spacing: 1px;
     }
+
+    /* WhatsApp Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 999;
+      width: 60px;
+      height: 60px;
+      background-color: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px #25D366aa;
+      transition: transform 0.2s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+    }
+
+    .whatsapp-float img {
+      width: 32px;
+      height: 32px;
+      filter: drop-shadow(0 0 5px #fff);
+    }
   </style>
 </head>
 <body>
@@ -155,6 +182,11 @@
       <a href="https://github.com/AsusXAx/AsusXAx.github.io/releases/download/Tool/AsusX.exe" class="install-btn" target="_blank" rel="noopener noreferrer">Install Now</a>
     </div>
   </main>
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/YOUR_PHONE_NUMBER" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
+  </a>
 
   <footer>© 2025 AsusX. All rights reserved.</footer>
 

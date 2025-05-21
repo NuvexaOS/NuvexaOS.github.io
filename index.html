@@ -2,61 +2,87 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AsusXAx | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🔥 My Cool Animated Site 🔥</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      background: #111;
-      color: #fff;
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      font-family: 'Poppins', sans-serif;
     }
 
-    .container {
+    body {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
       text-align: center;
+      overflow: hidden;
     }
 
     h1 {
       font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: slideIn 1s ease-out forwards;
     }
 
-    h1 span {
-      color: #00ffe7;
-    }
-
-    .subtitle {
+    p {
       font-size: 1.2rem;
-      margin-bottom: 20px;
-      color: #aaa;
+      animation: fadeIn 2s ease-out forwards;
     }
 
     .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      color: #111;
-      background: #00ffe7;
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
       border: none;
-      border-radius: 5px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: 0.3s ease;
+      border-radius: 50px;
+      background: #ff416c;
+      background: linear-gradient(to right, #ff4b2b, #ff416c);
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(255, 65, 108, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .btn:hover {
-      background: #00ccb8;
+      transform: scale(1.1);
+      box-shadow: 0 20px 40px rgba(255, 65, 108, 0.4);
+    }
+
+    @keyframes slideIn {
+      0% { transform: translateY(-50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .floating {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.9rem;
+      opacity: 0.6;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Hello, I'm <span>AsusXAx</span></h1>
-    <p class="subtitle">Coder • Designer • Hacker</p>
-    <a href="https://github.com/AsusXAx" class="btn" target="_blank">Visit My GitHub</a>
-  </div>
+  <h1>⚡ Welcome to My Cool Site ⚡</h1>
+  <p>This is a super cool animated landing page made just for you 🚀</p>
+  <button class="btn" onclick="alert('Installed! 🚀')">Install Now</button>
+  <div class="floating">Made with 💖 by You</div>
 </body>
 </html>

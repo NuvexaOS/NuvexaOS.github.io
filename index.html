@@ -8,48 +8,39 @@
   <!-- Favicon -->
   <link rel="icon" href="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/main/AsusX.logo.png" type="image/png" />
 
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #000;
-      color: #eee;
-      display: flex;
-      flex-direction: column;
       min-height: 100vh;
+      background: linear-gradient(135deg, #000000, #001f3f);
+      background-size: 400% 400%;
+      animation: bgMove 20s ease infinite;
+      color: #fff;
       overflow-x: hidden;
     }
 
-    .light-streaks {
-      position: fixed;
-      top: 0;
-      left: -150%;
-      width: 300%;
-      height: 5px;
-      pointer-events: none;
-      background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.6), transparent);
-      filter: drop-shadow(0 0 10px #0ff);
-      animation: streakMove 4s linear infinite;
-      z-index: 9999;
-    }
-
-    @keyframes streakMove {
-      0% { left: -150%; }
-      100% { left: 150%; }
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     header {
-      background: #000;
       display: flex;
       align-items: center;
-      padding: 12px 20px;
-      box-shadow: 0 0 15px #00f0ffaa;
+      padding: 20px 40px;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px #00f0ff80;
       position: sticky;
       top: 0;
       z-index: 10;
@@ -61,82 +52,67 @@
     }
 
     header h1 {
-      font-weight: 600;
-      font-size: 1.8rem;
-      letter-spacing: 2px;
       color: #00f0ff;
-      text-shadow: 0 0 8px #00f0ff;
-    }
-
-    main {
-      flex-grow: 1;
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    main h2 {
-      font-size: 2.6rem;
-      margin-bottom: 20px;
+      font-size: 2rem;
       text-shadow: 0 0 10px #00f0ff;
     }
 
-    main p {
-      font-size: 1.2rem;
-      color: #ccc;
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 700px;
+      text-align: center;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.2);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+    }
+
+    .card h2 {
+      font-size: 2.4rem;
+      margin-bottom: 15px;
+      text-shadow: 0 0 12px #00f0ff;
+    }
+
+    .card p {
+      font-size: 1.1rem;
+      color: #ddd;
       margin-bottom: 30px;
     }
 
     .tool-image {
-      max-width: 80%;
-      margin: 40px auto;
-      display: block;
-      border-radius: 16px;
-      box-shadow: 0 0 25px #00f0ff;
-    }
-
-    .install-container {
-      display: flex;
-      justify-content: center;
-      margin: 40px 0;
+      max-width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 0 25px #00f0ff80;
+      margin-bottom: 30px;
     }
 
     .install-btn {
       background: #00f0ff;
-      color: #111;
-      font-weight: 700;
-      padding: 16px 40px;
+      color: #000;
+      font-weight: bold;
+      font-size: 1.2rem;
+      padding: 14px 32px;
+      border-radius: 40px;
       border: none;
-      border-radius: 50px;
-      font-size: 1.3rem;
-      cursor: pointer;
-      box-shadow: 0 0 15px #00f0ffcc;
-      transition: all 0.3s ease-in-out;
-      text-transform: uppercase;
-      letter-spacing: 3px;
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      transition: 0.3s ease;
+      box-shadow: 0 0 20px #00f0ff80;
     }
 
     .install-btn:hover {
       background: #00c9e0;
-      box-shadow: 0 0 25px #00c9e0ff;
+      box-shadow: 0 0 30px #00f0ff;
       transform: scale(1.05);
     }
 
-    footer {
-      text-align: center;
-      padding: 15px 10px;
-      background: #000;
-      color: #666;
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-    }
-
-    /* WhatsApp Button */
     .whatsapp-float {
       position: fixed;
       bottom: 20px;
@@ -160,34 +136,34 @@
     .whatsapp-float img {
       width: 32px;
       height: 32px;
-      filter: drop-shadow(0 0 5px #fff);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #888;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
 
-  <div class="light-streaks"></div>
-
   <header>
-    <img src="AsusX.logo.png" alt="AsusXAx Logo" class="logo" />
+    <img src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/main/AsusX.logo.png" alt="AsusX Logo" class="logo" />
     <h1>AsusX</h1>
   </header>
 
   <main>
-    <h2>Install The Best Tweaks Tool Now!</h2>
-    <p>Optimized for speed, power, and your Gaming PC - Laptop. Built by AsusX.</p>
-
-    <!-- Tool Image -->
-    <img class="tool-image" src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/main/Tool.png" alt="Tool Preview" />
-
-    <!-- Install Button -->
-    <div class="install-container">
-      <a href="https://github.com/AsusXAx/AsusXAx.github.io/releases/download/Tool/AsusX.exe" class="install-btn" target="_blank" rel="noopener noreferrer">Install Now</a>
+    <div class="card">
+      <h2>Install The Best Tweaks Tool Now!</h2>
+      <p>Optimized for speed, power, and your Gaming PC or Laptop. Built by AsusX.</p>
+      <img class="tool-image" src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/main/Tool.png" alt="Tool Preview" />
+      <a href="https://github.com/AsusXAx/AsusXAx.github.io/releases/download/Tool/AsusX.exe" class="install-btn" target="_blank">Install Now</a>
     </div>
   </main>
 
   <!-- WhatsApp Button -->
-  <a href="https://asusxax.github.io/whatsapp" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+  <a href="https://asusxax.github.io/whatsapp" class="whatsapp-float" target="_blank">
     <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
   </a>
 

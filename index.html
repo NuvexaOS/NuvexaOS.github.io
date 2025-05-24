@@ -42,8 +42,8 @@
       padding: 15px 30px;
       background: rgba(0, 0, 0, 0.8);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255, 0, 0, 0.2);
-      box-shadow: 0 0 20px #ff000088;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+      box-shadow: 0 0 20px #00f0ff88;
       position: sticky;
       top: 0;
       z-index: 10;
@@ -52,24 +52,14 @@
     .logo {
       height: 35px;
       margin-right: 10px;
-      animation: pulseRed 2s infinite;
-    }
-
-    @keyframes pulseRed {
-      0%, 100% {
-        filter: drop-shadow(0 0 10px #ff0000);
-      }
-      50% {
-        filter: drop-shadow(0 0 20px #ff4d4d);
-      }
+      animation: pulse 2s infinite;
     }
 
     header h1 {
       font-family: 'Orbitron', sans-serif;
-      color: #ff0000;
-      font-size: 1.6rem;
-      text-shadow: 0 0 8px #ff0000;
-      letter-spacing: 2px;
+      color: #00f0ff;
+      font-size: 1.4rem;
+      text-shadow: 0 0 8px #00f0ff;
     }
 
     main {
@@ -84,17 +74,17 @@
 
     .glass-card {
       background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 0, 0, 0.2);
+      border: 1px solid rgba(0, 240, 255, 0.2);
       padding: 40px;
-      max-width: 700px;
+      max-width: 900px;
       border-radius: 16px;
       backdrop-filter: blur(15px);
-      box-shadow: 0 0 40px rgba(255, 0, 0, 0.2);
+      box-shadow: 0 0 40px rgba(0, 240, 255, 0.2);
     }
 
     .glass-card h2 {
       font-size: 2rem;
-      text-shadow: 0 0 12px #ff0000;
+      text-shadow: 0 0 10px #00f0ff;
       margin-bottom: 16px;
     }
 
@@ -104,57 +94,77 @@
       margin-bottom: 22px;
     }
 
-    .tool-image {
-      max-width: 100%;
-      border-radius: 14px;
-      box-shadow: 0 0 25px #ff0000;
-      margin-bottom: 25px;
-      transition: transform 0.3s ease;
-    }
-    .tool-image:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 40px #ff4444;
+    .btns-wrapper {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      margin-top: 30px;
+      flex-wrap: wrap;
     }
 
-    .btn-container {
+    .btn-section {
+      flex: 1 1 45%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 14px;
+      padding: 20px;
       display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 15px;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+      backdrop-filter: blur(10px);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .btn-section:hover {
+      box-shadow: 0 0 50px #00f0ff;
+    }
+
+    .btn-section img {
+      max-width: 100%;
+      max-height: 180px;
+      border-radius: 14px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 25px #00f0ff;
+    }
+
+    .buy-section img {
+      box-shadow: 0 0 30px #ff0000;
     }
 
     .btn {
-      background: #ff0000;
-      color: #000;
-      font-weight: 700;
-      padding: 12px 36px;
+      font-weight: bold;
+      padding: 12px 30px;
       font-size: 1rem;
       border-radius: 40px;
       text-decoration: none;
-      box-shadow: 0 0 24px #ff0000;
-      transition: all 0.3s ease;
       display: inline-block;
-      cursor: pointer;
-      user-select: none;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 24px;
+      width: 180px;
     }
 
-    .btn:hover {
-      background: #cc0000;
-      box-shadow: 0 0 30px #ff4444;
-      transform: scale(1.08);
+    .install-btn {
+      background: #00f0ff;
+      color: #000;
+      box-shadow: 0 0 24px #00f0ff;
     }
-
-    .buy-image {
-      max-width: 100%;
-      border-radius: 14px;
-      margin-top: 30px;
-      box-shadow: 0 0 30px #ff0000;
-      transition: transform 0.3s ease;
-    }
-    .buy-image:hover {
+    .install-btn:hover {
+      background: #00c9e0;
+      box-shadow: 0 0 30px #00f0ff;
       transform: scale(1.05);
-      box-shadow: 0 0 45px #ff6666;
+    }
+
+    .buy-btn {
+      background: #ff0000;
+      color: #000;
+      box-shadow: 0 0 24px #ff0000;
+    }
+    .buy-btn:hover {
+      background: #cc0000;
+      box-shadow: 0 0 30px #ff3333;
+      transform: scale(1.05);
     }
 
     .whatsapp-float {
@@ -188,7 +198,29 @@
       font-size: 0.8rem;
       color: #777;
       background: rgba(0, 0, 0, 0.6);
-      border-top: 1px solid rgba(255, 0, 0, 0.2);
+      border-top: 1px solid rgba(0, 240, 255, 0.2);
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        filter: drop-shadow(0 0 10px #00f0ff);
+      }
+      50% {
+        filter: drop-shadow(0 0 20px #33ffff);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .btns-wrapper {
+        flex-direction: column;
+        gap: 25px;
+      }
+      .btn-section {
+        flex: 1 1 100%;
+      }
+      .btn {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -204,12 +236,21 @@
     <div class="glass-card">
       <h2>Install The Best Tweaks in the World!</h2>
       <p>Optimize and enhance your system performance for the best gaming experience.</p>
-      <img class="tool-image" src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/refs/heads/main/AsusX.png" alt="Tool Preview" />
-      <div class="btn-container">
-        <a href="https://github.com/AsusXAx/AsusXAx.github.io/releases/download/Tool/AsusX.exe" class="btn" target="_blank" rel="noopener noreferrer">Install Now</a>
-        <a href="#" class="btn" target="_blank" rel="noopener noreferrer">Buy Now</a>
+
+      <div class="btns-wrapper">
+        <!-- Install Section -->
+        <div class="btn-section install-section">
+          <img src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/refs/heads/main/AsusX.png" alt="Free Version AsusX" />
+          <a href="https://github.com/AsusXAx/AsusXAx.github.io/releases/download/Tool/AsusX.exe" class="btn install-btn" target="_blank" rel="noopener noreferrer">Install Now</a>
+        </div>
+
+        <!-- Buy Section -->
+        <div class="btn-section buy-section">
+          <img src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/refs/heads/main/HERO.png" alt="Buy Now Preview" />
+          <a href="#" class="btn buy-btn" target="_blank" rel="noopener noreferrer">Buy Now</a>
+        </div>
       </div>
-      <img class="buy-image" src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/refs/heads/main/HERO.png" alt="Buy Now Preview" />
+
     </div>
   </main>
 
@@ -225,14 +266,14 @@
     particlesJS("particles-js", {
       particles: {
         number: { value: 100 },
-        color: { value: "#ff0000" },
+        color: { value: "#00f0ff" },
         shape: { type: "circle" },
         opacity: { value: 0.3 },
         size: { value: 3 },
         line_linked: {
           enable: true,
           distance: 120,
-          color: "#ff0000",
+          color: "#00f0ff",
           opacity: 0.2,
           width: 1
         },

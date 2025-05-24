@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AsusX - Tweaks Tool</title>
+  <title>AsusXAx - Tweaks Tool</title>
   <link rel="icon" href="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/main/AsusX.logo.png" type="image/png" />
 
   <!-- Fonts -->
@@ -42,8 +42,8 @@
       padding: 15px 30px;
       background: rgba(0, 0, 0, 0.8);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0, 240, 255, 0.2);
-      box-shadow: 0 0 20px #00f0ff88;
+      border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+      box-shadow: 0 0 20px #ff000088;
       position: sticky;
       top: 0;
       z-index: 10;
@@ -52,20 +52,24 @@
     .logo {
       height: 35px;
       margin-right: 10px;
-      animation: pulse 2s infinite;
+      animation: pulseRed 2s infinite;
+    }
+
+    @keyframes pulseRed {
+      0%, 100% {
+        filter: drop-shadow(0 0 10px #ff0000);
+      }
+      50% {
+        filter: drop-shadow(0 0 20px #ff4d4d);
+      }
     }
 
     header h1 {
       font-family: 'Orbitron', sans-serif;
-      color: #00f0ff;
-      font-size: 1.4rem;
+      color: #ff0000;
+      font-size: 1.6rem;
+      text-shadow: 0 0 8px #ff0000;
       letter-spacing: 2px;
-      text-shadow: 0 0 8px #00f0ff, 0 0 20px rgba(0, 240, 255, 0.3);
-      transition: transform 0.3s ease;
-    }
-
-    header h1:hover {
-      transform: scale(1.05);
     }
 
     main {
@@ -80,17 +84,17 @@
 
     .glass-card {
       background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(0, 240, 255, 0.2);
+      border: 1px solid rgba(255, 0, 0, 0.2);
       padding: 40px;
       max-width: 700px;
       border-radius: 16px;
       backdrop-filter: blur(15px);
-      box-shadow: 0 0 40px rgba(0, 240, 255, 0.2);
+      box-shadow: 0 0 40px rgba(255, 0, 0, 0.2);
     }
 
     .glass-card h2 {
       font-size: 2rem;
-      text-shadow: 0 0 10px #00f0ff;
+      text-shadow: 0 0 12px #ff0000;
       margin-bottom: 16px;
     }
 
@@ -103,27 +107,54 @@
     .tool-image {
       max-width: 100%;
       border-radius: 14px;
-      box-shadow: 0 0 25px #00f0ff;
+      box-shadow: 0 0 25px #ff0000;
       margin-bottom: 25px;
+      transition: transform 0.3s ease;
+    }
+    .tool-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 40px #ff4444;
     }
 
-    .install-btn {
-      background: #00f0ff;
+    .btn-container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    .btn {
+      background: #ff0000;
       color: #000;
-      font-weight: bold;
-      padding: 10px 30px;
+      font-weight: 700;
+      padding: 12px 36px;
       font-size: 1rem;
       border-radius: 40px;
       text-decoration: none;
-      box-shadow: 0 0 24px #00f0ff;
+      box-shadow: 0 0 24px #ff0000;
       transition: all 0.3s ease;
       display: inline-block;
+      cursor: pointer;
+      user-select: none;
     }
 
-    .install-btn:hover {
-      background: #00c9e0;
-      box-shadow: 0 0 30px #00f0ff;
+    .btn:hover {
+      background: #cc0000;
+      box-shadow: 0 0 30px #ff4444;
+      transform: scale(1.08);
+    }
+
+    .buy-image {
+      max-width: 100%;
+      border-radius: 14px;
+      margin-top: 30px;
+      box-shadow: 0 0 30px #ff0000;
+      transition: transform 0.3s ease;
+    }
+    .buy-image:hover {
       transform: scale(1.05);
+      box-shadow: 0 0 45px #ff6666;
     }
 
     .whatsapp-float {
@@ -157,7 +188,7 @@
       font-size: 0.8rem;
       color: #777;
       background: rgba(0, 0, 0, 0.6);
-      border-top: 1px solid rgba(0, 240, 255, 0.2);
+      border-top: 1px solid rgba(255, 0, 0, 0.2);
     }
   </style>
 </head>
@@ -166,7 +197,7 @@
 
   <header>
     <img src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/main/AsusX.logo.png" alt="AsusX Logo" class="logo" />
-    <h1>AsusX</h1>
+    <h1>AsusXAx</h1>
   </header>
 
   <main>
@@ -174,11 +205,15 @@
       <h2>Install The Best Tweaks in the World!</h2>
       <p>Optimize and enhance your system performance for the best gaming experience.</p>
       <img class="tool-image" src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/refs/heads/main/AsusX.png" alt="Tool Preview" />
-      <a href="https://github.com/AsusXAx/AsusXAx.github.io/releases/download/Tool/AsusX.exe" class="install-btn" target="_blank">Install Now</a>
+      <div class="btn-container">
+        <a href="https://github.com/AsusXAx/AsusXAx.github.io/releases/download/Tool/AsusX.exe" class="btn" target="_blank" rel="noopener noreferrer">Install Now</a>
+        <a href="#" class="btn" target="_blank" rel="noopener noreferrer">Buy Now</a>
+      </div>
+      <img class="buy-image" src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/refs/heads/main/HERO.png" alt="Buy Now Preview" />
     </div>
   </main>
 
-  <a href="https://asusxax.github.io/whatsapp" class="whatsapp-float" target="_blank">
+  <a href="https://asusxax.github.io/whatsapp" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
     <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
   </a>
 
@@ -190,14 +225,14 @@
     particlesJS("particles-js", {
       particles: {
         number: { value: 100 },
-        color: { value: "#00f0ff" },
+        color: { value: "#ff0000" },
         shape: { type: "circle" },
         opacity: { value: 0.3 },
         size: { value: 3 },
         line_linked: {
           enable: true,
           distance: 120,
-          color: "#00f0ff",
+          color: "#ff0000",
           opacity: 0.2,
           width: 1
         },

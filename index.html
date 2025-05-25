@@ -26,6 +26,8 @@
       overflow-x: hidden;
       color: #ddd;
       transition: all 0.4s ease;
+      display: flex;
+      flex-direction: column;
     }
 
     body.red-theme {
@@ -90,6 +92,7 @@
     }
 
     main {
+      flex: 1;
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
@@ -173,11 +176,11 @@
     footer {
       text-align: center;
       font-size: 0.8rem;
-      padding: 20px 10px;
+      padding: 40px 10px 60px;
       color: #888;
       background: rgba(0, 0, 0, 0.5);
       border-top: 1px solid rgba(0, 240, 255, 0.1);
-      margin-top: 40px;
+      margin-top: auto;
     }
   </style>
 </head>

@@ -42,159 +42,179 @@
       padding: 15px 30px;
       background: rgba(0, 0, 0, 0.8);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+      border-bottom: 1px solid rgba(255, 0, 0, 0.2); /* changed to red base */
       box-shadow: 0 0 20px #ff000088;
       position: sticky;
       top: 0;
       z-index: 10;
-      color: #ff0000;
     }
 
     .logo {
       height: 35px;
       margin-right: 10px;
       animation: pulse 2s infinite;
-      filter: drop-shadow(0 0 6px #ff0000);
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        filter: drop-shadow(0 0 5px #ff0000);
+      }
+      50% {
+        filter: drop-shadow(0 0 20px #ff0000);
+      }
     }
 
     header h1 {
       font-family: 'Orbitron', sans-serif;
       color: #ff0000;
+      font-weight: 700;
       font-size: 1.6rem;
-      text-shadow: 0 0 8px #ff0000;
+      text-shadow: 0 0 12px #ff0000;
     }
 
     main {
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
       padding: 60px 20px;
       min-height: 100vh;
+      gap: 40px;
       text-align: center;
     }
 
-    .btn-wrapper {
-      display: flex;
-      justify-content: space-between;
-      max-width: 900px;
-      width: 100%;
-      gap: 20px;
-    }
-
     .btn-section {
-      flex: 1;
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 0, 0, 0.2);
       padding: 30px;
+      max-width: 350px;
       border-radius: 16px;
       backdrop-filter: blur(15px);
       box-shadow: 0 0 40px rgba(255, 0, 0, 0.2);
-      transition: all 0.4s ease;
-      cursor: pointer;
       display: flex;
       flex-direction: column;
       align-items: center;
-      color: #aaa;
-      user-select: none;
+      transition: all 0.3s ease;
+      cursor: default;
     }
 
-    /* Separate install and buy sections for colors */
     .btn-section.install-section {
-      border-color: rgba(0, 240, 255, 0.2);
-      box-shadow: 0 0 40px rgba(0, 240, 255, 0.2);
-      color: #ccc;
+      border-color: rgba(0, 240, 255, 0.3);
+      box-shadow: 0 0 40px rgba(0, 240, 255, 0.3);
     }
 
-    .btn-section.buy-section {
-      border-color: rgba(255, 0, 0, 0.2);
-      box-shadow: 0 0 40px rgba(255, 0, 0, 0.2);
-      color: #aaa;
-    }
-
-    /* Hover effect for Install */
     .btn-section.install-section:hover {
-      box-shadow: 0 0 50px #00f0ff;
       border-color: #00f0ff;
-      color: #00f0ff;
+      box-shadow: 0 0 50px #00f0ff;
     }
 
-    .btn-section.install-section:hover h2,
-    .btn-section.install-section:hover p {
-      color: #00f0ff;
-      text-shadow: 0 0 8px #00f0ff;
+    .btn-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 14px;
+      color: #bbb;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
     }
 
-    .btn-section.install-section:hover .install-btn {
-      background: #00f0ff;
-      box-shadow: 0 0 30px #00f0ff;
-      color: #000;
-      transform: scale(1.05);
-    }
-
-    /* Hover effect for Buy */
-    .btn-section.buy-section:hover {
-      box-shadow: 0 0 50px #ff0000;
-      border-color: #ff0000;
-      color: #ff0000;
-    }
-
-    .btn-section.buy-section:hover h2,
-    .btn-section.buy-section:hover p {
-      color: #ff0000;
-      text-shadow: 0 0 8px #ff0000;
-    }
-
-    .btn-section.buy-section:hover .buy-btn {
-      background: #ff0000;
-      box-shadow: 0 0 30px #ff0000;
-      color: #000;
-      transform: scale(1.05);
-    }
-
-    h2 {
-      font-size: 1.9rem;
-      margin-bottom: 12px;
-      font-weight: 600;
-    }
-
-    p {
-      font-size: 1rem;
-      margin-bottom: 22px;
+    .btn-section p {
+      color: #999;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      transition: color 0.3s ease;
     }
 
     .tool-image {
       max-width: 100%;
       border-radius: 14px;
-      box-shadow: 0 0 25px currentColor;
-      margin-bottom: 20px;
-      transition: all 0.4s ease;
+      box-shadow: 0 0 25px #ff0000;
+      margin-bottom: 25px;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .btn-section.install-section .tool-image {
+      box-shadow: 0 0 25px #00f0ff;
+    }
+
+    .btn-section.install-section:hover .tool-image {
+      box-shadow: 0 0 40px #00f0ff;
     }
 
     .install-btn,
     .buy-btn {
-      padding: 12px 36px;
-      font-weight: 700;
+      font-weight: bold;
+      padding: 10px 30px;
       font-size: 1rem;
       border-radius: 40px;
       text-decoration: none;
-      cursor: pointer;
+      box-shadow: 0 0 24px;
       transition: all 0.3s ease;
-      border: none;
       display: inline-block;
-      box-shadow: 0 0 20px transparent;
+      color: #000;
+      user-select: none;
     }
 
     .install-btn {
       background: #00f0ff;
-      color: #000;
       box-shadow: 0 0 24px #00f0ff;
+      margin-bottom: 0;
+    }
+
+    .install-btn:hover {
+      background: #00c9e0;
+      box-shadow: 0 0 30px #00f0ff;
+      transform: scale(1.05);
     }
 
     .buy-btn {
       background: #ff0000;
-      color: #000;
       box-shadow: 0 0 24px #ff0000;
+      margin-top: 10px;
+    }
+
+    .buy-btn:hover {
+      background: #cc0000;
+      box-shadow: 0 0 35px #ff0000;
+      transform: scale(1.05);
+      color: #fff;
+    }
+
+    /* Hover effects for entire Install section */
+    .btn-section.install-section:hover,
+    .btn-section.install-section:hover * {
+      box-shadow: 0 0 50px #00f0ff !important;
+      border-color: #00f0ff !important;
+      color: #00f0ff !important;
+    }
+
+    .btn-section.install-section:hover h2,
+    .btn-section.install-section:hover p {
+      color: #00f0ff !important;
+      text-shadow: 0 0 8px #00f0ff !important;
+    }
+
+    .btn-section.install-section:hover .install-btn {
+      background: #00f0ff !important;
+      box-shadow: 0 0 30px #00f0ff !important;
+      color: #000 !important;
+      transform: scale(1.05) !important;
+    }
+
+    /* Hover effects for entire Buy section */
+    .btn-section.buy-section:hover,
+    .btn-section.buy-section:hover * {
+      box-shadow: 0 0 50px #ff0000 !important;
+      border-color: #ff0000 !important;
+      color: #ff0000 !important;
+    }
+
+    .btn-section.buy-section:hover h2,
+    .btn-section.buy-section:hover p {
+      color: #ff0000 !important;
+      text-shadow: 0 0 8px #ff0000 !important;
+    }
+
+    .btn-section.buy-section:hover .buy-btn {
+      background: #ff0000 !important;
+      box-shadow: 0 0 40px #ff0000 !important;
+      color: #fff !important;
+      transform: scale(1.05) !important;
     }
 
     footer {
@@ -204,7 +224,32 @@
       color: #777;
       background: rgba(0, 0, 0, 0.6);
       border-top: 1px solid rgba(255, 0, 0, 0.2);
-      user-select: none;
+    }
+
+    /* WhatsApp Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 999;
+      width: 55px;
+      height: 55px;
+      background-color: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 12px #25D366aa;
+      transition: transform 0.3s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+    }
+
+    .whatsapp-float img {
+      width: 28px;
+      height: 28px;
     }
   </style>
 </head>
@@ -217,24 +262,26 @@
   </header>
 
   <main>
-    <div class="btn-wrapper">
-      <!-- Install Section -->
-      <div class="btn-section install-section">
-        <h2>Install The Best Tweaks in the World!</h2>
-        <p>Optimize and enhance your system performance for the best gaming experience.</p>
-        <img class="tool-image" src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/refs/heads/main/AsusX.png" alt="Tool Preview" />
-        <a href="https://github.com/AsusXAx/AsusXAx.github.io/releases/download/Tool/AsusX.exe" class="install-btn" target="_blank" rel="noopener noreferrer">Install Now</a>
-      </div>
+    <!-- Install Section -->
+    <div class="btn-section install-section">
+      <h2>Install The Best Tweaks in the World!</h2>
+      <p>Optimize and enhance your system performance for the best gaming experience.</p>
+      <img class="tool-image" src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/refs/heads/main/AsusX.png" alt="Tool Preview" />
+      <a href="https://github.com/AsusXAx/AsusXAx.github.io/releases/download/Tool/AsusX.exe" class="install-btn" target="_blank" rel="noopener noreferrer">Install Now</a>
+    </div>
 
-      <!-- Buy Section -->
-      <div class="btn-section buy-section">
-        <h2>Buy The Ultimate Tweaks Package!</h2>
-        <p>Get exclusive features and premium support with the Pro version.</p>
-        <img class="tool-image" src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/refs/heads/main/HERO.png" alt="Buy Now Preview" />
-        <a href="https://asusxax.github.io/buy" class="buy-btn" target="_blank" rel="noopener noreferrer">Buy Now</a>
-      </div>
+    <!-- Buy Section -->
+    <div class="btn-section buy-section">
+      <h2>Buy The Ultimate Tweaks Package!</h2>
+      <p>Unlock premium features with the official purchase.</p>
+      <img class="tool-image" src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/refs/heads/main/HERO.png" alt="Buy Now Preview" />
+      <a href="#" class="buy-btn" target="_blank" rel="noopener noreferrer">Buy Now</a>
     </div>
   </main>
+
+  <a href="https://asusxax.github.io/whatsapp" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
+  </a>
 
   <footer>Built by AsusXAx | © 2025 All Rights Reserved</footer>
 
@@ -244,7 +291,7 @@
     particlesJS("particles-js", {
       particles: {
         number: { value: 100 },
-        color: { value: "#ff0000" },
+        color: { value: "#ff0000" }, // red lights
         shape: { type: "circle" },
         opacity: { value: 0.3 },
         size: { value: 3 },

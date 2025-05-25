@@ -30,7 +30,7 @@
       transition: all 0.4s ease;
       display: flex;
       flex-direction: column;
-      min-height: 100vh; /* Ensure body fills viewport height */
+      min-height: 100vh;
     }
 
     body.red-theme {
@@ -91,7 +91,7 @@
     }
 
     main {
-      flex: 0 0 auto; /* Prevent main from growing and causing extra space */
+      flex: 1 0 auto; /* grow to fill space */
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
@@ -176,13 +176,13 @@
     }
 
     footer {
+      flex-shrink: 0; /* keep footer visible at bottom */
       text-align: center;
       font-size: 0.8rem;
       padding: 15px 10px;
       color: #888;
       background: rgba(0, 0, 0, 0.5);
       border-top: 1px solid rgba(0, 240, 255, 0.1);
-      flex-shrink: 0; /* prevent footer shrinking */
     }
   </style>
 </head>

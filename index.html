@@ -3,27 +3,252 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Site Temporarily Closed</title>
+  <title>AsusXAx - Tweaks Tool</title>
+  <link rel="icon" href="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/main/AsusX.logo.png" type="image/png" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
   <style>
-    body {
-      height: 100vh;
+    * {
       margin: 0;
-      background: #000;
-      color: #0ff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
       font-family: 'Poppins', sans-serif;
-      font-size: 1.5rem;
+      background: #000;
+      overflow-x: hidden;
+      color: #ddd;
+      transition: all 0.4s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body.red-theme {
+      background: #1a0000;
+      color: #fdd;
+    }
+
+    header, footer, .glass-card, .install-btn, .buy-btn {
+      transition: all 0.4s ease;
+    }
+
+    .red-theme header,
+    .red-theme footer,
+    .red-theme .glass-card {
+      box-shadow: 0 0 30px #ff000088 !important;
+      border-color: #ff000033 !important;
+    }
+
+    .red-theme .install-btn,
+    .red-theme .buy-btn {
+      background: #ff3333;
+      box-shadow: 0 0 25px #ff3333;
+    }
+
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+      box-shadow: 0 0 15px #00f0ff88;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      color: #00f0ff;
+      text-shadow: 0 0 6px #00f0ff;
+    }
+
+    main {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      padding: 20px 10px;
+      gap: 20px;
+      flex-grow: 1;
+      align-items: flex-start; /* Make sure elements are aligned */
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(0, 240, 255, 0.15);
+      padding: 15px;
+      border-radius: 16px;
+      width: 360px;
       text-align: center;
-      padding: 20px;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      height: auto; /* Automatically adjusts based on content */
+    }
+
+    .card h2 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: #00f0ff;
+    }
+
+    .buy-hover-area h2 {
+      color: red;
+    }
+
+    .card img {
+      width: 100%;
+      max-height: 220px; /* Fix image size consistency */
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #00f0ff;
+      margin-bottom: 15px;
+    }
+
+    .install-btn, .buy-btn {
+      padding: 10px 25px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+      color: #000;
+      text-align: center;
+    }
+
+    .install-btn {
+      background: #00f0ff;
+      box-shadow: 0 0 18px #00f0ff;
+    }
+
+    .buy-btn {
+      background: #ff0000;
+      box-shadow: 0 0 18px #ff0000;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      background-color: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 10px #25D366aa;
+      z-index: 999;
+    }
+
+    .whatsapp-float img {
+      width: 28px;
+      height: 28px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      padding: 15px 10px;
+      color: #888;
+      background: rgba(0, 0, 0, 0.5);
+      border-top: 1px solid rgba(0, 240, 255, 0.1);
     }
   </style>
 </head>
 <body>
-  <div>
-    <h1>🚧 Site Temporarily Closed 🚧</h1>
-    <p>We’re working on improvements. Please check back soon!</p>
-  </div>
+  <div id="particles-js"></div>
+
+  <header>
+    <img src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/main/AsusX.logo.png" alt="Logo" class="logo">
+    <h1>AsusXAx</h1>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>Install The Best Tweaks in the World!</h2>
+      <img src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/refs/heads/main/AsusX.png" alt="Free Version">
+      <a class="install-btn" href="https://github.com/AsusXAx/AsusXAx.github.io/releases/download/Tool/AsusX.exe" target="_blank">Install Now</a>
+    </div>
+
+    <div class="card buy-hover-area">
+      <h2>Unlock PRO Tweaks Now!</h2>
+      <img src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/refs/heads/main/HERO.png" alt="Pro Version">
+      <a class="buy-btn" href="#">Buy Now</a>
+    </div>
+  </main>
+
+  <a href="https://asusxax.github.io/whatsapp" class="whatsapp-float" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
+  </a>
+
+  <footer>
+    Built by AsusXAx | © 2025 All Rights Reserved
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    const body = document.body;
+    const buyHoverCard = document.querySelector('.buy-hover-area');
+
+    buyHoverCard.addEventListener('mouseenter', () => {
+      body.classList.add('red-theme');
+    });
+
+    buyHoverCard.addEventListener('mouseleave', () => {
+      body.classList.remove('red-theme');
+    });
+
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 100 },
+        color: { value: "#00f0ff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.3 },
+        size: { value: 3 },
+        line_linked: {
+          enable: true,
+          distance: 120,
+          color: "#00f0ff",
+          opacity: 0.2,
+          width: 1
+        },
+        move: { enable: true, speed: 2.5 }
+      },
+      interactivity: {
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
+        }
+      }
+    });
+  </script>
 </body>
 </html>

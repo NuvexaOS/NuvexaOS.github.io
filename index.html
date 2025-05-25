@@ -21,13 +21,16 @@
 
     html, body {
       height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
       font-family: 'Poppins', sans-serif;
       background: #000;
-      overflow-x: hidden;
       color: #ddd;
       transition: all 0.4s ease;
       display: flex;
       flex-direction: column;
+      min-height: 100vh; /* Ensure body fills viewport height */
     }
 
     body.red-theme {
@@ -65,7 +68,7 @@
     header {
       display: flex;
       align-items: center;
-      padding: 8px 15px;
+      padding: 10px 20px;
       background: rgba(0, 0, 0, 0.8);
       backdrop-filter: blur(8px);
       border-bottom: 1px solid rgba(0, 240, 255, 0.2);
@@ -76,45 +79,42 @@
     }
 
     .logo {
-      height: 28px;
-      margin-right: 8px;
+      height: 30px;
+      margin-right: 10px;
     }
 
     header h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       color: #00f0ff;
       text-shadow: 0 0 6px #00f0ff;
     }
 
     main {
+      flex: 0 0 auto; /* Prevent main from growing and causing extra space */
       display: flex;
-      justify-content: center; /* centered cards */
+      justify-content: space-around;
       flex-wrap: wrap;
-      padding: 15px 8px;
-      gap: 15px; /* smaller gap */
-      flex-grow: 1;
-      max-width: 800px;
-      margin: 0 auto; /* center main content */
+      padding: 20px 10px;
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
     }
 
     .card {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(0, 240, 255, 0.15);
-      padding: 15px 15px 20px 15px;
+      padding: 20px;
       border-radius: 16px;
-      max-width: 320px;
-      width: 100%;
+      max-width: 360px;
       text-align: center;
       box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
 
     .card h2 {
-      font-size: 1.2rem;
-      margin-bottom: 8px;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
       color: #00f0ff;
     }
 
@@ -126,7 +126,7 @@
       width: 100%;
       border-radius: 12px;
       box-shadow: 0 0 15px #00f0ff;
-      margin-bottom: 12px;
+      margin-bottom: 15px;
       transition: transform 0.3s;
     }
 
@@ -135,39 +135,24 @@
     }
 
     .install-btn, .buy-btn {
-      padding: 8px 22px;
+      padding: 10px 25px;
       border-radius: 30px;
       font-size: 0.9rem;
       font-weight: 600;
       text-decoration: none;
       display: inline-block;
-      margin-top: 8px;
+      margin-top: 10px;
       color: #000;
-      cursor: pointer;
-      user-select: none;
-      width: fit-content;
-      min-width: 130px;
-      text-align: center;
     }
 
     .install-btn {
       background: #00f0ff;
       box-shadow: 0 0 18px #00f0ff;
-      transition: background-color 0.3s ease;
-    }
-    .install-btn:hover {
-      background: #00c4d8;
-      box-shadow: 0 0 25px #00c4d8;
     }
 
     .buy-btn {
       background: #ff0000;
       box-shadow: 0 0 18px #ff0000;
-      transition: background-color 0.3s ease;
-    }
-    .buy-btn:hover {
-      background: #cc0000;
-      box-shadow: 0 0 25px #cc0000;
     }
 
     .whatsapp-float {
@@ -183,43 +168,21 @@
       justify-content: center;
       box-shadow: 0 0 10px #25D366aa;
       z-index: 999;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .whatsapp-float:hover {
-      background-color: #1da851;
-      box-shadow: 0 0 15px #1da851cc;
     }
 
     .whatsapp-float img {
       width: 28px;
       height: 28px;
-      pointer-events: none;
     }
 
     footer {
       text-align: center;
       font-size: 0.8rem;
-      padding: 12px 10px;
+      padding: 15px 10px;
       color: #888;
       background: rgba(0, 0, 0, 0.5);
       border-top: 1px solid rgba(0, 240, 255, 0.1);
-      user-select: none;
-    }
-
-    @media (max-width: 400px) {
-      main {
-        padding: 10px 5px;
-      }
-      .card {
-        max-width: 100%;
-        padding: 12px;
-      }
-      .install-btn, .buy-btn {
-        min-width: 100px;
-        padding: 8px 15px;
-      }
+      flex-shrink: 0; /* prevent footer shrinking */
     }
   </style>
 </head>
@@ -245,7 +208,7 @@
     </div>
   </main>
 
-  <a href="https://asusxax.github.io/whatsapp" class="whatsapp-float" target="_blank" aria-label="WhatsApp Chat">
+  <a href="https://asusxax.github.io/whatsapp" class="whatsapp-float" target="_blank">
     <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
   </a>
 

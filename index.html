@@ -9,262 +9,236 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
 
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
   <style>
     * {
-      margin: 0; padding: 0; box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     html, body {
       height: 100%;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #000000 0%, #0f0f0f 100%);
+      background: #000;
       overflow-x: hidden;
       color: #ddd;
-      transition: color 0.3s ease;
+      transition: all 0.4s ease;
+    }
+
+    body.red-theme {
+      background: #1a0000;
+      color: #fdd;
+    }
+
+    header, footer, .glass-card, .install-btn, .buy-btn {
+      transition: all 0.4s ease;
+    }
+
+    .red-theme header,
+    .red-theme footer,
+    .red-theme .glass-card {
+      box-shadow: 0 0 30px #ff000088 !important;
+      border-color: #ff000033 !important;
+    }
+
+    .red-theme .install-btn {
+      background: #ff3333;
+      box-shadow: 0 0 25px #ff3333;
+    }
+
+    .red-theme .buy-btn {
+      background: #ff3333;
+      box-shadow: 0 0 25px #ff3333;
     }
 
     #particles-js {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: -1;
-      transition: filter 0.3s ease;
+      pointer-events: none;
     }
 
     header {
       display: flex;
       align-items: center;
-      padding: 15px 30px;
+      padding: 10px 20px;
       background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(8px);
       border-bottom: 1px solid rgba(0, 240, 255, 0.2);
-      box-shadow: 0 0 20px #00f0ff88;
+      box-shadow: 0 0 15px #00f0ff88;
       position: sticky;
       top: 0;
       z-index: 10;
-      color: #00f0ff;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      font-size: 1.5rem;
-      text-shadow: 0 0 12px #00f0ff;
     }
 
     .logo {
-      height: 35px;
+      height: 30px;
       margin-right: 10px;
-      animation: pulse 2s infinite;
-      filter: drop-shadow(0 0 6px #00f0ff);
-      transition: filter 0.3s ease;
     }
 
-    @keyframes pulse {
-      0%, 100% { filter: drop-shadow(0 0 6px #00f0ff); }
-      50% { filter: drop-shadow(0 0 20px #00f0ff); }
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      color: #00f0ff;
+      text-shadow: 0 0 6px #00f0ff;
     }
 
     main {
       display: flex;
-      justify-content: center;
-      gap: 50px;
-      padding: 60px 20px;
-      min-height: 100vh;
-      text-align: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      padding: 40px 10px;
+      gap: 20px;
     }
 
-    .glass-card {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(0, 240, 255, 0.2);
-      padding: 40px;
-      max-width: 320px;
+    .card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(0, 240, 255, 0.15);
+      padding: 20px;
       border-radius: 16px;
-      backdrop-filter: blur(15px);
-      box-shadow: 0 0 40px rgba(0, 240, 255, 0.2);
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      max-width: 360px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
     }
 
-    .glass-card h2 {
-      font-size: 1.8rem;
-      margin-bottom: 16px;
-      color: #bbb;
-      text-shadow: 0 0 8px #00f0ff;
-      transition: color 0.3s ease, text-shadow 0.3s ease;
+    .card h2 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: #00f0ff;
     }
 
-    .glass-card p {
-      color: #aaa;
-      font-size: 0.95rem;
-      margin-bottom: 25px;
-      transition: color 0.3s ease;
-    }
-
-    .tool-image {
+    .card img {
       width: 100%;
-      border-radius: 14px;
-      box-shadow: 0 0 25px #00f0ff;
-      margin-bottom: 30px;
-      transition: box-shadow 0.3s ease;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #00f0ff;
+      margin-bottom: 15px;
+      transition: transform 0.3s;
+    }
+
+    .card img:hover {
+      transform: scale(1.03);
     }
 
     .install-btn, .buy-btn {
-      font-weight: bold;
-      padding: 12px 35px;
-      font-size: 1.1rem;
-      border-radius: 40px;
+      padding: 10px 25px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 600;
       text-decoration: none;
-      box-shadow: 0 0 24px;
-      transition: all 0.3s ease;
       display: inline-block;
-      user-select: none;
-      cursor: pointer;
+      margin-top: 10px;
       color: #000;
     }
 
     .install-btn {
       background: #00f0ff;
-      box-shadow: 0 0 24px #00f0ff;
-      margin-bottom: 0;
-    }
-    .install-btn:hover {
-      background: #00c9e0;
-      box-shadow: 0 0 30px #00f0ff;
-      transform: scale(1.05);
+      box-shadow: 0 0 18px #00f0ff;
     }
 
     .buy-btn {
       background: #ff0000;
-      box-shadow: 0 0 24px #ff0000;
-      margin-top: 10px;
-      color: #fff;
-    }
-    .buy-btn:hover {
-      background: #cc0000;
-      box-shadow: 0 0 35px #ff0000;
-      transform: scale(1.05);
-      color: #fff;
+      box-shadow: 0 0 18px #ff0000;
     }
 
-    footer {
-      text-align: center;
-      padding: 16px;
-      font-size: 0.8rem;
-      color: #777;
-      background: rgba(0, 0, 0, 0.6);
-      border-top: 1px solid rgba(0, 240, 255, 0.2);
-      transition: border-color 0.3s ease, color 0.3s ease;
+    .buy-hover-area:hover ~ body,
+    .buy-hover-area:hover ~ header,
+    .buy-hover-area:hover ~ footer {
+      background-color: #1a0000;
     }
 
-    /* WhatsApp Button */
+    .buy-hover-area:hover body {
+      background-color: #1a0000;
+    }
+
+    .buy-hover-area:hover .card h2 {
+      color: #ff0000;
+    }
+
+    .buy-hover-area:hover .card img {
+      box-shadow: 0 0 20px #ff0000;
+    }
+
     .whatsapp-float {
       position: fixed;
       bottom: 20px;
       left: 20px;
-      z-index: 999;
-      width: 55px;
-      height: 55px;
+      width: 50px;
+      height: 50px;
       background-color: #25D366;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 12px #25D366aa;
-      transition: transform 0.3s ease;
+      box-shadow: 0 0 10px #25D366aa;
+      z-index: 999;
     }
-    .whatsapp-float:hover {
-      transform: scale(1.1);
-    }
+
     .whatsapp-float img {
       width: 28px;
       height: 28px;
     }
 
-    /* RED THEME TRIGGERED BY BODY CLASS */
-    body.red-theme {
-      color: #ff4444;
-      transition: color 0.3s ease;
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      padding: 10px;
+      color: #888;
+      background: rgba(0, 0, 0, 0.5);
+      border-top: 1px solid rgba(0, 240, 255, 0.1);
     }
-    body.red-theme header {
-      color: #ff0000;
-      border-bottom-color: rgba(255, 0, 0, 0.2);
-      box-shadow: 0 0 20px #ff000088;
-      text-shadow: 0 0 12px #ff0000;
-    }
-    body.red-theme .logo {
-      animation: pulse-red 2s infinite;
-      filter: drop-shadow(0 0 6px #ff0000);
-    }
-    @keyframes pulse-red {
-      0%, 100% { filter: drop-shadow(0 0 6px #ff0000); }
-      50% { filter: drop-shadow(0 0 20px #ff0000); }
-    }
-    body.red-theme main .glass-card {
-      border-color: rgba(255, 0, 0, 0.2);
-      box-shadow: 0 0 40px rgba(255, 0, 0, 0.2);
-    }
-    body.red-theme main .glass-card h2 {
-      color: #ff0000;
-      text-shadow: 0 0 10px #ff0000;
-    }
-    body.red-theme main .glass-card p {
-      color: #ff6666;
-    }
-    body.red-theme main .glass-card .tool-image {
-      box-shadow: 0 0 25px #ff0000;
-    }
-    body.red-theme .install-btn {
-      background: #cc0000 !important;
-      box-shadow: 0 0 30px #ff0000 !important;
-      color: #fff !important;
-    }
-    body.red-theme .buy-btn {
-      background: #ff0000 !important;
-      box-shadow: 0 0 35px #ff0000 !important;
-      color: #fff !important;
-    }
-    body.red-theme footer {
-      color: #ff6666;
-      border-top-color: rgba(255, 0, 0, 0.2);
-    }
-
   </style>
 </head>
 <body>
   <div id="particles-js"></div>
 
   <header>
-    <img src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/main/AsusX.logo.png" alt="AsusX Logo" class="logo" />
-    AsusXAx
+    <img src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/main/AsusX.logo.png" alt="Logo" class="logo">
+    <h1>AsusXAx</h1>
   </header>
 
   <main>
-    <div class="glass-card install-section">
+    <div class="card">
       <h2>Install The Best Tweaks in the World!</h2>
-      <p>Optimize and enhance your system performance for the best gaming experience.</p>
-      <img class="tool-image" src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/refs/heads/main/AsusX.png" alt="Install Preview" />
-      <a href="https://github.com/AsusXAx/AsusXAx.github.io/releases/download/Tool/AsusX.exe" target="_blank" rel="noopener noreferrer" class="install-btn">Install Now</a>
+      <img src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/refs/heads/main/AsusX.png" alt="Free Version">
+      <a class="install-btn" href="https://github.com/AsusXAx/AsusXAx.github.io/releases/download/Tool/AsusX.exe" target="_blank">Install Now</a>
     </div>
 
-    <div class="glass-card buy-section">
-      <h2>Buy The Ultimate Tweaks Package!</h2>
-      <p>Unlock premium features with the official purchase.</p>
-      <img class="tool-image buy-trigger" src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/refs/heads/main/HERO.png" alt="Buy Preview" />
-      <a href="#" target="_blank" rel="noopener noreferrer" class="buy-btn buy-trigger">Buy Now</a>
+    <div class="card buy-hover-area">
+      <h2>Unlock PRO Tweaks Now!</h2>
+      <img src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/refs/heads/main/HERO.png" alt="Pro Version">
+      <a class="buy-btn" href="#">Buy Now</a>
     </div>
   </main>
 
-  <a href="https://asusxax.github.io/whatsapp" target="_blank" rel="noopener noreferrer" class="whatsapp-float">
+  <a href="https://asusxax.github.io/whatsapp" class="whatsapp-float" target="_blank">
     <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
   </a>
 
-  <footer>Built by AsusXAx | © 2025 All Rights Reserved</footer>
+  <footer>
+    Built by AsusXAx | © 2025 All Rights Reserved
+  </footer>
 
-  <!-- particles.js -->
+  <!-- Particles.js -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
-    // Initialize particles with blue color by default
-    let particlesConfigBlue = {
+    const body = document.body;
+    const buyHoverCard = document.querySelector('.buy-hover-area');
+
+    buyHoverCard.addEventListener('mouseenter', () => {
+      body.classList.add('red-theme');
+    });
+
+    buyHoverCard.addEventListener('mouseleave', () => {
+      body.classList.remove('red-theme');
+    });
+
+    particlesJS("particles-js", {
       particles: {
         number: { value: 100 },
         color: { value: "#00f0ff" },
@@ -286,31 +260,6 @@
           onclick: { enable: true, mode: "push" }
         }
       }
-    };
-
-    let particlesConfigRed = JSON.parse(JSON.stringify(particlesConfigBlue));
-    // Override colors to red
-    particlesConfigRed.particles.color.value = "#ff0000";
-    particlesConfigRed.particles.line_linked.color = "#ff0000";
-
-    function loadParticles(config) {
-      window.pJSDom && window.pJSDom.length && window.pJSDom[0].pJS.fn.vendors.destroypJS();
-      particlesJS('particles-js', config);
-    }
-
-    loadParticles(particlesConfigBlue);
-
-    // Handle hover on Buy Now elements to switch to red theme
-    const buyTriggers = document.querySelectorAll('.buy-trigger');
-    buyTriggers.forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        document.body.classList.add('red-theme');
-        loadParticles(particlesConfigRed);
-      });
-      el.addEventListener('mouseleave', () => {
-        document.body.classList.remove('red-theme');
-        loadParticles(particlesConfigBlue);
-      });
     });
   </script>
 </body>

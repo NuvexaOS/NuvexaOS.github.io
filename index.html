@@ -21,13 +21,16 @@
 
     html, body {
       height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
       font-family: 'Poppins', sans-serif;
       background: #000;
-      overflow-x: hidden;
       color: #ddd;
       transition: all 0.4s ease;
       display: flex;
       flex-direction: column;
+      min-height: 100vh;
     }
 
     body.red-theme {
@@ -88,28 +91,25 @@
     }
 
     main {
+      flex: 1 0 auto; /* grow to fill space */
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
       padding: 20px 10px;
       gap: 20px;
-      flex-grow: 1;
-      align-items: flex-start; /* Make sure elements are aligned */
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
     }
 
     .card {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(0, 240, 255, 0.15);
-      padding: 15px;
+      padding: 20px;
       border-radius: 16px;
-      width: 360px;
+      max-width: 360px;
       text-align: center;
       box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      height: auto; /* Automatically adjusts based on content */
     }
 
     .card h2 {
@@ -124,11 +124,14 @@
 
     .card img {
       width: 100%;
-      max-height: 220px; /* Fix image size consistency */
-      object-fit: contain;
       border-radius: 12px;
       box-shadow: 0 0 15px #00f0ff;
       margin-bottom: 15px;
+      transition: transform 0.3s;
+    }
+
+    .card img:hover {
+      transform: scale(1.03);
     }
 
     .install-btn, .buy-btn {
@@ -140,7 +143,6 @@
       display: inline-block;
       margin-top: 10px;
       color: #000;
-      text-align: center;
     }
 
     .install-btn {
@@ -174,12 +176,18 @@
     }
 
     footer {
+      flex-shrink: 0; /* keep footer visible at bottom */
       text-align: center;
       font-size: 0.8rem;
       padding: 15px 10px;
       color: #888;
       background: rgba(0, 0, 0, 0.5);
       border-top: 1px solid rgba(0, 240, 255, 0.1);
+    }
+
+    /* Move the "Unlock PRO Tweaks Now!" card down */
+    .card.buy-hover-area {
+      margin-top: 30px; /* Adjust the value as needed */
     }
   </style>
 </head>
@@ -213,6 +221,7 @@
     Built by AsusXAx | © 2025 All Rights Reserved
   </footer>
 
+  <!-- Particles.js -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
     const body = document.body;

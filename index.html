@@ -5,13 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AsusXAx - Tweaks Tool</title>
   <link rel="icon" href="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/main/AsusX.logo.png" type="image/png" />
-
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
-
-  <!-- Animate.css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-
   <style>
     * {
       margin: 0;
@@ -35,22 +30,18 @@
       color: #fdd;
     }
 
-    header, footer, .glass-card, .install-btn, .buy-btn {
+    header, footer, .card, .install-btn, .buy-btn {
       transition: all 0.4s ease;
     }
 
     .red-theme header,
     .red-theme footer,
-    .red-theme .glass-card {
+    .red-theme .card {
       box-shadow: 0 0 30px #ff000088 !important;
       border-color: #ff000033 !important;
     }
 
-    .red-theme .install-btn {
-      background: #ff3333;
-      box-shadow: 0 0 25px #ff3333;
-    }
-
+    .red-theme .install-btn,
     .red-theme .buy-btn {
       background: #ff3333;
       box-shadow: 0 0 25px #ff3333;
@@ -92,12 +83,12 @@
     }
 
     main {
-      flex: 1;
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
       padding: 40px 10px;
       gap: 20px;
+      flex-grow: 1;
     }
 
     .card {
@@ -176,11 +167,10 @@
     footer {
       text-align: center;
       font-size: 0.8rem;
-      padding: 40px 10px 60px;
+      padding: 15px 10px;
       color: #888;
       background: rgba(0, 0, 0, 0.5);
       border-top: 1px solid rgba(0, 240, 255, 0.1);
-      margin-top: auto;
     }
   </style>
 </head>
@@ -214,7 +204,6 @@
     Built by AsusXAx | © 2025 All Rights Reserved
   </footer>
 
-  <!-- Particles.js -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
     const body = document.body;

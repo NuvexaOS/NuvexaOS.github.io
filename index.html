@@ -21,16 +21,13 @@
 
     html, body {
       height: 100%;
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
       font-family: 'Poppins', sans-serif;
       background: #000;
+      overflow-x: hidden;
       color: #ddd;
       transition: all 0.4s ease;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
     }
 
     body.red-theme {
@@ -91,25 +88,28 @@
     }
 
     main {
-      flex: 1 0 auto; /* grow to fill space */
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
       padding: 20px 10px;
       gap: 20px;
-      max-width: 900px;
-      margin: 0 auto;
-      width: 100%;
+      flex-grow: 1;
+      align-items: flex-start; /* Make sure elements are aligned */
     }
 
     .card {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(0, 240, 255, 0.15);
-      padding: 20px;
+      padding: 15px;
       border-radius: 16px;
-      max-width: 360px;
+      width: 360px;
       text-align: center;
       box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      height: auto; /* Automatically adjusts based on content */
     }
 
     .card h2 {
@@ -124,16 +124,14 @@
 
     .card img {
       width: 100%;
+      max-height: 220px; /* Fix image size consistency */
+      object-fit: contain;
       border-radius: 12px;
       box-shadow: 0 0 15px #00f0ff;
       margin-bottom: 15px;
-      transition: transform 0.3s;
     }
 
-    .card img:hover {
-      transform: scale(1.03);
-    }
-
+    /* Ensure both buttons have the same size */
     .install-btn, .buy-btn {
       padding: 10px 25px;
       border-radius: 30px;
@@ -143,6 +141,7 @@
       display: inline-block;
       margin-top: 10px;
       color: #000;
+      text-align: center;
     }
 
     .install-btn {
@@ -176,67 +175,12 @@
     }
 
     footer {
-      flex-shrink: 0; /* keep footer visible at bottom */
       text-align: center;
       font-size: 0.8rem;
       padding: 15px 10px;
       color: #888;
       background: rgba(0, 0, 0, 0.5);
       border-top: 1px solid rgba(0, 240, 255, 0.1);
-    }
-
-    /* PRO Version Info Section */
-    .pro-info-section {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(0, 240, 255, 0.15);
-      padding: 20px;
-      border-radius: 16px;
-      max-width: 800px;
-      text-align: center;
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
-      margin-top: 20px;
-    }
-
-    .pro-info-section h2 {
-      font-size: 1.5rem;
-      color: #ff3333;
-    }
-
-    .pro-info-section p {
-      font-size: 1rem;
-      margin: 15px 0;
-      color: #ddd;
-    }
-
-    .pro-info-section ul {
-      text-align: left;
-      margin-top: 15px;
-      padding-left: 20px;
-      list-style-type: none;
-    }
-
-    .pro-info-section ul li {
-      font-size: 1rem;
-      margin-bottom: 10px;
-      color: #ddd;
-    }
-
-    .pro-info-section ul li::before {
-      content: "[✔️] ";
-      color: #00f0ff;
-    }
-
-    /* Remove the red glow effect and set the size to match the free version */
-    .buy-hover-area img {
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 0 15px #00f0ff; /* No red glow */
-      margin-bottom: 15px;
-      transition: transform 0.3s;
-    }
-
-    .buy-hover-area img:hover {
-      transform: scale(1.03);
     }
   </style>
 </head>
@@ -260,21 +204,6 @@
       <img src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/refs/heads/main/HERO.png" alt="Pro Version">
       <a class="buy-btn" href="#">Buy Now</a>
     </div>
-
-    <!-- PRO Version Info Section -->
-    <div class="pro-info-section">
-      <h2>What's in the PRO Version?</h2>
-      <p>Unlock exclusive features with the PRO version of AsusXAx, designed to take your experience to the next level. Some key benefits include:</p>
-      <ul>
-        <li><strong>Advanced Tweak Options:</strong> Access to powerful customization and optimization features.</li>
-        <li><strong>Faster Performance:</strong> Experience quicker results with the PRO tools.</li>
-        <li><strong>Priority Customer Support:</strong> Receive priority support for any issues or questions you may have.</li>
-        <li><strong>Additional Customization Tools:</strong> More customization options to tailor the tweaks to your exact needs.</li>
-        <li><strong>Exclusive Themes and Features:</strong> Unlock unique themes and experimental features not available in the free version.</li>
-        <li><strong>Unlimited Access:</strong> No limitations on tweak count or advanced tools usage.</li>
-        <li><strong>And much more!</strong></li>
-      </ul>
-    </div>
   </main>
 
   <a href="https://asusxax.github.io/whatsapp" class="whatsapp-float" target="_blank">
@@ -285,7 +214,6 @@
     Built by AsusXAx | © 2025 All Rights Reserved
   </footer>
 
-  <!-- Particles.js -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
     const body = document.body;

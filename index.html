@@ -8,6 +8,8 @@
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+
+  <!-- Animate.css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
   <style>
@@ -24,9 +26,6 @@
       overflow-x: hidden;
       color: #ddd;
       transition: all 0.4s ease;
-    }
-
-    body {
       display: flex;
       flex-direction: column;
     }
@@ -36,13 +35,13 @@
       color: #fdd;
     }
 
-    header, footer, .card, .install-btn, .buy-btn {
+    header, footer, .glass-card, .install-btn, .buy-btn {
       transition: all 0.4s ease;
     }
 
     .red-theme header,
     .red-theme footer,
-    .red-theme .card {
+    .red-theme .glass-card {
       box-shadow: 0 0 30px #ff000088 !important;
       border-color: #ff000033 !important;
     }
@@ -89,13 +88,13 @@
     }
 
     main {
-      flex: 1;
       display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      justify-content: space-around;
       flex-wrap: wrap;
+      padding: 20px 10px;
       gap: 20px;
-      padding: 30px 20px 0;
+      flex-grow: 1;
+      align-items: flex-start;
     }
 
     .card {
@@ -106,6 +105,11 @@
       width: 360px;
       text-align: center;
       box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      height: 500px;
     }
 
     .card h2 {
@@ -120,7 +124,7 @@
 
     .card img {
       width: 100%;
-      max-height: 220px;
+      height: 200px;
       object-fit: contain;
       border-radius: 12px;
       box-shadow: 0 0 15px #00f0ff;
@@ -136,6 +140,7 @@
       display: inline-block;
       margin-top: 10px;
       color: #000;
+      text-align: center;
     }
 
     .install-btn {
@@ -171,7 +176,7 @@
     footer {
       text-align: center;
       font-size: 0.8rem;
-      padding: 10px;
+      padding: 15px 10px;
       color: #888;
       background: rgba(0, 0, 0, 0.5);
       border-top: 1px solid rgba(0, 240, 255, 0.1);
@@ -190,12 +195,14 @@
     <div class="card">
       <h2>Install The Best Tweaks in the World!</h2>
       <img src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/refs/heads/main/AsusX.png" alt="Free Version">
+      <div style="flex-grow: 1;"></div>
       <a class="install-btn" href="https://github.com/AsusXAx/AsusXAx.github.io/releases/download/Tool/AsusX.exe" target="_blank">Install Now</a>
     </div>
 
     <div class="card buy-hover-area">
       <h2>Unlock PRO Tweaks Now!</h2>
       <img src="https://raw.githubusercontent.com/AsusXAx/AsusXAx.github.io/refs/heads/main/HERO.png" alt="Pro Version">
+      <div style="flex-grow: 1;"></div>
       <a class="buy-btn" href="#">Buy Now</a>
     </div>
   </main>

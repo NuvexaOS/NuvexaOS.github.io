@@ -1,257 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>FPS Booster — Maximize Your Game Performance</title>
-<style>
-  /* Reset */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #0a0a23;
-    color: #eee;
-    overflow-x: hidden;
-  }
-
-  /* Animated background particles */
-  #particles {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0; left: 0;
-    z-index: -1;
-    background: #0a0a23;
-  }
-
-  canvas {
-    display: block;
-    position: absolute;
-  }
-
-  header {
-    padding: 80px 20px 40px;
-    text-align: center;
-  }
-
-  h1 {
-    font-size: 4rem;
-    color: #39ff14;
-    text-shadow:
-      0 0 5px #39ff14,
-      0 0 10px #39ff14,
-      0 0 20px #39ff14,
-      0 0 40px #0f0;
-    animation: neonPulse 2.5s ease-in-out infinite alternate;
-  }
-
-  @keyframes neonPulse {
-    from {
-      text-shadow:
-        0 0 5px #39ff14,
-        0 0 10px #39ff14,
-        0 0 20px #39ff14,
-        0 0 40px #0f0;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AsusX - FPS Optimizer</title>
+  <style>
+    /* Reset & basic */
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #eee;
     }
-    to {
-      text-shadow:
-        0 0 20px #3fff39,
-        0 0 40px #3fff39,
-        0 0 80px #39ff14,
-        0 0 120px #0f0;
+    body {
+      background: #0a0a0a;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
     }
-  }
 
-  p.lead {
-    font-size: 1.3rem;
-    margin: 20px auto 50px;
-    max-width: 600px;
-    color: #b0f1b0;
-    text-shadow: 0 0 5px #26b026;
-    animation: fadeInUp 1.5s ease forwards;
-  }
+    /* Animated glowing lights */
+    .glow-lights {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .light {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.5;
+      animation: float 6s ease-in-out infinite;
+      mix-blend-mode: screen;
+    }
+    .light.red {
+      background: #ff3d3d;
+      width: 200px; height: 200px;
+      top: 20%; left: 10%;
+      animation-delay: 0s;
+    }
+    .light.blue {
+      background: #3d72ff;
+      width: 300px; height: 300px;
+      top: 60%; left: 80%;
+      animation-delay: 3s;
+    }
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) translateX(0);
+      }
+      50% {
+        transform: translateY(-20px) translateX(15px);
+      }
+    }
 
-  /* Install button */
-  .install-btn {
-    display: inline-block;
-    background: linear-gradient(45deg, #39ff14, #0f0);
-    padding: 18px 48px;
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: #000;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow:
-      0 0 10px #39ff14,
-      0 0 20px #0f0,
-      0 0 30px #3fff39;
-    transition: all 0.3s ease;
-    animation: pulseBtn 2s infinite;
-    user-select: none;
-    text-decoration: none;
-  }
-  .install-btn:hover {
-    background: linear-gradient(45deg, #3fff39, #0b0);
-    box-shadow:
-      0 0 20px #3fff39,
-      0 0 40px #0b0,
-      0 0 60px #3fff39;
-  }
+    /* Main container */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 480px;
+      background: rgba(30, 30, 30, 0.85);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 0 30px #3d72ffaa;
+      text-align: center;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      color: #3d72ff;
+      text-shadow: 0 0 8px #3d72ffbb;
+    }
+    p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      line-height: 1.4;
+      color: #ccc;
+    }
 
-  @keyframes pulseBtn {
-    0%, 100% {
+    /* Install button */
+    .btn-install {
+      background: linear-gradient(135deg, #3d72ff, #ff3d3d);
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.5rem;
+      color: white;
+      font-weight: 700;
+      border-radius: 50px;
+      cursor: pointer;
       box-shadow:
-        0 0 10px #39ff14,
-        0 0 20px #0f0,
-        0 0 30px #3fff39;
+        0 0 10px #3d72ff,
+        0 0 20px #ff3d3d,
+        0 0 40px #3d72ff;
+      transition: box-shadow 0.3s ease;
     }
-    50% {
+    .btn-install:hover,
+    .btn-install:focus {
       box-shadow:
-        0 0 20px #3fff39,
-        0 0 40px #0f0,
-        0 0 60px #3fff39;
+        0 0 20px #ff3d3d,
+        0 0 40px #3d72ff,
+        0 0 80px #ff3d3d;
+      outline: none;
+      transform: scale(1.05);
     }
-  }
 
-  /* Features Section */
-  .features {
-    max-width: 900px;
-    margin: 0 auto 80px;
-    padding: 0 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-    gap: 40px;
-  }
-
-  .feature {
-    background: #101030cc;
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow:
-      0 0 15px #0f0;
-    transition: transform 0.3s ease;
-  }
-  .feature:hover {
-    transform: scale(1.05);
-  }
-
-  .feature h3 {
-    color: #39ff14;
-    margin-bottom: 15px;
-    font-size: 1.6rem;
-  }
-
-  .feature p {
-    color: #c8ffc8;
-    line-height: 1.4;
-  }
-
-  /* Animations */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
+    /* Footer */
+    footer {
+      margin-top: 3rem;
+      color: #555;
+      font-size: 0.9rem;
+      user-select: none;
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 0.9rem;
-    color: #444;
-  }
-</style>
+  </style>
 </head>
 <body>
 
-<div id="particles"></div>
-
-<header>
-  <h1>FPS BOOSTER</h1>
-  <p class="lead">Maximize your game’s performance with our advanced FPS optimizer — smooth gameplay guaranteed.</p>
-  <a href="#" class="install-btn" onclick="alert('Installing FPS Booster...')">Install Now</a>
-</header>
-
-<section class="features">
-  <div class="feature">
-    <h3>Real-Time FPS Boost</h3>
-    <p>Automatically optimize your system resources and boost frame rates during gameplay.</p>
+  <div class="glow-lights">
+    <div class="light red"></div>
+    <div class="light blue"></div>
   </div>
-  <div class="feature">
-    <h3>Low CPU & RAM Usage</h3>
-    <p>Lightweight and efficient, our tool frees up memory without slowing you down.</p>
-  </div>
-  <div class="feature">
-    <h3>Easy One-Click Install</h3>
-    <p>Simple setup with a single button. Get up and running in seconds.</p>
-  </div>
-  <div class="feature">
-    <h3>Custom Profiles</h3>
-    <p>Create optimized profiles for different games or apps for maximum control.</p>
-  </div>
-</section>
 
-<footer>&copy; 2025 FPS Booster. All rights reserved.</footer>
+  <main>
+    <h1>AsusX</h1>
+    <p>Boost your FPS and optimize your PC gaming experience with AsusX — easy, fast, and powerful.</p>
+    <button class="btn-install" onclick="installTool()">Install AsusX</button>
+  </main>
 
-<script>
-  // Simple particles animation
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
-  document.getElementById('particles').appendChild(canvas);
-  let w, h;
-  function resize() {
-    w = window.innerWidth;
-    h = window.innerHeight;
-    canvas.width = w;
-    canvas.height = h;
-  }
-  window.addEventListener('resize', resize);
-  resize();
+  <footer>
+    &copy; 2025 AsusX. All rights reserved.
+  </footer>
 
-  const particlesCount = 100;
-  const particles = [];
-  for (let i = 0; i < particlesCount; i++) {
-    particles.push({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      r: Math.random() * 2 + 1,
-      speedX: (Math.random() - 0.5) * 0.3,
-      speedY: (Math.random() - 0.5) * 0.3,
-      opacity: Math.random() * 0.5 + 0.3
-    });
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, w, h);
-    particles.forEach(p => {
-      p.x += p.speedX;
-      p.y += p.speedY;
-      if (p.x < 0) p.x = w;
-      else if (p.x > w) p.x = 0;
-      if (p.y < 0) p.y = h;
-      else if (p.y > h) p.y = 0;
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(57, 255, 20, ${p.opacity})`;
-      ctx.shadowColor = `rgba(57, 255, 20, ${p.opacity})`;
-      ctx.shadowBlur = 10;
-      ctx.fill();
-    });
-    requestAnimationFrame(animate);
-  }
-  animate();
-</script>
+  <script>
+    function installTool() {
+      alert('Thanks for installing AsusX! Your FPS boost is on the way 🚀');
+      // You can add real installation logic here, e.g., download link, setup instructions, etc.
+      // window.location.href = 'https://your-download-link.com';
+    }
+  </script>
 
 </body>
 </html>

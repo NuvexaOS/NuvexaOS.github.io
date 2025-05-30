@@ -2,149 +2,87 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AsusX - FPS Optimizer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Cool App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    /* Reset & basic */
-    * {
-      box-sizing: border-box;
-      margin: 0; padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #eee;
-    }
     body {
-      background: #0a0a0a;
-      overflow-x: hidden;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      position: relative;
-    }
-
-    /* Animated glowing lights */
-    .glow-lights {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 0;
-    }
-    .light {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(60px);
-      opacity: 0.5;
-      animation: float 6s ease-in-out infinite;
-      mix-blend-mode: screen;
-    }
-    .light.red {
-      background: #ff3d3d;
-      width: 200px; height: 200px;
-      top: 20%; left: 10%;
-      animation-delay: 0s;
-    }
-    .light.blue {
-      background: #3d72ff;
-      width: 300px; height: 300px;
-      top: 60%; left: 80%;
-      animation-delay: 3s;
-    }
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0) translateX(0);
-      }
-      50% {
-        transform: translateY(-20px) translateX(15px);
-      }
-    }
-
-    /* Main container */
-    main {
-      position: relative;
-      z-index: 1;
-      max-width: 480px;
-      background: rgba(30, 30, 30, 0.85);
-      border-radius: 20px;
-      padding: 2.5rem;
-      box-shadow: 0 0 30px #3d72ffaa;
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background: radial-gradient(circle at top, #0f0f0f, #000000);
+      color: white;
       text-align: center;
+      overflow-x: hidden;
     }
+
+    header {
+      padding: 4rem 2rem;
+      background: linear-gradient(145deg, #1e1e1e, #111);
+      box-shadow: 0 0 60px rgba(255, 255, 255, 0.05);
+    }
+
     h1 {
       font-size: 3rem;
-      margin-bottom: 0.5rem;
-      color: #3d72ff;
-      text-shadow: 0 0 8px #3d72ffbb;
-    }
-    p {
-      font-size: 1.25rem;
-      margin-bottom: 2rem;
-      line-height: 1.4;
-      color: #ccc;
+      margin-bottom: 1rem;
     }
 
-    /* Install button */
-    .btn-install {
-      background: linear-gradient(135deg, #3d72ff, #ff3d3d);
-      border: none;
-      padding: 1rem 2rem;
-      font-size: 1.5rem;
-      color: white;
-      font-weight: 700;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow:
-        0 0 10px #3d72ff,
-        0 0 20px #ff3d3d,
-        0 0 40px #3d72ff;
-      transition: box-shadow 0.3s ease;
+    p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
     }
-    .btn-install:hover,
-    .btn-install:focus {
-      box-shadow:
-        0 0 20px #ff3d3d,
-        0 0 40px #3d72ff,
-        0 0 80px #ff3d3d;
-      outline: none;
+
+    .install-btn {
+      padding: 1rem 2rem;
+      background: #00ffcc;
+      color: #000;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 20px #00ffcc;
+      transition: transform 0.2s ease;
+    }
+
+    .install-btn:hover {
       transform: scale(1.05);
     }
 
-    /* Footer */
-    footer {
+    .screenshot {
+      max-width: 90%;
+      height: auto;
+      border-radius: 12px;
       margin-top: 3rem;
-      color: #555;
-      font-size: 0.9rem;
-      user-select: none;
+      box-shadow: 0 0 30px rgba(0, 255, 200, 0.2);
+    }
+
+    .lights {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(0,255,204,0.05) 0%, transparent 80%);
+      animation: flicker 5s infinite alternate;
+    }
+
+    @keyframes flicker {
+      0% { opacity: 0.05; }
+      100% { opacity: 0.15; }
     }
   </style>
 </head>
 <body>
-
-  <div class="glow-lights">
-    <div class="light red"></div>
-    <div class="light blue"></div>
-  </div>
-
-  <main>
-    <h1>AsusX</h1>
-    <p>Boost your FPS and optimize your PC gaming experience with AsusX — easy, fast, and powerful.</p>
-    <button class="btn-install" onclick="installTool()">Install AsusX</button>
-  </main>
-
-  <footer>
-    &copy; 2025 AsusX. All rights reserved.
-  </footer>
-
-  <script>
-    function installTool() {
-      alert('Thanks for installing AsusX! Your FPS boost is on the way 🚀');
-      // You can add real installation logic here, e.g., download link, setup instructions, etc.
-      // window.location.href = 'https://your-download-link.com';
-    }
-  </script>
-
+  <div class="lights"></div>
+  <header>
+    <h1>🚀 My Cool App</h1>
+    <p>This is a sleek, modern landing page for your app. Add your GitHub install link below.</p>
+    <a href="https://github.com/YOUR_USERNAME/YOUR_REPO" target="_blank">
+      <button class="install-btn">Install</button>
+    </a>
+    <img src="screenshot.png" alt="App screenshot" class="screenshot" />
+  </header>
 </body>
 </html>

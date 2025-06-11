@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YourOS — Light. Fast. Open.</title>
+  <title>YourOS — Elite Landing</title>
   <style>
     :root {
       --bg: #0f172a;
@@ -19,17 +19,22 @@
       color: var(--text);
       font-family: 'Segoe UI', sans-serif;
       overflow-x: hidden;
+      position: relative;
+      height: 100%;
     }
+    html { height: 100%; }
+
     canvas {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
       z-index: 0;
     }
+
     header {
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       flex-direction: column;
       height: 100vh;
       text-align: center;
@@ -46,21 +51,20 @@
       margin-top: 1rem;
       font-size: 1.2rem;
       min-height: 1.5em;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: .15em solid var(--text);
     }
+
     section {
       padding: 4rem 2rem;
       max-width: 1000px;
       margin: auto;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 1s ease-out;
+      opacity: 1;
       position: relative;
       z-index: 1;
     }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+
     .features {
       display: flex;
       flex-wrap: wrap;
@@ -84,6 +88,7 @@
       color: var(--accent1);
       margin-bottom: 1rem;
     }
+
     .download {
       text-align: center;
       margin-top: 3rem;
@@ -109,10 +114,14 @@
     .download a:hover span {
       transform: scale(1.05);
     }
+
     #installBtn {
       opacity: 0;
-      transition: opacity 1s;
+      transition: opacity 1s ease-in;
       margin-top: 1.5rem;
+    }
+    #installBtn.show {
+      opacity: 1;
     }
     #installBtn a {
       background: linear-gradient(90deg, var(--install), #22c55e);
@@ -122,10 +131,12 @@
       font-weight: bold;
       border-radius: 6px;
       text-decoration: none;
+      animation: pop 1s ease-out;
     }
     #installBtn a:hover {
       filter: brightness(1.2);
     }
+
     footer {
       text-align: center;
       padding: 2rem;
@@ -134,9 +145,14 @@
       position: relative;
       z-index: 1;
     }
+
     @keyframes pulse {
-      0%, 100% { filter: brightness(1); }
+      0%,100% { filter: brightness(1); }
       50% { filter: brightness(1.2); }
+    }
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
   </style>
 </head>
@@ -148,18 +164,16 @@
     <div class="typewriter"></div>
   </header>
 
-  <section id="features" class="features-section">
+  <section id="features">
     <div class="features">
       <div class="feature"><h3>🚀 Blazing Fast</h3><p>Boots in seconds, runs smooth with zero bloat.</p></div>
-      <div class="feature"><h3>🔒 Ultra Secure</h3><p>Privacy-first architecture. Fully open-source.</p></div>
+      <div class="feature"><h3>🔒 Ultra Secure</h3><p>Privacy‑first architecture. Fully open‑source.</p></div>
       <div class="feature"><h3>🧠 Smart Design</h3><p>Minimalist UI with powerful tools at your fingertips.</p></div>
     </div>
 
     <div class="download">
       <a href="#"><span>⬇️ Download YourOS</span></a>
-      <div id="installBtn">
-        <a href="#">⚙️ Install YourOS</a>
-      </div>
+      <div id="installBtn"><a href="#">⚙️ Install YourOS</a></div>
     </div>
   </section>
 
@@ -168,33 +182,62 @@
   </footer>
 
   <script>
-    const text = "Lightweight. Secure. Designed for creators.";
-    let idx = 0;
-    const typeEl = document.querySelector(".typewriter");
-
-    function type() {
-      if (idx < text.length) {
-        typeEl.textContent += text[idx++];
-        setTimeout(type, 80);
-      } else {
-        revealOnScroll();
-        setTimeout(() => {
-          document.getElementById("installBtn").style.opacity = 1;
-        }, 1000);
+    const canvas = document.getElementById("bg");
+    const ctx = canvas.getContext("2d");
+    let w, h;
+    const stars = [];
+    function initCanvas() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      stars.length = 0;
+      for(let i = 0; i < 150; i++){
+        stars.push({
+          x: Math.random()*w,
+          y: Math.random()*h,
+          r: Math.random()*1.5,
+          alpha: Math.random(),
+          dAlpha: Math.random()*0.02 + 0.005
+        });
       }
     }
-
-    const sections = [document.getElementById("features")];
-    function revealOnScroll() {
-      sections.forEach(sec => {
-        const rect = sec.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) sec.classList.add("visible");
+    window.addEventListener("resize", initCanvas);
+    function drawStars(){
+      ctx.clearRect(0,0,w,h);
+      stars.forEach(s => {
+        s.alpha += s.dAlpha * (Math.random()<0.5 ? 1 : -1);
+        if(s.alpha<=0){ s.alpha=0; s.dAlpha = -s.dAlpha; }
+        if(s.alpha>=1){ s.alpha=1; s.dAlpha = -s.dAlpha; }
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.fill();
       });
+      requestAnimationFrame(drawStars);
     }
-    window.addEventListener("scroll", revealOnScroll);
 
-    function animateParticles() {
-      const canvas = document.getElementById("bg");
-      const ctx = canvas.getContext("2d");
-      let w = canvas.width = window.innerWidth;
-      let h = canvas.height =
+    function typeWriter(text, el, cb) {
+      let i=0;
+      function typeNext(){
+        if(i < text.length){
+          el.textContent += text.charAt(i++);
+          setTimeout(typeNext, 80);
+        } else {
+          el.style.borderRight = 'none';
+          if(cb) cb();
+        }
+      }
+      typeNext();
+    }
+
+    window.onload = () => {
+      initCanvas();
+      drawStars();
+
+      const typeEl = document.querySelector(".typewriter");
+      typeWriter("Lightweight. Secure. Designed for creators.", typeEl, () => {
+        document.getElementById("installBtn").classList.add("show");
+      });
+    };
+  </script>
+</body>
+</html>

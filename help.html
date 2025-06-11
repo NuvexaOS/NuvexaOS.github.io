@@ -87,19 +87,6 @@
       transform: scale(1.05);
     }
 
-    .links {
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      color: #94a3b8;
-      text-align: center;
-    }
-
-    .links a {
-      color: var(--accent1);
-      text-decoration: none;
-      margin: 0 0.5rem;
-    }
-
     footer {
       margin-top: 4rem;
       font-size: 0.9rem;
@@ -110,27 +97,20 @@
 </head>
 <body>
   <h1>Need Help?</h1>
-  <p>If you’re having issues with YourOS, have suggestions, or just want to say hi — use the form below or reach out through our channels.</p>
+  <p>If you’re having issues with YourOS, have suggestions, or just want to say hi — use the form below and we’ll get back to you!</p>
 
-  <form>
+  <form action="https://formspree.io/f/xwkgrjqd" method="POST">
     <label for="name">Your Name</label>
-    <input type="text" id="name" placeholder="John Doe" required />
+    <input type="text" name="name" id="name" required placeholder="John Doe" />
 
     <label for="email">Your Email</label>
-    <input type="email" id="email" placeholder="you@example.com" required />
+    <input type="email" name="email" id="email" required placeholder="you@example.com" />
 
     <label for="message">Your Message</label>
-    <textarea id="message" placeholder="Tell us what’s up..." required></textarea>
+    <textarea name="message" id="message" required placeholder="Tell us what’s up..."></textarea>
 
     <button type="submit">Send Message</button>
   </form>
-
-  <div class="links">
-    Or reach us on:
-    <a href="#">Discord</a> |
-    <a href="#">GitHub</a> |
-    <a href="#">Twitter</a>
-  </div>
 
   <footer>
     © 2025 YourOS — Built by Legends.

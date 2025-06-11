@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YourOS — Next-Level OS</title>
+  <title>YourOS — The Future Is Now</title>
   <style>
     :root {
       --bg: #0f172a;
@@ -31,12 +31,13 @@
     }
 
     header {
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
+      padding: 2rem;
       position: relative;
       z-index: 1;
     }
@@ -57,23 +58,16 @@
       border-right: 2px solid var(--text);
     }
 
-    section {
-      padding: 4rem 2rem;
-      max-width: 1000px;
-      margin: auto;
-      position: relative;
-      z-index: 1;
-    }
-
     .features {
       display: flex;
       flex-wrap: wrap;
       gap: 2rem;
       justify-content: center;
+      margin-top: 3rem;
     }
 
     .feature {
-      background: var(--bg);
+      background: rgba(15, 23, 42, 0.9);
       padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 4px 15px var(--shadow);
@@ -94,7 +88,7 @@
 
     .download {
       text-align: center;
-      margin-top: 3rem;
+      margin-top: 2.5rem;
     }
 
     .download a {
@@ -142,9 +136,7 @@
   <header>
     <h1>YourOS</h1>
     <div class="typewriter"></div>
-  </header>
 
-  <section id="features">
     <div class="features">
       <div class="feature">
         <h3>🚀 Blazing Fast</h3>
@@ -163,7 +155,7 @@
     <div class="download">
       <a href="#"><span>⬇️ Download YourOS</span></a>
     </div>
-  </section>
+  </header>
 
   <footer>
     © 2025 YourOS Project — Open Source & Community Driven
@@ -208,7 +200,7 @@
     window.addEventListener("resize", initCanvas);
 
     // Typewriter
-    function typeWriter(text, el, cb) {
+    function typeWriter(text, el) {
       let i = 0;
       function typeNext() {
         if (i < text.length) {
@@ -216,7 +208,6 @@
           setTimeout(typeNext, 80);
         } else {
           el.style.borderRight = 'none';
-          if (cb) cb();
         }
       }
       typeNext();

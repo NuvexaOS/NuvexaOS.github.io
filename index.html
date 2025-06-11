@@ -162,38 +162,40 @@
   </footer>
 
   <script>
-    // Particle Background
+    // MOVING STAR BACKGROUND
     const canvas = document.getElementById("bg");
     const ctx = canvas.getContext("2d");
     let w, h;
-    const stars = [];
+    let stars = [];
 
     function initCanvas() {
       w = canvas.width = window.innerWidth;
       h = canvas.height = window.innerHeight;
-      stars.length = 0;
-      for (let i = 0; i < 150; i++) {
-        stars.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          r: Math.random() * 1.5,
-          alpha: Math.random(),
-          dAlpha: Math.random() * 0.02 + 0.005
-        });
-      }
+      stars = Array.from({ length: 150 }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.5,
+        alpha: Math.random() * 0.8 + 0.2,
+        speedX: Math.random() * 0.3 + 0.05,
+        speedY: Math.random() * 0.3 + 0.05
+      }));
     }
 
     function drawStars() {
       ctx.clearRect(0, 0, w, h);
-      stars.forEach(s => {
-        s.alpha += s.dAlpha * (Math.random() < 0.5 ? 1 : -1);
-        if (s.alpha <= 0) { s.alpha = 0; s.dAlpha *= -1; }
-        if (s.alpha >= 1) { s.alpha = 1; s.dAlpha *= -1; }
+      stars.forEach(star => {
+        star.x += star.speedX;
+        star.y += star.speedY;
+
+        if (star.x > w) star.x = 0;
+        if (star.y > h) star.y = 0;
+
         ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${star.alpha})`;
         ctx.fill();
       });
+
       requestAnimationFrame(drawStars);
     }
 

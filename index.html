@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YourOS — Next-level OS Experience</title>
+  <title>YourOS — Light. Fast. Open.</title>
   <style>
     :root {
       --bg: #0f172a;
       --text: #f1f5f9;
       --accent1: #38bdf8;
       --accent2: #f472b6;
+      --install: #4ade80;
       --shadow: rgba(0, 0, 0, 0.3);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -17,9 +18,7 @@
       background: var(--bg);
       color: var(--text);
       font-family: 'Segoe UI', sans-serif;
-      height: 100vh;
       overflow-x: hidden;
-      position: relative;
     }
     canvas {
       position: fixed;
@@ -29,12 +28,13 @@
     }
     header {
       display: flex;
-      align-items: center; justify-content: center;
+      align-items: center;
+      justify-content: center;
       flex-direction: column;
       height: 100vh;
       text-align: center;
-      z-index: 1;
       position: relative;
+      z-index: 1;
     }
     h1 {
       font-size: 3rem;
@@ -54,8 +54,8 @@
       opacity: 0;
       transform: translateY(20px);
       transition: all 1s ease-out;
-      z-index: 1;
       position: relative;
+      z-index: 1;
     }
     section.visible {
       opacity: 1;
@@ -80,7 +80,10 @@
       transform: translateY(-5px) scale(1.05);
       box-shadow: 0 8px 25px rgba(56, 189, 248, 0.5);
     }
-    .feature h3 { color: var(--accent1); margin-bottom: 1rem; }
+    .feature h3 {
+      color: var(--accent1);
+      margin-bottom: 1rem;
+    }
     .download {
       text-align: center;
       margin-top: 3rem;
@@ -92,7 +95,6 @@
       border-radius: 8px;
       display: inline-block;
       text-decoration: none;
-      overflow: hidden;
       animation: pulse 2s infinite;
     }
     .download a span {
@@ -107,13 +109,30 @@
     .download a:hover span {
       transform: scale(1.05);
     }
+    #installBtn {
+      opacity: 0;
+      transition: opacity 1s;
+      margin-top: 1.5rem;
+    }
+    #installBtn a {
+      background: linear-gradient(90deg, var(--install), #22c55e);
+      color: var(--bg);
+      display: inline-block;
+      padding: 1rem 2rem;
+      font-weight: bold;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+    #installBtn a:hover {
+      filter: brightness(1.2);
+    }
     footer {
       text-align: center;
       padding: 2rem;
       font-size: 0.9rem;
       color: #94a3b8;
-      z-index: 1;
       position: relative;
+      z-index: 1;
     }
     @keyframes pulse {
       0%, 100% { filter: brightness(1); }
@@ -138,6 +157,9 @@
 
     <div class="download">
       <a href="#"><span>⬇️ Download YourOS</span></a>
+      <div id="installBtn">
+        <a href="#">⚙️ Install YourOS</a>
+      </div>
     </div>
   </section>
 
@@ -146,19 +168,22 @@
   </footer>
 
   <script>
-    // Typewriter effect
     const text = "Lightweight. Secure. Designed for creators.";
     let idx = 0;
     const typeEl = document.querySelector(".typewriter");
+
     function type() {
       if (idx < text.length) {
         typeEl.textContent += text[idx++];
         setTimeout(type, 80);
+      } else {
+        revealOnScroll();
+        setTimeout(() => {
+          document.getElementById("installBtn").style.opacity = 1;
+        }, 1000);
       }
     }
-    window.onload = () => { type(); revealOnScroll(); animateParticles(); };
 
-    // Scroll reveal
     const sections = [document.getElementById("features")];
     function revealOnScroll() {
       sections.forEach(sec => {
@@ -168,37 +193,8 @@
     }
     window.addEventListener("scroll", revealOnScroll);
 
-    // Particles background
     function animateParticles() {
       const canvas = document.getElementById("bg");
       const ctx = canvas.getContext("2d");
       let w = canvas.width = window.innerWidth;
-      let h = canvas.height = window.innerHeight;
-      window.onresize = () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; };
-
-      const particles = Array.from({ length: 80 }, () => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        r: Math.random() * 2 + 1,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-      }));
-
-      function draw() {
-        ctx.clearRect(0, 0, w, h);
-        ctx.fillStyle = "rgba(255,255,255,0.3)";
-        particles.forEach(p => {
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fill();
-          p.x += p.vx; p.y += p.vy;
-          if (p.x < 0 || p.x > w) p.vx *= -1;
-          if (p.y < 0 || p.y > h) p.vy *= -1;
-        });
-        requestAnimationFrame(draw);
-      }
-      draw();
-    }
-  </script>
-</body>
-</html>
+      let h = canvas.height =

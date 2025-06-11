@@ -3,86 +3,130 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Cool App</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet" />
+  <title>Your OS - Fast. Clean. Powerful.</title>
   <style>
-    body {
+    :root {
+      --primary: #0f172a;
+      --accent: #38bdf8;
+      --bg: #1e293b;
+      --text: #f1f5f9;
+      --shadow: rgba(0, 0, 0, 0.3);
+    }
+
+    * {
       margin: 0;
-      font-family: 'Outfit', sans-serif;
-      background: radial-gradient(circle at top, #0f0f0f, #000000);
-      color: white;
-      text-align: center;
-      overflow-x: hidden;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
     }
 
     header {
-      padding: 4rem 2rem;
-      background: linear-gradient(145deg, #1e1e1e, #111);
-      box-shadow: 0 0 60px rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      text-align: center;
+      background: var(--primary);
+      box-shadow: 0 2px 10px var(--shadow);
     }
 
-    h1 {
+    header h1 {
       font-size: 3rem;
-      margin-bottom: 1rem;
+      color: var(--accent);
     }
 
-    p {
+    header p {
       font-size: 1.2rem;
-      max-width: 600px;
-      margin: 0 auto 2rem;
+      color: #cbd5e1;
+      margin-top: 0.5rem;
     }
 
-    .install-btn {
-      padding: 1rem 2rem;
-      background: #00ffcc;
-      color: #000;
-      border: none;
-      border-radius: 50px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 0 20px #00ffcc;
-      transition: transform 0.2s ease;
+    .section {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
     }
 
-    .install-btn:hover {
-      transform: scale(1.05);
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
     }
 
-    .screenshot {
-      max-width: 90%;
-      height: auto;
+    .feature {
+      background: #0f172a;
+      padding: 2rem;
       border-radius: 12px;
-      margin-top: 3rem;
-      box-shadow: 0 0 30px rgba(0, 255, 200, 0.2);
+      box-shadow: 0 4px 15px var(--shadow);
+      width: 280px;
+      text-align: center;
     }
 
-    .lights {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      background: radial-gradient(circle, rgba(0,255,204,0.05) 0%, transparent 80%);
-      animation: flicker 5s infinite alternate;
+    .feature h3 {
+      margin-bottom: 1rem;
+      color: var(--accent);
     }
 
-    @keyframes flicker {
-      0% { opacity: 0.05; }
-      100% { opacity: 0.15; }
+    .download {
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    .download a {
+      background: var(--accent);
+      color: #0f172a;
+      padding: 1rem 2rem;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    .download a:hover {
+      background: #0ea5e9;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #94a3b8;
     }
   </style>
 </head>
 <body>
-  <div class="lights"></div>
   <header>
-    <h1>🚀 My Cool App</h1>
-    <p>This is a sleek, modern landing page for your app. Add your GitHub install link below.</p>
-    <a href="https://github.com/YOUR_USERNAME/YOUR_REPO" target="_blank">
-      <button class="install-btn">Install</button>
-    </a>
-    <img src="screenshot.png" alt="App screenshot" class="screenshot" />
+    <h1>YourOS</h1>
+    <p>The future of lightweight, fast, and open-source operating systems.</p>
   </header>
+
+  <section class="section">
+    <div class="features">
+      <div class="feature">
+        <h3>🚀 Blazing Fast</h3>
+        <p>Boots in seconds, runs smooth on any hardware. No bloat, no lag.</p>
+      </div>
+      <div class="feature">
+        <h3>🔒 Secure</h3>
+        <p>Privacy-first architecture. Open-source and fully auditable.</p>
+      </div>
+      <div class="feature">
+        <h3>🧠 Smart UI</h3>
+        <p>Minimalist design with powerful tools just a click away.</p>
+      </div>
+    </div>
+
+    <div class="download">
+      <a href="#">⬇️ Download YourOS</a>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 YourOS Project — Open Source & Community Driven
+  </footer>
 </body>
 </html>

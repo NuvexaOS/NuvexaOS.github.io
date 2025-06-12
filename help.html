@@ -123,7 +123,7 @@
   <h1>Need Help?</h1>
   <p>If you're having issues with NuvexaOS, use the form below to contact us. We'll get back to you ASAP.</p>
 
-  <form id="contactForm" action="https://formspree.io/f/xwkgrjqd" method="POST">
+  <form id="contactForm">
     <label for="name">Your Name</label>
     <input type="text" name="name" id="name" required placeholder="John Doe" />
 
@@ -149,20 +149,10 @@
     const form = document.getElementById("contactForm");
     const successMsg = document.getElementById("successMsg");
 
-    form.addEventListener("submit", async (e) => {
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
-
-      const data = new FormData(form);
-      const res = await fetch(form.action, {
-        method: "POST",
-        body: data,
-        headers: { Accept: "application/json" }
-      });
-
-      if (res.ok) {
-        form.reset();
-        successMsg.style.display = "block";
-      }
+      form.reset();
+      successMsg.style.display = "block";
     });
   </script>
 </body>

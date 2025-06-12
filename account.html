@@ -46,7 +46,7 @@
       background: rgba(255, 255, 255, 0.05);
       border-radius: 12px;
       padding: 2rem;
-      width: 350px;
+      width: 360px;
       box-shadow: 0 4px 15px var(--shadow);
       text-align: center;
     }
@@ -56,7 +56,29 @@
       background: linear-gradient(90deg, var(--accent1), var(--accent2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
       margin-bottom: 1.5rem;
+    }
+
+    .tabs button {
+      background: none;
+      border: none;
+      color: var(--text);
+      font-weight: bold;
+      font-size: 1rem;
+      margin: 0 1rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 5px;
+    }
+
+    .tabs button.active {
+      border-color: var(--accent1);
     }
 
     input {
@@ -70,7 +92,7 @@
       font-size: 1rem;
     }
 
-    button {
+    button.submit {
       width: 100%;
       padding: 1rem;
       background: linear-gradient(90deg, var(--accent1), var(--accent2));
@@ -82,7 +104,7 @@
       transition: transform 0.2s;
     }
 
-    button:hover {
+    button.submit:hover {
       transform: scale(1.05);
     }
 
@@ -92,6 +114,14 @@
       font-size: 0.9rem;
       color: var(--accent1);
       text-decoration: none;
+    }
+
+    .form-group {
+      display: none;
+    }
+
+    .form-group.active {
+      display: block;
     }
 
     footer {
@@ -109,15 +139,31 @@
 
   <div class="wrapper">
     <div class="card">
-      <h2>Sign In</h2>
-      <input type="email" placeholder="Email" required />
-      <input type="password" placeholder="Password" required />
-      <button>Login</button>
+      <h2>NuvexaOS</h2>
+
+      <div class="tabs">
+        <button id="loginTab" class="active">Login</button>
+        <button id="createTab">Create Account</button>
+      </div>
+
+      <div id="loginForm" class="form-group active">
+        <input type="email" placeholder="Email" required />
+        <input type="password" placeholder="Password" required />
+        <button class="submit">Login</button>
+      </div>
+
+      <div id="createForm" class="form-group">
+        <input type="text" placeholder="Username" required />
+        <input type="email" placeholder="Email" required />
+        <input type="password" placeholder="Password" required />
+        <button class="submit">Create Account</button>
+      </div>
+
       <a href="index.html" class="back-link">⬅️ Back to Home</a>
     </div>
   </div>
 
-  <footer>© 2025 NuvexaOS — All rights reserved.</footer>
+  <footer>© 2025 NuvexaOS — Built by Legends.</footer>
 
   <script>
     // Star background
@@ -158,6 +204,26 @@
     window.onload = () => {
       initCanvas();
       drawStars();
+    };
+
+    // Tab switch logic
+    const loginTab = document.getElementById("loginTab");
+    const createTab = document.getElementById("createTab");
+    const loginForm = document.getElementById("loginForm");
+    const createForm = document.getElementById("createForm");
+
+    loginTab.onclick = () => {
+      loginTab.classList.add("active");
+      createTab.classList.remove("active");
+      loginForm.classList.add("active");
+      createForm.classList.remove("active");
+    };
+
+    createTab.onclick = () => {
+      createTab.classList.add("active");
+      loginTab.classList.remove("active");
+      createForm.classList.add("active");
+      loginForm.classList.remove("active");
     };
   </script>
 </body>

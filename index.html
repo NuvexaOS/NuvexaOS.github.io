@@ -133,6 +133,7 @@
         <span>⬇️ Download NuvexaOS</span>
       </a>
       <a href="help.html"><span>❓ Help & Contact</span></a>
+      <a href="account.html"><span>👤 Account</span></a>
     </div>
   </header>
 
@@ -163,7 +164,7 @@
         if(s.y<0||s.y>h) s.y = Math.random()*h;
         ctx.beginPath();
         ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.fillStyle = \`rgba(255,255,255,\${s.alpha})\`;
         ctx.fill();
       });
       requestAnimationFrame(draw);

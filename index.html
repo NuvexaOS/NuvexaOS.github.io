@@ -115,25 +115,6 @@
       transform: scale(1.05);
     }
 
-    .help-button {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background: linear-gradient(90deg, var(--accent1), var(--accent2));
-      color: var(--bg);
-      padding: 0.8rem 1.2rem;
-      border-radius: 6px;
-      font-weight: bold;
-      text-decoration: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-      z-index: 1000;
-      transition: transform 0.2s;
-    }
-
-    .help-button:hover {
-      transform: scale(1.05);
-    }
-
     footer {
       text-align: center;
       padding: 2rem;
@@ -153,7 +134,7 @@
   <canvas id="bg"></canvas>
 
   <header>
-    <h1>NuvexaOS</h1>
+    <h1>YourOS</h1>
     <div class="typewriter"></div>
 
     <div class="features">
@@ -172,17 +153,18 @@
     </div>
 
     <div class="download">
-      <a href="#"><span>⬇️ Download NuvexaOS</span></a>
+      <a href="https://fromsmash.com/NuvexaOSlOW" target="_blank" rel="noopener">
+        <span>⬇️ Download NuvexaOS</span>
+      </a>
     </div>
   </header>
-
-  <a href="help.html" class="help-button" title="Need help?">Help</a>
 
   <footer>
     © 2025 NuvexaOS.
   </footer>
 
   <script>
+    // MOVING STAR BACKGROUND
     const canvas = document.getElementById("bg");
     const ctx = canvas.getContext("2d");
     let w, h;
@@ -221,6 +203,7 @@
 
     window.addEventListener("resize", initCanvas);
 
+    // Typewriter
     function typeWriter(text, el) {
       let i = 0;
       function typeNext() {

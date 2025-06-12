@@ -98,6 +98,14 @@
       transform: scale(1.05);
     }
 
+    #success {
+      display: none;
+      margin-top: 1.5rem;
+      text-align: center;
+      font-weight: bold;
+      color: #22c55e;
+    }
+
     footer {
       margin-top: 4rem;
       text-align: center;
@@ -115,26 +123,28 @@
     <h1>Need Help?</h1>
     <p>If you're having issues with NuvexaOS, found a bug, or just want to reach out — drop us a message.</p>
 
-    <form action="https://formspree.io/f/xwkgrjqd" method="POST">
+    <form id="contactForm">
       <label for="name">Your Name</label>
-      <input type="text" name="name" id="name" required placeholder="John Doe" />
+      <input type="text" id="name" required placeholder="John Doe" />
 
       <label for="email">Your Email</label>
-      <input type="email" name="email" id="email" required placeholder="you@example.com" />
+      <input type="email" id="email" required placeholder="you@example.com" />
 
       <label for="message">Your Message</label>
-      <textarea name="message" id="message" required placeholder="Tell us what’s up..."></textarea>
+      <textarea id="message" required placeholder="Tell us what’s up..."></textarea>
 
       <button type="submit">Send Message</button>
     </form>
+
+    <div id="success">✅ Your message has been sent successfully!</div>
   </div>
 
   <footer>
-    © 2025 NuvexaOS.
+    © 2025 NuvexaOS — Built by Legends.
   </footer>
 
   <script>
-    // MOVING STAR BACKGROUND
+    // Star background
     const canvas = document.getElementById("bg");
     const ctx = canvas.getContext("2d");
     let w, h;
@@ -158,16 +168,13 @@
       stars.forEach(star => {
         star.x += star.speedX;
         star.y += star.speedY;
-
         if (star.x > w) star.x = 0;
         if (star.y > h) star.y = 0;
-
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255,255,255,${star.alpha})`;
         ctx.fill();
       });
-
       requestAnimationFrame(drawStars);
     }
 
@@ -176,6 +183,16 @@
       initCanvas();
       drawStars();
     };
+
+    // Fake submission handler
+    const form = document.getElementById("contactForm");
+    const successMsg = document.getElementById("success");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault(); // stop actual form submit
+      form.reset();
+      successMsg.style.display = "block";
+    });
   </script>
 </body>
 </html>

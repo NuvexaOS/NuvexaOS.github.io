@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact – NuvexaOS Support</title>
+  <title>NuvexaOS — Help & Contact</title>
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/NuvexaOS/NuvexaOS.github.io/refs/heads/main/guest.png" />
   <style>
     :root {
       --bg: #0f172a;
@@ -11,25 +12,39 @@
       --accent1: #38bdf8;
       --accent2: #f472b6;
       --shadow: rgba(0, 0, 0, 0.3);
-      --success: #4ade80;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
+    html, body {
+      height: 100%;
       background: var(--bg);
       font-family: 'Segoe UI', sans-serif;
       color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      overflow-x: hidden;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 0;
+    }
+
+    .container {
+      z-index: 1;
+      position: relative;
+      max-width: 600px;
+      margin: 6rem auto;
       padding: 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      box-shadow: 0 4px 15px var(--shadow);
     }
 
     h1 {
       font-size: 2.5rem;
+      text-align: center;
       background: linear-gradient(90deg, var(--accent1), var(--accent2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -39,21 +54,15 @@
     p {
       text-align: center;
       margin-bottom: 2rem;
-      max-width: 600px;
+      font-size: 1rem;
     }
 
     form {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px var(--shadow);
-      width: 100%;
-      max-width: 500px;
-      position: relative;
+      display: flex;
+      flex-direction: column;
     }
 
     label {
-      display: block;
       margin-bottom: 0.5rem;
       font-weight: bold;
     }
@@ -89,71 +98,84 @@
       transform: scale(1.05);
     }
 
-    .success-message {
-      display: none;
-      margin-top: 1rem;
-      text-align: center;
-      color: var(--success);
-      font-weight: bold;
-      font-size: 1.1rem;
-      animation: fadeIn 0.5s ease-in-out;
-    }
-
-    .success-check {
-      font-size: 2rem;
-      color: var(--success);
-      display: inline-block;
-      margin-bottom: 0.5rem;
-    }
-
     footer {
       margin-top: 4rem;
+      text-align: center;
       font-size: 0.9rem;
       color: #94a3b8;
-      text-align: center;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+      z-index: 1;
+      position: relative;
     }
   </style>
 </head>
 <body>
-  <h1>Need Help?</h1>
-  <p>If you're having issues with NuvexaOS, use the form below to contact us. We'll get back to you ASAP.</p>
+  <canvas id="bg"></canvas>
 
-  <form id="contactForm">
-    <label for="name">Your Name</label>
-    <input type="text" name="name" id="name" required placeholder="John Doe" />
+  <div class="container">
+    <h1>Need Help?</h1>
+    <p>If you're having issues with NuvexaOS, found a bug, or just want to reach out — drop us a message.</p>
 
-    <label for="email">Your Email</label>
-    <input type="email" name="email" id="email" required placeholder="you@example.com" />
+    <form action="https://formspree.io/f/xwkgrjqd" method="POST">
+      <label for="name">Your Name</label>
+      <input type="text" name="name" id="name" required placeholder="John Doe" />
 
-    <label for="message">Your Message</label>
-    <textarea name="message" id="message" required placeholder="Tell us what’s up..."></textarea>
+      <label for="email">Your Email</label>
+      <input type="email" name="email" id="email" required placeholder="you@example.com" />
 
-    <button type="submit">Send Message</button>
+      <label for="message">Your Message</label>
+      <textarea name="message" id="message" required placeholder="Tell us what’s up..."></textarea>
 
-    <div class="success-message" id="successMsg">
-      <div class="success-check">✅</div>
-      Your message has been sent successfully!
-    </div>
-  </form>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
 
   <footer>
     © 2025 NuvexaOS.
   </footer>
 
   <script>
-    const form = document.getElementById("contactForm");
-    const successMsg = document.getElementById("successMsg");
+    // MOVING STAR BACKGROUND
+    const canvas = document.getElementById("bg");
+    const ctx = canvas.getContext("2d");
+    let w, h;
+    let stars = [];
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      form.reset();
-      successMsg.style.display = "block";
-    });
+    function initCanvas() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      stars = Array.from({ length: 150 }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.5,
+        alpha: Math.random() * 0.8 + 0.2,
+        speedX: Math.random() * 0.3 + 0.05,
+        speedY: Math.random() * 0.3 + 0.05
+      }));
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, w, h);
+      stars.forEach(star => {
+        star.x += star.speedX;
+        star.y += star.speedY;
+
+        if (star.x > w) star.x = 0;
+        if (star.y > h) star.y = 0;
+
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${star.alpha})`;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(drawStars);
+    }
+
+    window.addEventListener("resize", initCanvas);
+    window.onload = () => {
+      initCanvas();
+      drawStars();
+    };
   </script>
 </body>
 </html>

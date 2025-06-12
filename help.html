@@ -21,7 +21,7 @@
       background: var(--bg);
       font-family: 'Segoe UI', sans-serif;
       color: var(--text);
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     canvas {
@@ -31,14 +31,22 @@
       z-index: 0;
     }
 
-    .container {
+    .wrapper {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       z-index: 1;
       position: relative;
-      max-width: 600px;
-      margin: 6rem auto;
-      padding: 2rem;
+    }
+
+    .container {
       background: rgba(255, 255, 255, 0.05);
       border-radius: 12px;
+      padding: 2.5rem;
+      max-width: 600px;
+      width: 90%;
       box-shadow: 0 4px 15px var(--shadow);
     }
 
@@ -106,37 +114,58 @@
       color: #22c55e;
     }
 
+    #success a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.8rem 1.6rem;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      color: var(--bg);
+      font-weight: bold;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+
+    #success a:hover {
+      transform: scale(1.05);
+    }
+
     footer {
-      margin-top: 4rem;
+      position: absolute;
+      bottom: 1rem;
+      width: 100%;
       text-align: center;
       font-size: 0.9rem;
       color: #94a3b8;
-      z-index: 1;
-      position: relative;
     }
   </style>
 </head>
 <body>
   <canvas id="bg"></canvas>
 
-  <div class="container">
-    <h1>Need Help?</h1>
-    <p>If you're having issues with NuvexaOS, found a bug, or just want to reach out — drop us a message.</p>
+  <div class="wrapper">
+    <div class="container">
+      <h1>Need Help?</h1>
+      <p>If you're having issues with NuvexaOS, found a bug, or just want to reach out — drop us a message.</p>
 
-    <form id="contactForm">
-      <label for="name">Your Name</label>
-      <input type="text" id="name" required placeholder="John Doe" />
+      <form id="contactForm">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" required placeholder="John Doe" />
 
-      <label for="email">Your Email</label>
-      <input type="email" id="email" required placeholder="you@example.com" />
+        <label for="email">Your Email</label>
+        <input type="email" id="email" required placeholder="you@example.com" />
 
-      <label for="message">Your Message</label>
-      <textarea id="message" required placeholder="Tell us what’s up..."></textarea>
+        <label for="message">Your Message</label>
+        <textarea id="message" required placeholder="Tell us what’s up..."></textarea>
 
-      <button type="submit">Send Message</button>
-    </form>
+        <button type="submit">Send Message</button>
+      </form>
 
-    <div id="success">✅ Your message has been sent successfully!</div>
+      <div id="success">
+        ✅ Your message has been sent successfully!<br>
+        <a href="index.html">⬅️ Back to Home</a>
+      </div>
+    </div>
   </div>
 
   <footer>
@@ -184,12 +213,11 @@
       drawStars();
     };
 
-    // Fake submission handler
     const form = document.getElementById("contactForm");
     const successMsg = document.getElementById("success");
 
     form.addEventListener("submit", (e) => {
-      e.preventDefault(); // stop actual form submit
+      e.preventDefault();
       form.reset();
       successMsg.style.display = "block";
     });

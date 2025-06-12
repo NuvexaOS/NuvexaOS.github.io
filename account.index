@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF‑8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NuvexaOS — Account</title>
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/NuvexaOS/NuvexaOS.github.io/refs/heads/main/guest.png" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --text: #f1f5f9;
+      --accent1: #38bdf8;
+      --accent2: #f472b6;
+      --shadow: rgba(0, 0, 0, 0.3);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body {
+      height:100%; background:var(--bg);
+      font-family:'Segoe UI', sans-serif; color:var(--text);
+      overflow:hidden;
+    }
+    .wrapper {
+      display:flex; align-items:center; justify-content:center;
+      height:100%;
+    }
+    .box {
+      background:rgba(255,255,255,0.05);
+      padding:2rem; border-radius:12px;
+      width: 90%; max-width: 400px;
+      box-shadow:0 4px 15px var(--shadow);
+      text-align:center;
+    }
+    h2 { margin-bottom:1rem; }
+    label { display:block; text-align:left; margin:0.5rem 0 0.3rem; font-weight:bold; }
+    input {
+      width:100%; padding:0.8rem; margin-bottom:1rem;
+      border:none; border-radius:6px;
+      background:#1e293b; color:var(--text);
+    }
+    button {
+      padding:0.8rem 1.6rem; margin:0.5rem 0;
+      border:none; border-radius:6px;
+      background:linear-gradient(90deg,var(--accent1),var(--accent2));
+      color:var(--bg); font-weight:bold;
+      cursor:pointer; transition:transform 0.2s;
+    }
+    button:hover { transform:scale(1.05); }
+    .message { margin-top:1rem; color:#22c55e; font-weight:bold; }
+    .error { color:#f87171; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="box" id="authBox">
+      <!-- Content inserted by JavaScript -->
+    </div>
+  </div>
+
+  <script>
+    // Check auth state in localStorage
+    const currentUser = localStorage.getItem('nuUser');
+    const box = document.getElementById('authBox');
+
+    function showLoggedIn(username) {
+      box.innerHTML = \`
+        <h2>Welcome, \${username}!</h2>
+        <button id="signoutBtn">Sign Out</button>
+      \`;
+      document.getElementById('signoutBtn').addEventListener('click', () => {
+        localStorage.removeItem('nuUser');
+        renderForm();
+      });
+    }
+
+    function renderForm() {
+      box.innerHTML = \`
+        <h2>Login or Sign Up</h2>
+        <div id="formMsg"></div>
+        <label>Username</label><input type="text" id="username" placeholder="Choose a username" />
+        <label>Password</label><input type="password" id="password" placeholder="Choose a password" />
+        <button id="signupBtn">Sign Up</button>
+        <button id="loginBtn">Log In</button>
+      \`;
+      document.getElementById('signupBtn').addEventListener('click', signUp);
+      document.getElementById('loginBtn').addEventListener('click', logIn);
+    }
+
+    function signUp() {
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value;
+      const msgDiv = document.getElementById('formMsg');
+      if (!user || !pass) return msgDiv.innerHTML = '<div class="error">Enter username & password</div>';
+      if (localStorage.getItem('nuCred_' + user)) {
+        return msgDiv.innerHTML = '<div class="error">Username taken</div>';
+      }
+      localStorage.setItem('nuCred_' + user, pass);
+      localStorage.setItem('nuUser', user);
+      showLoggedIn(user);
+    }
+
+    function logIn() {
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value;
+      const msgDiv = document.getElementById('formMsg');
+      const stored = localStorage.getItem('nuCred_' + user);
+      if (stored && stored === pass) {
+        localStorage.setItem('nuUser', user);
+        showLoggedIn(user);
+      } else {
+        msgDiv.innerHTML = '<div class="error">Invalid login</div>';
+      }
+    }
+
+    if (currentUser) showLoggedIn(currentUser);
+    else renderForm();
+  </script>
+</body>
+</html>

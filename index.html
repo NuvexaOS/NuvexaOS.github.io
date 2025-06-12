@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NuvexaOS — The Future Is Now</title>
+  <title>NuvexaOS — Account</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/NuvexaOS/NuvexaOS.github.io/refs/heads/main/guest.png" />
   <style>
     :root {
@@ -11,169 +11,153 @@
       --text: #f1f5f9;
       --accent1: #38bdf8;
       --accent2: #f472b6;
-      --vignette: rgba(0,0,0,0.6);
-      --shadow: rgba(0,0,0,0.3);
+      --shadow: rgba(0, 0, 0, 0.3);
     }
-    * { margin:0; padding:0; box-sizing:border-box; }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     html, body {
-      height:100%; background:var(--bg);
-      font-family:'Segoe UI', sans-serif; color:var(--text);
-      overflow-x:hidden;
+      height: 100%;
+      background: var(--bg);
+      font-family: 'Segoe UI', sans-serif;
+      color: var(--text);
+      overflow: hidden;
     }
-    #stars, #nebula, .vignette {
-      position:fixed; top:0; left:0; width:100vw; height:100vh;
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
     }
-    #stars { z-index:0; }
-    #nebula {
-      background:
-        radial-gradient(circle at 30% 30%, var(--accent1)20%, transparent 60%),
-        radial-gradient(circle at 70% 70%, var(--accent2)20%, transparent 60%);
-      opacity:0.4; z-index:1;
+
+    .wrapper {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+      position: relative;
     }
-    .vignette {
-      background: var(--vignette); opacity:0.5; z-index:2;
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 2rem;
+      width: 350px;
+      box-shadow: 0 4px 15px var(--shadow);
+      text-align: center;
     }
-    header {
-      position:relative; z-index:3;
-      min-height:100vh; display:flex; flex-direction:column;
-      justify-content:center; align-items:center; text-align:center;
-      padding:2rem;
+
+    .card h2 {
+      font-size: 2rem;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1.5rem;
     }
-    h1 {
-      font-size:3.5rem; background:linear-gradient(90deg,var(--accent1),var(--accent2));
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-radius: 6px;
+      background: #1e293b;
+      color: var(--text);
+      font-size: 1rem;
     }
-    .typewriter {
-      margin-top:1rem; font-size:1.3rem;
-      min-height:1.5em; overflow:hidden;
-      border-right:2px solid var(--text);
+
+    button {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      color: var(--bg);
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.2s;
     }
-    .features {
-      display:flex; flex-wrap:wrap;
-      gap:2rem; margin-top:3rem;
-      justify-content:center;
+
+    button:hover {
+      transform: scale(1.05);
     }
-    .feature {
-      position:relative; overflow:hidden;
-      background:rgba(15,23,42,0.8);
-      width:300px; padding:2rem; border-radius:16px;
-      box-shadow:0 4px 15px var(--shadow);
-      transition:transform 0.4s ease, box-shadow 0.4s ease;
+
+    .back-link {
+      margin-top: 1rem;
+      display: inline-block;
+      font-size: 0.9rem;
+      color: var(--accent1);
+      text-decoration: none;
     }
-    .feature::before {
-      content:""; position:absolute; top:0; left:0;
-      width:100%; height:100%;
-      background: radial-gradient(circle at top left, var(--accent1)15%, transparent 70%);
-      opacity:0; transition:opacity 0.5s;
-    }
-    .feature:hover {
-      transform:translateY(-10px) scale(1.03);
-      box-shadow:0 12px 30px rgba(0,0,0,0.5);
-    }
-    .feature:hover::before { opacity:0.15; }
-    .feature h3 { color:var(--accent1); margin-bottom:1rem; }
-    .buttons {
-      display:flex; flex-wrap:wrap;
-      gap:1rem; margin-top:3rem;
-      justify-content:center;
-    }
-    .buttons a {
-      background:linear-gradient(90deg,var(--accent1),var(--accent2));
-      padding:0.2rem; border-radius:8px;
-      text-decoration:none;
-      box-shadow:0 4px 15px var(--shadow);
-      transition:transform 0.3s, box-shadow 0.3s;
-    }
-    .buttons a span {
-      display:block; padding:1rem 2rem;
-      background:rgba(15,23,42,0.9);
-      color:var(--text); font-weight:bold;
-      border-radius:6px;
-    }
-    .buttons a:hover {
-      transform:translateY(-5px);
-      box-shadow:0 12px 25px rgba(0,0,0,0.6);
-    }
+
     footer {
-      position:relative; z-index:3;
-      padding:2rem; text-align:center;
-      font-size:0.9rem; color:#94a3b8;
+      position: absolute;
+      bottom: 1rem;
+      width: 100%;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #94a3b8;
     }
   </style>
 </head>
 <body>
-  <canvas id="stars"></canvas>
-  <div id="nebula"></div>
-  <div class="vignette"></div>
+  <canvas id="bg"></canvas>
 
-  <header>
-    <h1>NuvexaOS</h1>
-    <div class="typewriter"></div>
-
-    <div class="features">
-      <div class="feature"><h3>🚀 Blazing Fast</h3><p>Boots in seconds, zero bloat.</p></div>
-      <div class="feature"><h3>🔒 Ultra Secure</h3><p>Privacy‑first & open‑source.</p></div>
-      <div class="feature"><h3>🧠 Smart Design</h3><p>Minimalist UI, powerful tools.</p></div>
+  <div class="wrapper">
+    <div class="card">
+      <h2>Sign In</h2>
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <button>Login</button>
+      <a href="index.html" class="back-link">⬅️ Back to Home</a>
     </div>
+  </div>
 
-    <div class="buttons">
-      <a href="https://fromsmash.com/NuvexaOSlOW" target="_blank" rel="noopener"><span>⬇️ Download NuvexaOS</span></a>
-      <a href="help.html"><span>❓ Help & Contact</span></a>
-      <a href="account.html"><span>👤 Account</span></a>
-    </div>
-  </header>
-
-  <footer>© 2025 NuvexaOS — Built by Legends.</footer>
+  <footer>© 2025 NuvexaOS — All rights reserved.</footer>
 
   <script>
-    const canvas = document.getElementById('stars');
-    const ctx = canvas.getContext('2d');
-    let w, h, stars = [];
+    // Star background
+    const canvas = document.getElementById("bg");
+    const ctx = canvas.getContext("2d");
+    let w, h;
+    let stars = [];
 
-    function initStars(){
+    function initCanvas() {
       w = canvas.width = window.innerWidth;
       h = canvas.height = window.innerHeight;
-      stars = Array.from({length:200}, () => ({
-        x: Math.random()*w, y: Math.random()*h,
-        r: Math.random()*1.5+0.5,
-        alpha: Math.random()*0.5+0.3,
-        dx: Math.random()*0.6-0.3,
-        dy: Math.random()*0.6-0.3
+      stars = Array.from({ length: 150 }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.5,
+        alpha: Math.random() * 0.8 + 0.2,
+        dx: Math.random() * 0.3 + 0.05,
+        dy: Math.random() * 0.3 + 0.05
       }));
     }
 
-    function drawStars(){
-      ctx.clearRect(0,0,w,h);
-      stars.forEach(s => {
-        s.x += s.dx; s.y += s.dy;
-        if(s.x<0||s.x>w) s.x = Math.random()*w;
-        if(s.y<0||s.y>h) s.y = Math.random()*h;
+    function drawStars() {
+      ctx.clearRect(0, 0, w, h);
+      stars.forEach(star => {
+        star.x += star.dx;
+        star.y += star.dy;
+        if (star.x > w) star.x = 0;
+        if (star.y > h) star.y = 0;
         ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${star.alpha})`;
         ctx.fill();
       });
       requestAnimationFrame(drawStars);
     }
 
-    function typeWriter(txt, el){
-      let i=0;
-      el.textContent = '';
-      function step(){
-        if(i<txt.length){
-          el.textContent += txt[i++];
-          setTimeout(step, 80);
-        } else {
-          el.style.borderRight = 'none';
-        }
-      }
-      step();
-    }
-
-    window.addEventListener('resize', initStars);
+    window.addEventListener("resize", initCanvas);
     window.onload = () => {
-      initStars(); drawStars();
-      typeWriter("Lightweight. Secure. Designed for creators.", document.querySelector('.typewriter'));
+      initCanvas();
+      drawStars();
     };
   </script>
 </body>

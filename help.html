@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact – YourOS Support</title>
+  <title>Contact – NuvexaOS Support</title>
   <style>
     :root {
       --bg: #0f172a;
@@ -11,6 +11,7 @@
       --accent1: #38bdf8;
       --accent2: #f472b6;
       --shadow: rgba(0, 0, 0, 0.3);
+      --success: #4ade80;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -48,6 +49,7 @@
       box-shadow: 0 4px 15px var(--shadow);
       width: 100%;
       max-width: 500px;
+      position: relative;
     }
 
     label {
@@ -87,19 +89,41 @@
       transform: scale(1.05);
     }
 
+    .success-message {
+      display: none;
+      margin-top: 1rem;
+      text-align: center;
+      color: var(--success);
+      font-weight: bold;
+      font-size: 1.1rem;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .success-check {
+      font-size: 2rem;
+      color: var(--success);
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+
     footer {
       margin-top: 4rem;
       font-size: 0.9rem;
       color: #94a3b8;
       text-align: center;
     }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
   <h1>Need Help?</h1>
-  <p>If you’re having issues with YourOS, have suggestions, or just want to say hi — use the form below and we’ll get back to you!</p>
+  <p>If you're having issues with NuvexaOS, use the form below to contact us. We'll get back to you ASAP.</p>
 
-  <form action="https://formspree.io/f/xwkgrjqd" method="POST">
+  <form id="contactForm" action="https://formspree.io/f/xwkgrjqd" method="POST">
     <label for="name">Your Name</label>
     <input type="text" name="name" id="name" required placeholder="John Doe" />
 
@@ -110,10 +134,36 @@
     <textarea name="message" id="message" required placeholder="Tell us what’s up..."></textarea>
 
     <button type="submit">Send Message</button>
+
+    <div class="success-message" id="successMsg">
+      <div class="success-check">✅</div>
+      Your message has been sent successfully!
+    </div>
   </form>
 
   <footer>
-    © 2025 YourOS — Built by Legends.
+    © 2025 NuvexaOS — Powered by Purpose.
   </footer>
+
+  <script>
+    const form = document.getElementById("contactForm");
+    const successMsg = document.getElementById("successMsg");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const data = new FormData(form);
+      const res = await fetch(form.action, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" }
+      });
+
+      if (res.ok) {
+        form.reset();
+        successMsg.style.display = "block";
+      }
+    });
+  </script>
 </body>
 </html>

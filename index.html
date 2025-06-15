@@ -3,152 +3,211 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NuvexaOS — Bold & Clean</title>
+  <title>NuvexaOS — Cosmic Animated Edition</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/NuvexaOS/NuvexaOS.github.io/refs/heads/main/guest.png" />
   <style>
     :root {
-      --bg-top: #041f4a;
-      --bg-bot: #0f172a;
-      --primary: #00dffc;
-      --secondary: #f72585;
-      --text: #e0e0e0;
-      --shadow: rgba(0,0,0,0.4);
+      --bg-color: #040714;
+      --text-color: #ffffff;
+      --primary-color: #00d4ff;
+      --secondary-color: #ff00ff;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      min-height: 100vh;
-      background: linear-gradient(to bottom, var(--bg-top), var(--bg-bot));
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
       font-family: 'Segoe UI', sans-serif;
-      color: var(--text);
+    }
+
+    body {
+      overflow: hidden;
+      background: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      height: 100vh;
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
-    }
-
-    /* Hero Section */
-    .hero {
-      margin-top: 10vh;
       text-align: center;
-      max-width: 600px;
-      padding: 2rem;
-    }
-    .hero h1 {
-      font-size: 4rem;
-      font-weight: bold;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
-    }
-    .hero p {
-      font-size: 1.25rem;
-      opacity: 0.9;
-      margin-bottom: 2rem;
+      gap: 2rem;
     }
 
-    /* Buttons */
-    .btn-group {
+    h1 {
+      font-size: 4rem;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--secondary-color); }
+      to { text-shadow: 0 0 40px var(--primary-color), 0 0 80px var(--secondary-color); }
+    }
+
+    p {
+      font-size: 1.3rem;
+    }
+
+    .cards {
       display: flex;
-      gap: 1rem;
+      gap: 2rem;
       justify-content: center;
       flex-wrap: wrap;
-    }
-    .btn {
-      font-weight: bold;
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .btn-download {
-      background: var(--primary);
-      color: #000;
-    }
-    .btn-contact {
-      background: var(--secondary);
-      color: #000;
-    }
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px var(--shadow);
+      margin-top: 2rem;
     }
 
-    /* Features */
-    .features {
+    .card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      width: 280px;
+      padding: 2rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 30px rgba(255,255,255,0.2);
+    }
+
+    .buttons {
+      margin-top: 3rem;
       display: flex;
       gap: 1.5rem;
-      padding: 4rem 2rem;
       flex-wrap: wrap;
       justify-content: center;
     }
-    .feature-card {
-      background: rgba(255,255,255,0.06);
-      padding: 2rem;
-      border-radius: 12px;
-      width: 260px;
-      box-shadow: 0 8px 16px var(--shadow);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: transform 0.2s;
+
+    .btn {
+      padding: 1rem 2.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: bold;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
-    .feature-card:hover {
-      transform: translateY(-5px);
-    }
-    .feature-card h3 {
-      margin-bottom: 0.5rem;
-      color: var(--primary);
-    }
-    .feature-card p {
-      font-size: 0.95rem;
-      text-align: center;
+
+    .download { background: var(--primary-color); }
+    .contact { background: var(--secondary-color); }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     }
 
     footer {
-      margin: 3rem 0;
+      position: absolute;
+      bottom: 2rem;
+      width: 100%;
       font-size: 0.85rem;
       opacity: 0.7;
-    }
-
-    @media (max-width: 768px) {
-      .hero p {
-        font-size: 1.1rem;
-      }
-      .feature-card {
-        width: 100%;
-        max-width: 320px;
-      }
     }
   </style>
 </head>
 <body>
 
-  <div class="hero">
-    <h1>NuvexaOS</h1>
-    <p>Redefining simplicity and power — designed for creators, by creators.</p>
-    <div class="btn-group">
-      <a href="https://fromsmash.com/NuvexaOSlOW" target="_blank" class="btn btn-download">⬇️ Download</a>
-      <a href="help.html" class="btn btn-contact">❓ Help & Contact</a>
+<canvas id="particleCanvas"></canvas>
+
+<div class="container">
+  <h1>NuvexaOS</h1>
+  <p>Designed to elevate creativity. Built for speed, security, and innovation.</p>
+
+  <div class="cards">
+    <div class="card">
+      <h3>⚡ Speed</h3>
+      <p>Fast booting with zero bloat.</p>
+    </div>
+    <div class="card">
+      <h3>🔐 Security</h3>
+      <p>Robust security with open-source transparency.</p>
+    </div>
+    <div class="card">
+      <h3>✨ Design</h3>
+      <p>Beautiful and intuitive minimalistic UI.</p>
     </div>
   </div>
 
-  <div class="features">
-    <div class="feature-card">
-      <h3>🚀 Fast Boot</h3>
-      <p>Start up in seconds, so you can get right to work.</p>
-    </div>
-    <div class="feature-card">
-      <h3>🔒 Secure Core</h3>
-      <p>Protecting your creativity with top-tier security.</p>
-    </div>
-    <div class="feature-card">
-      <h3>🎨 Creator UI</h3>
-      <p>Minimalist yet powerful—tools where you need them.</p>
-    </div>
+  <div class="buttons">
+    <a href="https://fromsmash.com/NuvexaOSlOW" target="_blank" class="btn download">⬇️ Download</a>
+    <a href="help.html" class="btn contact">❓ Help & Contact</a>
   </div>
+</div>
 
-  <footer>© 2025 NuvexaOS — Crafted with passion.</footer>
+<footer>© 2025 NuvexaOS — Created for creators.</footer>
+
+<script>
+  const canvas = document.getElementById('particleCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let particlesArray = [];
+  const colors = ['#00d4ff', '#ff00ff', '#ffffff'];
+
+  class Particle {
+    constructor(){
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 3 + 1;
+      this.speedX = Math.random() * 1 - 0.5;
+      this.speedY = Math.random() * 1 - 0.5;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+    }
+    update(){
+      this.x += this.speedX;
+      this.y += this.speedY;
+
+      if (this.size > 0.2) this.size -= 0.02;
+
+      if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+      if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+    }
+    draw(){
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.fill();
+    }
+  }
+
+  function init(){
+    particlesArray = [];
+    for(let i = 0; i < 100; i++){
+      particlesArray.push(new Particle());
+    }
+  }
+
+  function animate(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for(let particle of particlesArray){
+      particle.update();
+      particle.draw();
+    }
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+  });
+
+  init();
+  animate();
+</script>
 
 </body>
 </html>

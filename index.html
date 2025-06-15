@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NuvexaOS — Cosmic Edition</title>
+  <title>NuvexaOS — Polished Cosmic</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/NuvexaOS/NuvexaOS.github.io/refs/heads/main/guest.png" />
   <style>
     :root {
@@ -96,18 +96,21 @@
       text-decoration: none;
       color: var(--text-color);
       font-weight: bold;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
       transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: none;
     }
-
-    .download { background: var(--primary-color); }
-    .contact { background: var(--secondary-color); }
-    .tool { background: var(--tool-color); }
 
     .btn:hover {
       transform: scale(1.1);
       box-shadow: 0 0 20px white;
     }
+
+    .download { background-color: rgba(0, 212, 255, 0.15); }
+    .contact { background-color: rgba(255, 0, 255, 0.15); }
+    .tool { background-color: rgba(57, 255, 20, 0.15); }
 
     footer {
       position: absolute;
@@ -163,7 +166,7 @@
     constructor(){
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * canvas.height;
-      this.size = Math.random() * 6 + 4;
+      this.size = Math.random() * 2 + 1; // Smaller stars
       this.speedX = Math.random() * 1 - 0.5;
       this.speedY = Math.random() * 1 - 0.5;
       this.color = colors[Math.floor(Math.random() * colors.length)];
@@ -186,7 +189,7 @@
 
   function init(){
     particlesArray = [];
-    for(let i = 0; i < 100; i++){
+    for(let i = 0; i < 120; i++){
       particlesArray.push(new Particle());
     }
   }

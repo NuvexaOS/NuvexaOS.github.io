@@ -3,215 +3,180 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NuvexaOS — Polished Cosmic</title>
+  <title>NuvexaOS — XP Style Cosmic Edition</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/NuvexaOS/NuvexaOS.github.io/refs/heads/main/guest.png" />
   <style>
     :root {
-      --bg-color: #040714;
-      --text-color: #ffffff;
-      --primary-color: #00d4ff;
-      --secondary-color: #ff00ff;
-      --tool-color: #39ff14;
+      --bg: #081429;
+      --toolbar: linear-gradient(to right, #3a6ea5, #5b8fd0);
+      --panel: rgba(255,255,255,0.1);
+      --text: #fff;
+      --button-face: #d4d0c8;
+      --button-shadow: #6e6b5a;
     }
 
-    * {
-      margin: 0; padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-    }
+    * { margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI', sans-serif; }
 
     body {
+      background: var(--bg);
+      color: var(--text);
+      position: relative;
+      height: 100vh;
       overflow: hidden;
-      background: var(--bg-color);
-      color: var(--text-color);
     }
 
     canvas {
       position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      z-index: 0;
+      top:0;left:0;
+      width:100%;height:100%;
+      z-index:0;
     }
 
-    .container {
-      position: relative;
-      z-index: 1;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      gap: 2rem;
+    .toolbar {
+      position: absolute; top:0; left:0; right:0;
+      height:40px;
+      background: var(--toolbar);
+      display:flex;
+      align-items:center;
+      padding:0 10px;
+      box-shadow: inset 0 -2px 4px rgba(0,0,0,0.5);
+      z-index:2;
+    }
+    .toolbar button {
+      background: var(--button-face);
+      border:2px solid var(--button-shadow);
+      padding: 4px 8px;
+      margin-right: 6px;
+      font-size:0.9rem;
+      border-radius:3px;
+      cursor:pointer;
+      box-shadow: 1px 1px 0 #fff inset;
+      transition: background 0.2s;
+    }
+    .toolbar button:hover {
+      background: #e0e0e0;
+    }
+
+    .panel {
+      position: absolute;
+      top:40px; bottom:0; left:0; right:0;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      backdrop-filter: blur(10px);
+      background: var(--panel);
+      z-index:1;
+      padding:2rem;
     }
 
     h1 {
-      font-size: 4rem;
-      animation: glow 2s ease-in-out infinite alternate;
+      font-size:3rem;
+      margin-bottom:1rem;
+      text-shadow: 0 0 6px #0dd, 0 0 12px #f0f;
     }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--secondary-color); }
-      to { text-shadow: 0 0 40px var(--primary-color), 0 0 80px var(--secondary-color); }
-    }
-
-    p {
-      font-size: 1.3rem;
-    }
+    p { font-size:1.2rem; margin-bottom:2rem; }
 
     .cards {
-      display: flex;
-      gap: 2rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 2rem;
+      display:flex;
+      gap:1rem;
+      margin-bottom:2rem;
     }
-
     .card {
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(10px);
-      border-radius: 12px;
-      width: 280px;
-      padding: 2rem;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: rgba(255,255,255,0.08);
+      padding:1.5rem;
+      border:1px solid rgba(255,255,255,0.2);
+      border-radius:6px;
+      box-shadow:0 2px 5px rgba(0,0,0,0.3);
+      text-align:center;
+      width:220px;
+      font-size:0.9rem;
     }
-
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 12px 30px rgba(255,255,255,0.2);
-    }
+    .card h3 { margin-bottom:0.5rem; }
 
     .buttons {
-      margin-top: 3rem;
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
+      display:flex;
+      gap:1rem;
     }
-
-    .btn {
-      padding: 1rem 2rem;
-      border-radius: 10px;
-      text-decoration: none;
-      color: var(--text-color);
-      font-weight: bold;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-      transition: transform 0.2s, box-shadow 0.2s;
+    .xp-btn {
+      background: var(--button-face);
+      border:2px solid var(--button-shadow);
+      padding:0.8rem 1.5rem;
+      border-radius:3px;
+      box-shadow: 1px 1px 0 #fff inset;
+      cursor:pointer;
+      transition: box-shadow 0.2s;
+      font-weight:bold;
+      color:#000;
     }
-
-    .btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px white;
+    .xp-btn:hover {
+      box-shadow: -1px -1px 0 #fff inset, 1px 1px 0 #666 inset;
     }
-
-    .download { background-color: rgba(0, 212, 255, 0.15); }
-    .contact { background-color: rgba(255, 0, 255, 0.15); }
-    .tool { background-color: rgba(57, 255, 20, 0.15); }
 
     footer {
-      position: absolute;
-      bottom: 2rem;
-      width: 100%;
-      font-size: 0.85rem;
-      opacity: 0.7;
+      position:absolute; bottom:10px;
+      text-shadow:0 0 4px #000;
+      font-size:0.85rem;
     }
   </style>
 </head>
 <body>
+  <canvas id="starfield"></canvas>
 
-<canvas id="particleCanvas"></canvas>
+  <div class="toolbar">
+    <button onclick="location.href='help.html'">Help</button>
+    <button onclick="location.href='https://fromsmash.com/NuvexaOSlOW'">Download</button>
+    <button onclick="alert('Install tool coming soon!')">Install Tool</button>
+  </div>
 
-<div class="container">
-  <h1>NuvexaOS</h1>
-  <p>Designed to elevate creativity. Built for speed, security, and innovation.</p>
-
-  <div class="cards">
-    <div class="card">
-      <h3>⚡ Speed</h3>
-      <p>Fast booting with zero bloat.</p>
+  <div class="panel">
+    <h1>NuvexaOS</h1>
+    <p>Boosted with XP nostalgia and cosmic flair.</p>
+    <div class="cards">
+      <div class="card"><h3>⚡ Speed</h3>Boots fast.</div>
+      <div class="card"><h3>🔐 Security</h3>Safe & open-source.</div>
+      <div class="card"><h3>✨ Design</h3>Retro-modern UI.</div>
     </div>
-    <div class="card">
-      <h3>🔐 Security</h3>
-      <p>Robust security with open-source transparency.</p>
-    </div>
-    <div class="card">
-      <h3>✨ Design</h3>
-      <p>Beautiful and intuitive minimalistic UI.</p>
+    <div class="buttons">
+      <button class="xp-btn" onclick="location.href='#'">Install NuvexaOS Tool</button>
+      <button class="xp-btn" onclick="location.href='help.html'">Help & Contact</button>
     </div>
   </div>
 
-  <div class="buttons">
-    <a href="https://fromsmash.com/NuvexaOSlOW" target="_blank" class="btn download">⬇️ Download</a>
-    <a href="help.html" class="btn contact">❓ Help & Contact</a>
-    <a href="#" class="btn tool">⚙️ Install NuvexaOS Tool</a>
-  </div>
-</div>
+  <footer>© 2025 NuvexaOS — Feel the nostalgia.</footer>
 
-<footer>© 2025 NuvexaOS — Created for creators.</footer>
-
-<script>
-  const canvas = document.getElementById('particleCanvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  let particlesArray = [];
-  const colors = ['#00d4ff', '#ff00ff', '#ffffff'];
-
-  class Particle {
-    constructor(){
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.size = Math.random() * 2 + 1; // Smaller stars
-      this.speedX = Math.random() * 1 - 0.5;
-      this.speedY = Math.random() * 1 - 0.5;
-      this.color = colors[Math.floor(Math.random() * colors.length)];
-    }
-    update(){
-      this.x += this.speedX;
-      this.y += this.speedY;
-
-      if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
-      if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
-    }
-    draw(){
-      ctx.fillStyle = this.color;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.closePath();
-      ctx.fill();
-    }
-  }
-
-  function init(){
-    particlesArray = [];
-    for(let i = 0; i < 120; i++){
-      particlesArray.push(new Particle());
-    }
-  }
-
-  function animate(){
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for(let particle of particlesArray){
-      particle.update();
-      particle.draw();
-    }
-    requestAnimationFrame(animate);
-  }
-
-  window.addEventListener('resize', () => {
+  <script>
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    init();
-  });
 
-  init();
-  animate();
-</script>
-
+    let stars = [];
+    function init() {
+      stars = Array.from({length: 80}, () => ({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        size: Math.random()*2+1,
+        dx: Math.random()*0.4-0.2,
+        dy: Math.random()*0.4-0.2
+      }));
+    }
+    function draw(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      stars.forEach(s=>{
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(255,255,255,0.8)';
+        ctx.fill();
+        s.x += s.dx;
+        s.y += s.dy;
+        if (s.x<0||s.x>canvas.width) s.dx*=-1;
+        if (s.y<0||s.y>canvas.height) s.dy*=-1;
+      });
+      requestAnimationFrame(draw);
+    }
+    window.onresize = () => { canvas.width = innerWidth; canvas.height = innerHeight; init(); };
+    init(); draw();
+  </script>
 </body>
 </html>

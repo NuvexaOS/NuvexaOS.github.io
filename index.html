@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NuvexaOS — Cosmic Animated Edition</title>
+  <title>NuvexaOS — Cosmic Edition</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/NuvexaOS/NuvexaOS.github.io/refs/heads/main/guest.png" />
   <style>
     :root {
@@ -11,6 +11,7 @@
       --text-color: #ffffff;
       --primary-color: #00d4ff;
       --secondary-color: #ff00ff;
+      --tool-color: #39ff14;
     }
 
     * {
@@ -84,27 +85,28 @@
     .buttons {
       margin-top: 3rem;
       display: flex;
-      gap: 1.5rem;
+      gap: 1rem;
       flex-wrap: wrap;
       justify-content: center;
     }
 
     .btn {
-      padding: 1rem 2.5rem;
+      padding: 1rem 2rem;
       border-radius: 10px;
       text-decoration: none;
       color: var(--text-color);
       font-weight: bold;
       transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+      box-shadow: none;
     }
 
     .download { background: var(--primary-color); }
     .contact { background: var(--secondary-color); }
+    .tool { background: var(--tool-color); }
 
     .btn:hover {
       transform: scale(1.1);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+      box-shadow: 0 0 20px white;
     }
 
     footer {
@@ -142,6 +144,7 @@
   <div class="buttons">
     <a href="https://fromsmash.com/NuvexaOSlOW" target="_blank" class="btn download">⬇️ Download</a>
     <a href="help.html" class="btn contact">❓ Help & Contact</a>
+    <a href="#" class="btn tool">⚙️ Install NuvexaOS Tool</a>
   </div>
 </div>
 
@@ -160,7 +163,7 @@
     constructor(){
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * canvas.height;
-      this.size = Math.random() * 5 + 2; // bigger stars
+      this.size = Math.random() * 6 + 4;
       this.speedX = Math.random() * 1 - 0.5;
       this.speedY = Math.random() * 1 - 0.5;
       this.color = colors[Math.floor(Math.random() * colors.length)];
@@ -168,8 +171,6 @@
     update(){
       this.x += this.speedX;
       this.y += this.speedY;
-
-      if (this.size > 0.2) this.size -= 0.02;
 
       if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
       if (this.y > canvas.height || this.y < 0) this.speedY *= -1;

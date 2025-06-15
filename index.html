@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NuvexaOS — The Future Is Now</title>
+  <title>NuvexaOS — Supernova Edition</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/NuvexaOS/NuvexaOS.github.io/refs/heads/main/guest.png" />
   <style>
     :root {
@@ -11,112 +11,142 @@
       --text: #f1f5f9;
       --accent1: #38bdf8;
       --accent2: #f472b6;
-      --vignette: rgba(0,0,0,0.6);
-      --shadow: rgba(0,0,0,0.3);
+      --shadow: rgba(0, 0, 0, 0.3);
     }
-    * { margin:0; padding:0; box-sizing:border-box; }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     html, body {
-      height:100%; background:var(--bg);
-      font-family:'Segoe UI', sans-serif; color:var(--text);
-      overflow-x:hidden;
+      height: 100%;
+      background: var(--bg);
+      font-family: 'Segoe UI', sans-serif;
+      color: var(--text);
+      overflow-x: hidden;
     }
-    canvas#stars {
-      position:fixed; top:0; left:0;
-      width:100vw; height:100vh; z-index:0;
+
+    canvas, .particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 0;
     }
-    #nebula {
-      position:fixed; top:0; left:0;
-      width:100vw; height:100vh;
-      background: radial-gradient(circle at 30% 30%, var(--accent1)20%, transparent 60%),
-                  radial-gradient(circle at 70% 70%, var(--accent2)20%, transparent 60%);
-      opacity:0.4; z-index:1;
-    }
-    .vignette {
-      position:fixed; top:0; left:0;
-      width:100vw; height:100vh;
-      background: var(--vignette); opacity:0.5; z-index:2;
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: linear-gradient(135deg, #0ea5e9 0%, #9333ea 100%);
+      opacity: 0.2;
+      z-index: 1;
     }
 
     header {
-      position:relative; z-index:3;
-      min-height:100vh;
-      display:flex; flex-direction:column;
-      justify-content:center; align-items:center;
-      text-align:center; padding:2rem;
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
     }
 
     h1 {
-      font-size:3.5rem; line-height:1.1;
-      background:linear-gradient(90deg,var(--accent1),var(--accent2));
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      font-size: 3.8rem;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #38bdf8, 0 0 20px #f472b6; }
+      to { text-shadow: 0 0 20px #38bdf8, 0 0 30px #f472b6; }
     }
 
     .typewriter {
-      margin-top:1rem; font-size:1.3rem;
-      min-height:1.5em; overflow:hidden;
-      border-right:2px solid var(--text);
+      margin-top: 1rem;
+      font-size: 1.4rem;
+      min-height: 1.5em;
+      overflow: hidden;
+      border-right: 2px solid var(--text);
     }
 
     .features {
-      display:flex; flex-wrap:wrap;
-      justify-content:center; gap:2rem;
-      margin-top:3rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 3rem;
     }
 
     .feature {
-      position:relative; overflow:hidden;
-      background:rgba(15,23,42,0.8);
-      padding:2rem;border-radius:16px;
-      width:300px; text-align:center;
-      box-shadow:0 4px 15px var(--shadow);
-      transition:transform 0.4s ease, box-shadow 0.4s ease;
+      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 2rem;
+      width: 280px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
-    .feature::before {
-      content:""; position:absolute; top:0; left:0;
-      width:100%; height:100%;
-      background: radial-gradient(circle at top left, var(--accent1)15%, transparent 70%);
-      opacity:0; transition:opacity 0.5s;
-    }
+
     .feature:hover {
-      transform:translateY(-10px) scale(1.03);
-      box-shadow:0 12px 30px rgba(0,0,0,0.5);
+      transform: scale(1.05);
+      box-shadow: 0 12px 30px rgba(255, 255, 255, 0.2);
     }
-    .feature:hover::before { opacity:0.15; }
+
+    .feature h3 {
+      color: var(--accent1);
+      margin-bottom: 1rem;
+    }
 
     .buttons {
-      display:flex; gap:1rem;
-      margin-top:3rem;
-      flex-wrap:wrap; justify-content:center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 3rem;
     }
+
     .buttons a {
-      background:linear-gradient(90deg,var(--accent1),var(--accent2));
-      padding:0.2rem;border-radius:8px;
-      text-decoration:none;
-      box-shadow:0 4px 15px var(--shadow);
-      transition:transform 0.3s, box-shadow 0.3s;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      padding: 0.2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
+
     .buttons a span {
-      display:block; padding:1rem 2rem;
-      background:rgba(15,23,42,0.9);
-      border-radius:6px; font-weight:bold;
-      color:var(--text);
+      display: block;
+      padding: 1rem 2.2rem;
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 8px;
+      font-weight: bold;
+      color: var(--text);
     }
+
     .buttons a:hover {
-      transform:translateY(-5px);
-      box-shadow:0 12px 25px rgba(0,0,0,0.6);
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     }
 
     footer {
-      position:relative; z-index:3;
-      text-align:center; padding:2rem;
-      font-size:0.9rem; color:#94a3b8;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #94a3b8;
+      position: relative;
+      z-index: 3;
     }
   </style>
 </head>
 <body>
-  <canvas id="stars"></canvas>
-  <div id="nebula"></div>
-  <div class="vignette"></div>
+  <canvas id="bg"></canvas>
 
   <header>
     <h1>NuvexaOS</h1>
@@ -139,49 +169,57 @@
   <footer>© 2025 NuvexaOS — Built by Legends.</footer>
 
   <script>
-    const starsCanvas = document.getElementById('stars');
-    const ctx = starsCanvas.getContext('2d');
+    const canvas = document.getElementById("bg");
+    const ctx = canvas.getContext("2d");
     let w, h, stars = [];
 
-    function initStarfield(){
-      w = starsCanvas.width = window.innerWidth;
-      h = starsCanvas.height = window.innerHeight;
-      stars = Array.from({ length:200 }, () => ({
-        x: Math.random()*w, y: Math.random()*h,
-        r: Math.random()*1.5+0.5,
-        alpha: Math.random()*0.5+0.3,
-        dx: Math.random()*0.6-0.3,
-        dy: Math.random()*0.6-0.3
+    function initCanvas() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      stars = Array.from({ length: 150 }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.5,
+        alpha: Math.random() * 0.8 + 0.2,
+        dx: Math.random() * 0.3 + 0.05,
+        dy: Math.random() * 0.3 + 0.05
       }));
     }
 
-    function draw(){
-      ctx.clearRect(0,0,w,h);
+    function drawStars() {
+      ctx.clearRect(0, 0, w, h);
       stars.forEach(s => {
-        s.x += s.dx; s.y += s.dy;
-        if(s.x<0||s.x>w) s.x = Math.random()*w;
-        if(s.y<0||s.y>h) s.y = Math.random()*h;
+        s.x += s.dx;
+        s.y += s.dy;
+        if (s.x > w) s.x = 0;
+        if (s.y > h) s.y = 0;
         ctx.beginPath();
-        ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
         ctx.fill();
       });
-      requestAnimationFrame(draw);
+      requestAnimationFrame(drawStars);
     }
 
-    function typeWriter(txt, el){
-      let i=0; el.textContent='';
-      function loop(){
-        if(i<txt.length){ el.textContent+=txt[i++]; setTimeout(loop,80); }
-        else el.style.borderRight='none';
+    function typeWriter(text, el) {
+      let i = 0;
+      function typeNext() {
+        if (i < text.length) {
+          el.textContent += text.charAt(i++);
+          setTimeout(typeNext, 75);
+        } else {
+          el.style.borderRight = 'none';
+        }
       }
-      loop();
+      typeNext();
     }
 
-    window.addEventListener('resize',initStarfield);
+    window.addEventListener("resize", initCanvas);
     window.onload = () => {
-      initStarfield(); draw();
-      typeWriter("Lightweight. Secure. Designed for creators.", document.querySelector('.typewriter'));
+      initCanvas();
+      drawStars();
+      const typeEl = document.querySelector(".typewriter");
+      typeWriter("Lightweight. Secure. Designed for creators.", typeEl);
     };
   </script>
 </body>

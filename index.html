@@ -96,7 +96,7 @@
       color: var(--text-color);
       font-weight: bold;
       transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
     }
 
     .download { background: var(--primary-color); }
@@ -104,7 +104,7 @@
 
     .btn:hover {
       transform: scale(1.1);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.8);
     }
 
     footer {
@@ -160,7 +160,7 @@
     constructor(){
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * canvas.height;
-      this.size = Math.random() * 3 + 1;
+      this.size = Math.random() * 5 + 2; // bigger stars
       this.speedX = Math.random() * 1 - 0.5;
       this.speedY = Math.random() * 1 - 0.5;
       this.color = colors[Math.floor(Math.random() * colors.length)];

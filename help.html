@@ -3,179 +3,136 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NuvexaOS — Help & Contact</title>
-  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/NuvexaOS/NuvexaOS.github.io/refs/heads/main/guest.png" />
+  <title>Help & Contact — NuvexaOS</title>
+  <link rel="icon" href="https://raw.githubusercontent.com/NuvexaOS/NuvexaOS.github.io/refs/heads/main/guest.png" />
   <style>
     :root {
-      --bg: #0f172a;
-      --text: #f1f5f9;
-      --accent1: #38bdf8;
-      --accent2: #f472b6;
-      --vignette: rgba(0,0,0,0.6);
-      --shadow: rgba(0,0,0,0.3);
+      --text: #ffffff;
+      --accent: #00d4ff;
     }
 
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html, body {
-      height:100%; background:var(--bg);
-      font-family:'Segoe UI',sans-serif; color:var(--text);
-      overflow:hidden;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
     }
 
-    canvas#stars, #nebula, .vignette {
-      position:fixed; top:0; left:0; width:100vw; height:100vh;
-    }
-    canvas#stars { z-index:0; }
-    #nebula {
-      background: radial-gradient(circle at 30% 30%, var(--accent1)20%, transparent 60%),
-                  radial-gradient(circle at 70% 70%, var(--accent2)20%, transparent 60%);
-      opacity:0.4; z-index:1;
-    }
-    .vignette {
-      background: var(--vignette); opacity:0.5; z-index:2;
-    }
-
-    .wrapper {
-      position:relative; z-index:3;
-      height:100vh; display:flex;
-      justify-content:center; align-items:center;
-    }
-
-    .container {
-      background:rgba(255,255,255,0.05);
-      border-radius:12px; padding:2.5rem;
-      width:90%; max-width:600px;
-      box-shadow:0 4px 15px var(--shadow);
-      text-align:center;
+    body {
+      height: 100vh;
+      background: url("https://www.wallpaperhub.app/_next/image?url=https%3A%2F%2Fcdn.wallpaperhub.app%2Fcloudcache%2Fb%2Fd%2F7%2F6%2F4%2Fb%2Fbd764bb25d49a05105060185774ba14cd2c846f7.jpg&w=4500&q=100") no-repeat center center fixed;
+      background-size: cover;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
     }
 
     h1 {
-      font-size:2.5rem;
-      background:linear-gradient(90deg,var(--accent1),var(--accent2));
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      margin-bottom:1rem;
+      font-size: 3rem;
+      background: linear-gradient(90deg, var(--accent), #ff00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeIn 1s ease-out;
     }
 
-    p {
-      margin-bottom:2rem; font-size:1rem;
+    .form-container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      margin-top: 2rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+      animation: fadeIn 2s ease-out;
     }
 
-    form {
-      display:flex; flex-direction:column;
-    }
-    label {
-      text-align:left; margin-bottom:0.5rem;
-      font-weight:bold;
-    }
     input, textarea {
-      padding:0.8rem; margin-bottom:1.5rem;
-      border:none; border-radius:6px;
-      background:#1e293b; color:var(--text);
-      font-size:1rem;
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 1rem;
+      outline: none;
     }
-    textarea { resize:vertical; height:150px; }
 
-    button {
-      background:linear-gradient(90deg,var(--accent1),var(--accent2));
-      border:none; padding:1rem 2rem;
-      border-radius:6px;
-      color:var(--bg); font-weight:bold;
-      cursor:pointer; transition:transform 0.2s;
+    textarea {
+      resize: vertical;
+      height: 120px;
     }
-    button:hover { transform:scale(1.05); }
 
-    #success {
-      display:none;
-      margin-top:1.5rem;
-      font-weight:bold; color:#22c55e;
+    .btn {
+      padding: 0.8rem 2rem;
+      margin-top: 1rem;
+      border-radius: 10px;
+      border: none;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      transition: 0.3s;
     }
-    #success a {
-      display:inline-block; margin-top:1rem;
-      padding:0.8rem 1.6rem;
-      background:linear-gradient(90deg,var(--accent1),var(--accent2));
-      color:var(--bg); font-weight:bold;
-      border-radius:6px;
-      text-decoration:none;
-      transition:transform 0.2s;
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 12px white;
+      transform: scale(1.05);
     }
-    #success a:hover { transform:scale(1.05); }
+
+    .back-link {
+      margin-top: 1.5rem;
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      transition: 0.3s;
+      animation: fadeIn 3s ease-out;
+    }
+
+    .back-link:hover {
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 10px white;
+    }
 
     footer {
-      position:absolute; bottom:1rem;
-      width:100%; text-align:center;
-      font-size:0.9rem; z-index:3;
-      color:#94a3b8;
+      position: absolute;
+      bottom: 1rem;
+      font-size: 0.85rem;
+      color: white;
+      text-shadow: 0 0 4px black;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <canvas id="stars"></canvas>
-  <div id="nebula"></div>
-  <div class="vignette"></div>
 
-  <div class="wrapper">
-    <div class="container">
-      <h1>Need Help?</h1>
-      <p>If you're having issues with NuvexaOS, found a bug, or just want to reach out — drop us a message.</p>
+  <h1>Contact & Support</h1>
 
-      <form id="contactForm">
-        <label for="name">Your Name</label>
-        <input type="text" id="name" required placeholder="John Doe" />
-
-        <label for="email">Your Email</label>
-        <input type="email" id="email" required placeholder="you@example.com" />
-
-        <label for="message">Your Message</label>
-        <textarea id="message" required placeholder="Tell us what’s up..."></textarea>
-
-        <button type="submit">Send Message</button>
-      </form>
-
-      <div id="success">
-        ✅ Your message has been sent successfully!<br>
-        <a href="index.html">⬅️ Back to Home</a>
-      </div>
-    </div>
+  <div class="form-container">
+    <form onsubmit="event.preventDefault(); alert('Message sent successfully!'); this.reset();">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea placeholder="Write your message here..." required></textarea>
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+    <a href="index.html" class="back-link">⬅️ Back to Home</a>
   </div>
 
-  <footer>© 2025 NuvexaOS — Built by Legends.</footer>
+  <footer>© 2025 NuvexaOS — We’ve got your back!</footer>
 
-  <script>
-    // Moving Starfield
-    const cvs = document.getElementById('stars'), ctx = cvs.getContext('2d');
-    let w, h, stars = [];
-    function init(){
-      w=cvs.width=window.innerWidth; h=cvs.height=window.innerHeight;
-      stars = Array.from({length:200}, () => ({
-        x:Math.random()*w, y:Math.random()*h,
-        r:Math.random()*1.5+0.5,
-        alpha:Math.random()*0.5+0.3,
-        dx:Math.random()*0.6-0.3,
-        dy:Math.random()*0.6-0.3
-      }));
-    }
-    function draw(){
-      ctx.clearRect(0,0,w,h);
-      stars.forEach(s => {
-        s.x+=s.dx; s.y+=s.dy;
-        if(s.x<0||s.x>w) s.x=Math.random()*w;
-        if(s.y<0||s.y>h) s.y=Math.random()*h;
-        ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,2*Math.PI);
-        ctx.fillStyle=`rgba(255,255,255,${s.alpha})`; ctx.fill();
-      });
-      requestAnimationFrame(draw);
-    }
-    window.addEventListener('resize', init);
-    window.onload = () => { init(); draw(); };
-
-    // Fake Form Submission
-    const form = document.getElementById('contactForm');
-    const success = document.getElementById('success');
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      form.reset();
-      success.style.display = 'block';
-    });
-  </script>
 </body>
 </html>

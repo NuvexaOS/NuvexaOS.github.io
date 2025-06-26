@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NuvexaOS – Re-imagine Your Desktop</title>
 
-  <!-- Google Fonts & Icons -->
+  <!-- Google Fonts + Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
@@ -13,108 +13,105 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
   <!-- =======================================================
-        FULL  CSS   (no more “trimmed for brevity” 😉)
+       FULL PAGE CSS
   ======================================================= -->
   <style>
   :root{
-      --glass-bg:rgba(255,255,255,0.08);
-      --border-clr:rgba(255,255,255,0.18);
-      --txt:#fefefe;
-      --accent:#8e41ff;
-      --accent2:#00d4ff;
+    --glass-bg:rgba(255,255,255,.08);
+    --border-clr:rgba(255,255,255,.18);
+    --txt:#fefefe;
+    --accent:#8e41ff;
+    --accent2:#00d4ff;
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   body{
-      font-family:"Inter",sans-serif;
-      height:100vh;background:#111;color:var(--txt);
-      overflow-x:hidden;
+    font-family:"Inter",sans-serif;
+    height:100vh;background:#111;color:var(--txt);
+    overflow-x:hidden;
   }
 
-  /* ---- Floating neon blobs ---- */
+  /* === floating neon blobs === */
   .blob{
-      position:absolute;width:40vw;height:40vw;border-radius:50%;
-      background:linear-gradient(130deg,var(--accent),var(--accent2));
-      filter:blur(90px) saturate(120%);opacity:.35;
-      animation:float 25s infinite ease-in-out;
+    position:absolute;width:40vw;height:40vw;border-radius:50%;
+    background:linear-gradient(130deg,var(--accent),var(--accent2));
+    filter:blur(90px) saturate(120%);opacity:.35;
+    animation:float 24s ease-in-out infinite;
   }
-  .blob:nth-child(1){top:-10%;left:-10%;}
-  .blob:nth-child(2){bottom:-15%;right:-5%;animation-delay:3s;}
+  .blob:nth-child(1){top:-10%;left:-12%;}
+  .blob:nth-child(2){bottom:-15%;right:-8%;animation-delay:3s;}
   @keyframes float{
-      0%,100%{transform:translate(0,0) scale(1);}
-      50%{transform:translate(10%,15%) scale(1.2);}
+    0%,100%{transform:translate(0,0) scale(1);}
+    50%{transform:translate(10%,15%) scale(1.2);}
   }
 
-  /* ---- Glass nav ---- */
+  /* === glass nav === */
   header{
-      width:100%;padding:1.4rem 6vw;
-      backdrop-filter:blur(14px) saturate(180%);
-      background:var(--glass-bg);
-      border-bottom:1px solid var(--border-clr);
-      display:flex;justify-content:space-between;align-items:center;
-      position:fixed;top:0;left:0;z-index:99;
-      animation:fadeDown .8s ease .2s both;
+    width:100%;padding:1.3rem 6vw;
+    position:fixed;top:0;left:0;z-index:99;
+    backdrop-filter:blur(14px) saturate(180%);
+    background:var(--glass-bg);border-bottom:1px solid var(--border-clr);
+    display:flex;justify-content:space-between;align-items:center;
+    animation:fadeDown .8s ease .2s both;
   }
+  .logo{font-weight:800;font-size:1.2rem;color:var(--accent);}
   nav a{
-      color:var(--txt);text-decoration:none;margin:0 1rem;font-weight:600;
-      transition:.25s;
+    color:var(--txt);text-decoration:none;font-weight:600;
+    transition:.25s;
   }
   nav a:hover{color:var(--accent2);}
-  .logo{font-weight:800;font-size:1.2rem;color:var(--accent);letter-spacing:.5px;}
 
-  /* ---- Hero ---- */
+  /* === hero === */
   .hero{
-      min-height:100vh;
-      display:flex;flex-direction:column;
-      justify-content:center;align-items:center;text-align:center;
-      gap:2rem;padding:0 6vw;
+    min-height:100vh;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    text-align:center;gap:2rem;padding:0 6vw;
   }
   h1{
-      font-size:clamp(2.5rem,6vw,5rem);
-      line-height:1.1;text-shadow:0 4px 20px rgba(0,0,0,.55);
-      animation:slideUp .9s ease-out .4s both;
+    font-size:clamp(2.5rem,6vw,5rem);line-height:1.1;
+    text-shadow:0 4px 20px rgba(0,0,0,.55);
+    animation:slideUp .9s ease-out .4s both;
   }
   h1 span{color:var(--accent2);}
   p.tagline{
-      font-size:1.15rem;max-width:640px;opacity:.85;
-      animation:slideUp .9s ease-out .55s both;
+    font-size:1.15rem;max-width:640px;opacity:.85;
+    animation:slideUp .9s ease-out .55s both;
   }
 
-  /* ---- Buttons ---- */
+  /* === CTA button === */
   .cta-btn{
-      padding:1rem 2.6rem;font-size:1.1rem;font-weight:700;
-      border:none;border-radius:12px;cursor:pointer;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      color:#fff;
-      box-shadow:0 10px 20px rgba(0,0,0,.4),0 0 0 0 var(--accent2);
-      transition:.3s transform ease, box-shadow .3s ease;
-      animation:pulse 3s ease-in-out infinite 1s;
+    padding:1rem 2.6rem;font-size:1.1rem;font-weight:700;cursor:pointer;
+    border:none;border-radius:12px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;
+    box-shadow:0 10px 20px rgba(0,0,0,.4),0 0 0 0 var(--accent2);
+    transition:.3s transform ease, box-shadow .3s ease;
+    animation:pulse 3s ease-in-out infinite 1s;
   }
   .cta-btn:hover{
-      transform:translateY(-4px) scale(1.05);
-      box-shadow:0 14px 30px rgba(0,0,0,.5),0 0 15px 3px var(--accent2);
+    transform:translateY(-4px) scale(1.05);
+    box-shadow:0 14px 30px rgba(0,0,0,.5),0 0 15px 3px var(--accent2);
   }
 
-  /* ---- Footer ---- */
+  /* === footer === */
   footer{text-align:center;padding:3rem 0 4rem;font-size:.85rem;opacity:.6;}
 
-  /* ---- Keyframes ---- */
+  /* === keyframes === */
   @keyframes slideUp{
-      from{opacity:0;transform:translateY(50px);}
-      to  {opacity:1;transform:translateY(0);}
+    from{opacity:0;transform:translateY(50px);}
+    to  {opacity:1;transform:translateY(0);}
   }
   @keyframes fadeDown{
-      from{opacity:0;transform:translateY(-60px);}
-      to  {opacity:1;transform:translateY(0);}
+    from{opacity:0;transform:translateY(-60px);}
+    to  {opacity:1;transform:translateY(0);}
   }
   @keyframes pulse{
-      0%  {box-shadow:0 10px 20px rgba(0,0,0,.4),0 0 0 0 rgba(0,212,255,.6);}
-      70% {box-shadow:0 10px 25px rgba(0,0,0,.4),0 0 30px 12px rgba(0,212,255,0);}
-      100%{box-shadow:0 10px 20px rgba(0,0,0,.4),0 0 0 0 rgba(0,212,255,0);}
+    0%  {box-shadow:0 10px 20px rgba(0,0,0,.4),0 0 0 0 rgba(0,212,255,.6);}
+    70% {box-shadow:0 10px 25px rgba(0,0,0,.4),0 0 30px 12px rgba(0,212,255,0);}
+    100%{box-shadow:0 10px 20px rgba(0,0,0,.4),0 0 0 0 rgba(0,212,255,0);}
   }
   </style>
 </head>
-<body>
 
+<body>
   <!-- neon blobs -->
   <div class="blob"></div>
   <div class="blob"></div>
@@ -124,9 +121,6 @@
     <div class="logo">Nuvexa<span style="color:var(--accent2);">OS</span></div>
     <nav>
       <a href="features.html">Overview</a>
-      <a href="#download">Download&nbsp;ISO</a>
-      <a href="#docs">Docs</a>
-      <a href="#community">Community</a>
     </nav>
   </header>
 
@@ -141,8 +135,7 @@
 
   <!-- footer -->
   <footer>
-      © 2025 Nuvexa Labs · Built with ❤️ to make PCs awesome again
+    © 2025 Nuvexa Labs &middot; Built with ❤️ to make PCs awesome again
   </footer>
-
 </body>
 </html>

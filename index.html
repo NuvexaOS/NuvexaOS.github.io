@@ -3,197 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NuvexaOS – A New Dimension of Computing</title>
+  <title>NuvexaOS – Re-imagine Your Desktop</title>
 
-  <!-- ===== Google Fonts & Icons ===== -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
-  <!-- ===== Animate.css (entry animations) ===== -->
+  <!-- Animate.css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
   <style>
-  /* ---------- RESET ---------- */
-  :root{
-      --glass-bg:rgba(255,255,255,0.10);
-      --border-clr:rgba(255,255,255,0.25);
-      --txt:#fefefe;
-      --accent:#8e41ff;
-      --accent2:#00d4ff;
-  }
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  body{
-      font-family:"Inter",sans-serif;
-      height:100vh;
-      background:#111;
-      color:var(--txt);
-      overflow-x:hidden;
-  }
-
-  /* ---------- NEON GRADIENT BLOBS (parallax background) ---------- */
-  .blob{
-      position:absolute;
-      width:40vw;
-      height:40vw;
-      border-radius:50%;
-      background:linear-gradient(130deg,var(--accent),var(--accent2));
-      filter:blur(90px) saturate(120%);
-      opacity:.35;
-      animation:float 20s infinite ease-in-out;
-  }
-  .blob:nth-child(1){top:-10%;left:-10%;}
-  .blob:nth-child(2){bottom:-15%;right:-5%; animation-delay:3s;}
-
-  @keyframes float{
-      0%,100%{transform:translate(0,0) scale(1);}
-      50%{transform:translate(10%,15%) scale(1.2);}
-  }
-
-  /* ---------- GLASS NAV ---------- */
-  header{
-      width:100%;
-      padding:1.4rem 6vw;
-      backdrop-filter:blur(14px) saturate(180%);
-      background:var(--glass-bg);
-      border-bottom:1px solid var(--border-clr);
-      display:flex;justify-content:space-between;align-items:center;
-      position:fixed;top:0;left:0;z-index:99;
-  }
-  nav a{
-      color:var(--txt);text-decoration:none;margin:0 1rem;font-weight:600;
-      transition:.25s;
-  }
-  nav a:hover{color:var(--accent2);}
-  .logo{font-weight:800;font-size:1.2rem;color:var(--accent);letter-spacing:.5px;}
-
-  /* ---------- HERO ---------- */
-  .hero{
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      gap:2rem;
-      padding:0 6vw;
-  }
-  h1{
-      font-size:clamp(2.5rem,6vw,5rem);
-      line-height:1.1;
-      text-shadow:0 4px 20px rgba(0,0,0,.55);
-  }
-  h1 span{color:var(--accent2);}
-  p.tagline{font-size:1.15rem;max-width:600px;opacity:.85;}
-
-  .cta-btn{
-      padding:1rem 2.6rem;
-      font-size:1.1rem;font-weight:700;
-      border:none;border-radius:12px;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      color:#fff;cursor:pointer;box-shadow:0 12px 25px rgba(0,0,0,.35);
-      transition:.3s transform ease;
-  }
-  .cta-btn:hover{transform:translateY(-4px) scale(1.03);}
-
-  /* ---------- GLASS CARDS ---------- */
-  .features{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:2rem;
-      padding:6rem 8vw 8rem;
-  }
-  .card{
-      backdrop-filter:blur(25px) saturate(170%);
-      background:var(--glass-bg);
-      border:1px solid var(--border-clr);
-      border-radius:20px;
-      padding:3rem 2.2rem;
-      text-align:center;
-      transition:.35s transform;
-  }
-  .card:hover{transform:translateY(-8px) rotateX(4deg) rotateY(-2deg);}
-  .card i{
-      font-size:2.4rem;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      -webkit-background-clip:text;color:transparent;margin-bottom:1rem;
-  }
-  .card h3{margin-bottom:.7rem;font-size:1.45rem;}
-  .card p{opacity:.8;font-size:.95rem;}
-
-  /* ---------- FOOTER ---------- */
-  footer{
-      text-align:center;
-      padding:3rem 0 4rem;
-      font-size:.85rem;opacity:.6;
-  }
+    /* ————— [ same CSS as v2 … trimmed for brevity ] ————— */
+    /*  Paste the entire CSS block from the previous reply here.
+        Nothing in the CSS needs to change for the new copy.       */
   </style>
 </head>
 <body>
 
-  <!-- floating blobs -->
+  <!-- neon blobs -->
   <div class="blob"></div>
   <div class="blob"></div>
 
-  <!-- navbar -->
-  <header class="animate__animated animate__fadeInDown">
-      <div class="logo">Nuvexa<span style="color:var(--accent2);">OS</span></div>
-      <nav>
-          <a href="#features">Features</a>
-          <a href="#download">Download</a>
-          <a href="#community">Community</a>
-      </nav>
+  <!-- nav -->
+  <header>
+    <div class="logo">Nuvexa<span style="color:var(--accent2);">OS</span></div>
+    <nav>
+      <a href="features.html">Overview</a>   <!-- was “Features” -->
+      <a href="#download">Download ISO</a>   <!-- clearer call-out -->
+      <a href="#docs">Docs</a>
+      <a href="#community">Community</a>
+    </nav>
   </header>
 
   <!-- hero -->
-  <section class="hero animate__animated animate__fadeIn">
-      <h1>The <span>future</span> of personal computing.</h1>
-      <p class="tagline">
-          NuvexaOS combines lightning-fast performance with a design language that feels like holding a hologram in your hands.
-      </p>
-      <button class="cta-btn">Try the Beta</button>
+  <section class="hero">
+    <h1>Your computer, <span>reborn</span>.</h1>
+    <p class="tagline">
+      NuvexaOS is a next-gen desktop operating system that boots in seconds,  
+      isolates every app for zero-trust security, and wraps it all in a fluid, glass-morphic UI.
+    </p>
+    <button class="cta-btn" id="download">Download Beta ISO</button>
   </section>
 
-  <!-- features -->
-  <section id="features" class="features">
-      <div class="card animate__animated animate__zoomIn" style="animation-delay:.1s;">
-          <i class="fas fa-bolt"></i>
-          <h3>Blazing Speed</h3>
-          <p>Nuvexa’s micro-kernel launches apps 40 % faster than traditional desktop OSes.</p>
-      </div>
-
-      <div class="card animate__animated animate__zoomIn" style="animation-delay:.25s;">
-          <i class="fas fa-shield-alt"></i>
-          <h3>Zero-Trust Security</h3>
-          <p>Containerized processes and hardware-level encryption keep intruders out.</p>
-      </div>
-
-      <div class="card animate__animated animate__zoomIn" style="animation-delay:.4s;">
-          <i class="fas fa-magic"></i>
-          <h3>Adaptive UI</h3>
-          <p>The interface morphs to your workflow, whether you’re gaming or coding.</p>
-      </div>
-  </section>
-
-  <!-- footer -->
   <footer>
-      Made with ❤️ and way too much coffee · © 2025 Nuvexa Labs
+      © 2025 Nuvexa Labs · Built with ❤️ to make PCs awesome again
   </footer>
 
-  <!-- ---------- OPTIONAL JS EXTRAS ---------- -->
-  <script>
-    /* Tiny parallax tilt effect on the feature cards (vanilla JS, no lib) */
-    document.querySelectorAll('.card').forEach(card=>{
-      card.addEventListener('mousemove', e=>{
-        const rect = card.getBoundingClientRect(),
-              x = e.clientX - rect.left,
-              y = e.clientY - rect.top,
-              midX = rect.width/2,
-              midY = rect.height/2;
-        card.style.transform =
-          `perspective(800px) rotateX(${-(y-midY)/18}deg) rotateY(${(x-midX)/18}deg) translateY(-8px)`;
-      });
-      card.addEventListener('mouseleave',()=>card.style.transform='translateY(0)');
-    });
-  </script>
 </body>
 </html>

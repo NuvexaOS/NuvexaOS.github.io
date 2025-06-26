@@ -9,11 +9,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
-  <!-- Animate.css for quick entrance effects -->
+  <!-- Animate.css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
   <style>
-  /* ————— Theme Vars ————— */
+  /* ---------- Theme ---------- */
   :root{
     --c1:#5e17eb;
     --c2:#00c9ff;
@@ -22,112 +22,52 @@
     --bg:#131417;
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  body{
-    font-family:"Inter",sans-serif;
-    background:var(--bg);
-    color:var(--txt);
-    overflow-x:hidden;
-  }
+  body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);overflow-x:hidden;}
 
-  /* ————— Floating gradient blobs ————— */
+  /* ---------- Gradient blobs ---------- */
   .blob{
-    position:absolute;
-    width:60vmin;height:60vmin;
-    border-radius:50%;
+    position:absolute;width:60vmin;height:60vmin;border-radius:50%;
     background:radial-gradient(circle at 30% 30%,var(--c2),transparent 60%),
                radial-gradient(circle at 70% 70%,var(--c3),transparent 60%);
-    filter:blur(80px) saturate(140%);
-    opacity:.6;
-    animation: drift 25s infinite alternate ease-in-out;
-    pointer-events:none;
-    z-index:-2;
+    filter:blur(80px) saturate(140%);opacity:.6;
+    animation:drift 25s infinite alternate ease-in-out;
+    pointer-events:none;z-index:-2;
   }
   .blob:nth-child(1){top:-15vmin;left:-20vmin;}
   .blob:nth-child(2){bottom:-20vmin;right:-15vmin;animation-delay:4s;}
+  @keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(10vmin,8vmin) scale(1.1)}}
 
-  @keyframes drift{
-    from{transform:translate(0,0) scale(1)}
-    to  {transform:translate(10vmin,8vmin) scale(1.1)}
-  }
-
-  /* ————— Nav ————— */
+  /* ---------- Nav ---------- */
   header{
-    position:fixed;top:0;left:0;z-index:10;
-    width:100%;
-    padding:1.3rem 6vw;
-    display:flex;justify-content:space-between;align-items:center;
+    position:fixed;top:0;left:0;z-index:10;width:100%;
+    padding:1.3rem 6vw;display:flex;justify-content:space-between;align-items:center;
     backdrop-filter:blur(14px);
   }
-  .logo{
-    font-weight:800;font-size:1.2rem;
-    background:linear-gradient(90deg,var(--c1),var(--c2));
-    -webkit-background-clip:text;color:transparent;
-  }
-  nav a{
-    color:var(--txt);text-decoration:none;font-weight:600;
-    padding:.4rem 1rem;border-radius:8px;transition:.25s;
-  }
+  .logo{font-weight:800;font-size:1.2rem;background:linear-gradient(90deg,var(--c1),var(--c2));-webkit-background-clip:text;color:transparent;}
+  nav a{color:var(--txt);text-decoration:none;font-weight:600;padding:.4rem 1rem;border-radius:8px;transition:.25s;}
   nav a:hover{background:rgba(255,255,255,.12)}
-  
-  /* ————— Hero ————— */
+
+  /* ---------- Hero ---------- */
   .hero{
-    min-height:100vh;
-    display:flex;flex-direction:column;justify-content:center;align-items:center;
-    text-align:center;padding:0 8vw;
-    gap:2.2rem;
+    min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+    padding:0 8vw;gap:2.2rem;
   }
   h1{
-    font-size:clamp(2.8rem,7vw,5.2rem);
-    line-height:1.1;
+    font-size:clamp(2.8rem,7vw,5.2rem);line-height:1.1;
     background:linear-gradient(120deg,var(--c1),var(--c2) 40%,var(--c3) 70%);
     -webkit-background-clip:text;color:transparent;
   }
   p.tagline{max-width:680px;font-size:1.2rem;opacity:.88}
   .cta-btn{
-    padding:1rem 2.8rem;font-size:1.15rem;font-weight:700;
-    border:none;border-radius:14px;cursor:pointer;
-    background:linear-gradient(135deg,var(--c1),var(--c2));
-    color:#fff;
+    padding:1rem 2.8rem;font-size:1.15rem;font-weight:700;border:none;border-radius:14px;cursor:pointer;
+    background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;
     box-shadow:0 12px 25px rgba(0,0,0,.4);
     transition:.3s transform ease,box-shadow .3s ease;
   }
   .cta-btn:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 18px 30px rgba(0,0,0,.55)}
 
-  /* ————— Sections ————— */
-  section{padding:6rem 8vw}
-  .section-title{
-    font-size:2.2rem;font-weight:700;margin-bottom:3rem;
-    background:linear-gradient(90deg,var(--c1),var(--c3));
-    -webkit-background-clip:text;color:transparent;
-  }
-  .grid{
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:2rem;
-  }
-  .card{
-    padding:2rem;border-radius:18px;text-align:center;
-    background:rgba(255,255,255,0.06);
-    backdrop-filter:blur(12px);
-    border:1px solid rgba(255,255,255,.12);
-    transition:transform .35s;
-  }
-  .card:hover{transform:translateY(-6px) rotateX(4deg) rotateY(-2deg)}
-  .card i{
-    font-size:2.2rem;margin-bottom:1rem;
-    color:var(--c2);
-  }
-  .card h3{margin-bottom:.8rem;font-size:1.3rem}
-  .card p{font-size:.95rem;opacity:.85}
-
-  /* ————— Footer ————— */
-  footer{
-    text-align:center;padding:3.5rem 8vw 4.5rem;
-    font-size:.85rem;opacity:.6;
-  }
-
-  /* ————— Scroll-reveal animation utility classes ————— */
-  .reveal{opacity:0;transform:translateY(60px);transition:1s ease}
-  .reveal.active{opacity:1;transform:none}
+  /* ---------- Footer ---------- */
+  footer{text-align:center;padding:3.5rem 8vw 4.5rem;font-size:.85rem;opacity:.6;}
   </style>
 </head>
 <body>
@@ -151,49 +91,15 @@
       NuvexaOS boots in seconds, isolates every process for zero-trust security,<br/>
       and surrounds it all with a mesmerizing gradient splash UI.
     </p>
-    <button class="cta-btn animate__animated animate__pulse animate__delay-2s animate__infinite">Download&nbsp;Beta&nbsp;ISO</button>
-  </section>
-
-  <!-- (Optional) Feature cards if you want them back later -->
-  <section id="features">
-    <h2 class="section-title reveal">Why NuvexaOS?</h2>
-    <div class="grid">
-      <div class="card reveal">
-        <i class="fas fa-bolt"></i>
-        <h3>Instant Boot</h3>
-        <p>Micro-kernel architecture gets you to the desktop in under 4 seconds.</p>
-      </div>
-      <div class="card reveal">
-        <i class="fas fa-lock"></i>
-        <h3>Zero-Trust</h3>
-        <p>Every app runs in its own sandbox—malware can’t escape.</p>
-      </div>
-      <div class="card reveal">
-        <i class="fas fa-brush"></i>
-        <h3>Adaptive UI</h3>
-        <p>Dark, light, or neon — it morphs to your workflow and mood.</p>
-      </div>
-    </div>
+    <button class="cta-btn animate__animated animate__pulse animate__delay-2s animate__infinite">
+      Download&nbsp;Beta&nbsp;ISO
+    </button>
   </section>
 
   <!-- Footer -->
   <footer>
     © 2025 Nuvexa Labs · Built with ❤️ and a splash of color
   </footer>
-
-  <!-- Simple JS for scroll-reveal -->
-  <script>
-  const reveals = document.querySelectorAll('.reveal');
-  const revealOnScroll = () =>{
-    const trigger = window.innerHeight * 0.9;
-    reveals.forEach(el=>{
-      const top = el.getBoundingClientRect().top;
-      if(top < trigger) el.classList.add('active');
-    });
-  };
-  window.addEventListener('scroll',revealOnScroll);
-  revealOnScroll();
-  </script>
 
 </body>
 </html>

@@ -23,13 +23,13 @@
     /* Frosted glass window container */
     .window {
       width: 600px;
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 8px;
-      backdrop-filter: blur(10px);
-      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(0px);
+      background: rgba(255, 255, 255, 0.05);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
       overflow: hidden;
-      animation: popUp 0.8s ease-out;
+      animation: popUp 0.8s ease-out, glassy 1s ease-in-out 0.5s forwards;
     }
 
     /* Title bar like Windows XP */
@@ -41,12 +41,10 @@
       padding: 0 8px;
       color: #fff;
       font-weight: bold;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     }
     .title-bar .title { flex: 1; }
-    .title-bar .buttons {
-      display: flex;
-    }
+    .title-bar .buttons { display: flex; }
     .btn {
       width: 16px; height: 16px;
       margin-left: 8px;
@@ -54,18 +52,40 @@
       align-items: center;
       justify-content: center;
       border-radius: 2px;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.2);
       cursor: pointer;
       transition: background 0.2s;
     }
-    .btn:hover { background: rgba(255,255,255,0.4); }
+    .btn:hover { background: rgba(255, 255, 255, 0.4); }
     .btn.close:hover { background: #e81123; }
 
     /* Content area */
     .content {
       padding: 20px;
       color: #f0f0f0;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Action buttons */
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .action-btn {
+      padding: 10px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+      backdrop-filter: blur(5px);
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.3s, backdrop-filter 0.3s;
+    }
+    .action-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
     }
 
     /* Animations */
@@ -76,6 +96,16 @@
     @keyframes popUp {
       0% { transform: scale(0.8); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes glassy {
+      from {
+        backdrop-filter: blur(0px);
+        background: rgba(255, 255, 255, 0.05);
+      }
+      to {
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.1);
+      }
     }
   </style>
 </head>
@@ -93,6 +123,10 @@
       <h1>Welcome to NuvexaOS</h1>
       <p>Experience the nostalgia of Windows XP with a modern, glassy twist.</p>
       <p>Enjoy smooth animations and frosted-glass UI elements.</p>
+      <div class="actions">
+        <a href="#" class="action-btn">Download</a>
+        <a href="#about" class="action-btn">About</a>
+      </div>
     </div>
   </div>
 </body>

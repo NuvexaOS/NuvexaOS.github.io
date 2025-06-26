@@ -2,190 +2,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NuvexaOS – Retro XP‑Style Homepage</title>
-    <!-- Favicon placeholder -->
-    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f5b3.svg">
-    <style>
-        /* ====== Base ====== */
-        :root {
-            --xp-blue: #0a246a;
-            --xp-light-blue: #3b7bd6;
-            --xp-gray: #c0c0c0;
-            --window-radius: 6px;
-        }
-        * { box-sizing: border-box; }
-        html,body { height: 100%; margin: 0; }
-        body {
-            font-family: "Trebuchet MS", Tahoma, sans-serif;
-            color: #fff;
-            background: url("https://upload.wikimedia.org/wikipedia/en/2/24/Bliss_%28Windows_XP%29.png") center/cover no-repeat fixed;
-        }
-        a { color: #fff; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        /* ====== Overlay to improve readability ====== */
-        #overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.4);
-            pointer-events: none;
-            z-index: -1;
-        }
-        /* ====== Layout ====== */
-        header {
-            padding: 1rem 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        #logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: .5px;
-        }
-        nav ul { list-style: none; padding: 0; margin: 0; display: flex; gap: 1rem; }
-        main { display: flex; flex-direction: column; align-items: center; }
-        section { width: 90%; max-width: 960px; margin: 3rem 0; text-align: center; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NuvexaOS – Blissful Glass Interface</title>
+  <!-- Google Font: Press Start 2P for retro vibe -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    /* ========= Root Design Tokens ========= */
+    :root {
+      --blur: 12px;
+      --glass-bg: rgba(255, 255, 255, 0.18);
+      --glass-border: rgba(255, 255, 255, 0.35);
+      --accent: #3b7bd6;
+    }
 
-        /* ====== Hero ====== */
-        #hero h1 { font-size: 3rem; margin-bottom: .5rem; }
-        .btn {
-            display: inline-block;
-            padding: .75rem 1.5rem;
-            margin: .5rem;
-            border: none;
-            border-radius: var(--window-radius);
-            background: var(--xp-blue);
-            box-shadow: 0 2px 0 #000;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform .1s;
-        }
-        .btn:hover { background: var(--xp-light-blue); }
-        .btn:active { transform: translateY(2px); box-shadow: 0 0 #000; }
+    /* ========= Reset & Base ========= */
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html,body { height: 100%; }
+    body {
+      font-family: "Trebuchet MS", Tahoma, sans-serif;
+      color: #fff;
+      background: url("https://upload.wikimedia.org/wikipedia/en/2/24/Bliss_%28Windows_XP%29.png") center/cover no-repeat fixed;
+      overflow-x: hidden;
+    }
 
-        /* ====== Window Card mimic ====== */
-        .window-card {
-            background: var(--xp-gray);
-            border: 2px solid #000;
-            border-radius: var(--window-radius);
-            width: 100%;
-            max-width: 300px;
-            box-shadow: 4px 4px 0 rgba(0,0,0,.4);
-            margin: 1rem;
-            display: flex;
-            flex-direction: column;
-        }
-        .title-bar {
-            background: linear-gradient(to bottom, var(--xp-light-blue) 0%, var(--xp-blue) 100%);
-            color: #fff;
-            padding: .3rem .6rem;
-            font-weight: bold;
-            border-top-left-radius: var(--window-radius);
-            border-top-right-radius: var(--window-radius);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .title-bar .controls span {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            margin-left: 4px;
-            background: #fff;
-            border: 1px solid #000;
-        }
-        .title-bar .controls span:nth-child(2) { background: #f00; }
-        .card-body { padding: 1rem; color: #000; }
+    /* ========= Overlay to tint & darken BG slightly ========= */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: -1;
+    }
 
-        /* ====== Responsive ====== */
-        @media (min-width: 640px) {
-            #features .cards { flex-direction: row; }
-        }
-    </style>
+    /* ========= Animations ========= */
+    @keyframes fadeSlideUp {
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========= Utility ========= */
+    .glass {
+      backdrop-filter: blur(var(--blur)) saturate(160%);
+      -webkit-backdrop-filter: blur(var(--blur)) saturate(160%);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+      animation: fadeSlideUp .8s ease forwards;
+    }
+
+    a { color: #fff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ========= Layout ========= */
+    header {
+      position: fixed;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: min(100% - 2rem, 1024px);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 1.5rem;
+      z-index: 10;
+    }
+    #logo {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1.2rem;
+      letter-spacing: .5px;
+    }
+    nav ul { list-style: none; display: flex; gap: 1.5rem; }
+
+    /* ========= Sections ========= */
+    main { width: 100%; padding-top: 100px; display: flex; flex-direction: column; align-items: center; }
+    section { width: min(100% - 2rem, 1024px); margin: 2.5rem 0; padding: 2.5rem 1.5rem; text-align: center; }
+    h1,h2 { font-family: 'Press Start 2P', cursive; margin-bottom: 1rem; text-shadow: 0 0 4px rgba(0,0,0,.6); }
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.4rem; }
+
+    /* ========= Buttons ========= */
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2rem;
+      margin: 0.6rem;
+      font-weight: 600;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,.4);
+      transition: transform .15s ease, box-shadow .15s ease;
+      color: #fff;
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 14px rgba(0,0,0,.5); }
+    .btn:active { transform: translateY(1px); box-shadow: 0 3px 6px rgba(0,0,0,.4); }
+
+    /* ========= Feature Cards ========= */
+    .card-grid { display: grid; gap: 1.5rem; }
+    @media (min-width: 640px) { .card-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); } }
+
+    .feature-card {
+      padding: 1.5rem;
+      text-align: left;
+    }
+
+    /* ========= Footer ========= */
+    footer { width: 100%; padding: 1rem 0; text-align: center; opacity:.8; }
+  </style>
 </head>
 <body>
-    <div id="overlay"></div>
-    <header>
-        <div id="logo">NuvexaOS</div>
-        <nav>
-            <ul>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#download">Download</a></li>
-                <li><a href="#about">About</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- ========= Header ========= -->
+  <header class="glass">
+    <div id="logo">NuvexaOS</div>
+    <nav>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#download">Download</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <main>
-        <!-- Hero Section -->
-        <section id="hero">
-            <h1>Welcome to NuvexaOS</h1>
-            <p>The future‑ready OS sporting classic vibes.</p>
-            <a class="btn" href="#download">Download Now</a>
-            <a class="btn" href="#about">Learn More</a>
-        </section>
+  <main>
+    <!-- ========= Hero ========= -->
+    <section id="hero" class="glass" style="animation-delay:.1s">
+      <h1>Experience NuvexaOS</h1>
+      <p style="max-width:600px;margin:0 auto 1.5rem;">Classic nostalgia meets next‑gen power – crafted for dreamers and doers alike.</p>
+      <a class="btn" href="#download">Download Now</a>
+      <a class="btn" href="#about">Learn More</a>
+    </section>
 
-        <!-- Features Section -->
-        <section id="features">
-            <h2>Features</h2>
-            <div class="cards" style="display:flex;flex-wrap:wrap;justify-content:center;">
-                <!-- Card 1 -->
-                <div class="window-card">
-                    <div class="title-bar">
-                        <span>Fast Boot</span>
-                        <div class="controls"><span></span><span></span></div>
-                    </div>
-                    <div class="card-body">
-                        <p>Blazing fast startup times ensure you dive into productivity without delays.</p>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="window-card">
-                    <div class="title-bar">
-                        <span>Retro UI</span>
-                        <div class="controls"><span></span><span></span></div>
-                    </div>
-                    <div class="card-body">
-                        <p>Enjoy the nostalgia of classic interfaces paired with modern performance.</p>
-                    </div>
-                </div>
-                <!-- Card 3 -->
-                <div class="window-card">
-                    <div class="title-bar">
-                        <span>App Hub</span>
-                        <div class="controls"><span></span><span></span></div>
-                    </div>
-                    <div class="card-body">
-                        <p>Discover curated apps optimized for NuvexaOS in one convenient place.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- ========= Features ========= -->
+    <section id="features" class="glass" style="animation-delay:.2s">
+      <h2>Key Features</h2>
+      <div class="card-grid">
+        <div class="feature-card glass">
+          <h3>⚡ Turbo Boot</h3>
+          <p>Get from power‑on to desktop in seconds with our streamlined init stack.</p>
+        </div>
+        <div class="feature-card glass">
+          <h3>🎨 Blissful UI</h3>
+          <p>Frosted‑glass windows and smooth micro‑animations deliver pure aesthetic joy.</p>
+        </div>
+        <div class="feature-card glass">
+          <h3>🛠 Built‑in Hub</h3>
+          <p>Discover and install curated apps without leaving your workspace.</p>
+        </div>
+      </div>
+    </section>
 
-        <!-- Download Section -->
-        <section id="download">
-            <h2>Get NuvexaOS Today</h2>
-            <p>Ready to experience the next‑gen OS wrapped in retro goodness?</p>
-            <a class="btn" href="#">Download ISO</a>
-            <a class="btn" href="#">Documentation</a>
-        </section>
+    <!-- ========= Download ========= -->
+    <section id="download" class="glass" style="animation-delay:.3s">
+      <h2>Get NuvexaOS</h2>
+      <p>Ready to feel the bliss? Choose your flavor below.</p>
+      <a class="btn" href="#">Download ISO</a>
+      <a class="btn" href="#">Documentation</a>
+    </section>
 
-        <!-- About Section -->
-        <section id="about">
-            <h2>About NuvexaOS</h2>
-            <p>NuvexaOS merges timeless design aesthetics with cutting‑edge tech under the hood. Crafted by lovers of retro computing, we believe an OS should feel both familiar and thrillingly new.</p>
-        </section>
-    </main>
+    <!-- ========= About ========= -->
+    <section id="about" class="glass" style="animation-delay:.4s">
+      <h2>About</h2>
+      <p style="max-width:700px;margin:0 auto;">Born from a passion for timeless aesthetics and bleeding‑edge performance, NuvexaOS re‑imagines computing comfort. Whether you're coding, creating or just vibing, we keep things smooth, secure and delightfully familiar.</p>
+    </section>
+  </main>
 
-    <footer style="text-align:center;padding:1rem 0;background:rgba(0,0,0,.6);">
-        © <span id="year"></span> NuvexaOS. All rights reserved.
-    </footer>
+  <footer class="glass" style="position:relative;bottom:0;animation-delay:.5s">
+    © <span id="year"></span> NuvexaOS – Bliss happens here.
+  </footer>
 
-    <script>
-        // Update footer year automatically
-        document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>

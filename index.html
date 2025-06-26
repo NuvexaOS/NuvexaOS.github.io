@@ -1,149 +1,191 @@
+<!-- File: index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NuvexaOS — Retro XP Edition</title>
-  <link rel="icon" href="https://raw.githubusercontent.com/NuvexaOS/NuvexaOS.github.io/refs/heads/main/guest.png" />
-  <style>
-    :root {
-      --text: #ffffff;
-      --primary: #00d4ff;
-      --secondary: #ff00ff;
-      --tool: #39ff14;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NuvexaOS – Retro XP‑Style Homepage</title>
+    <!-- Favicon placeholder -->
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f5b3.svg">
+    <style>
+        /* ====== Base ====== */
+        :root {
+            --xp-blue: #0a246a;
+            --xp-light-blue: #3b7bd6;
+            --xp-gray: #c0c0c0;
+            --window-radius: 6px;
+        }
+        * { box-sizing: border-box; }
+        html,body { height: 100%; margin: 0; }
+        body {
+            font-family: "Trebuchet MS", Tahoma, sans-serif;
+            color: #fff;
+            background: url("https://upload.wikimedia.org/wikipedia/en/2/24/Bliss_%28Windows_XP%29.png") center/cover no-repeat fixed;
+        }
+        a { color: #fff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        /* ====== Overlay to improve readability ====== */
+        #overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            pointer-events: none;
+            z-index: -1;
+        }
+        /* ====== Layout ====== */
+        header {
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        #logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: .5px;
+        }
+        nav ul { list-style: none; padding: 0; margin: 0; display: flex; gap: 1rem; }
+        main { display: flex; flex-direction: column; align-items: center; }
+        section { width: 90%; max-width: 960px; margin: 3rem 0; text-align: center; }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-    }
+        /* ====== Hero ====== */
+        #hero h1 { font-size: 3rem; margin-bottom: .5rem; }
+        .btn {
+            display: inline-block;
+            padding: .75rem 1.5rem;
+            margin: .5rem;
+            border: none;
+            border-radius: var(--window-radius);
+            background: var(--xp-blue);
+            box-shadow: 0 2px 0 #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform .1s;
+        }
+        .btn:hover { background: var(--xp-light-blue); }
+        .btn:active { transform: translateY(2px); box-shadow: 0 0 #000; }
 
-    body {
-      height: 100vh;
-      background: url("https://www.wallpaperhub.app/_next/image?url=https%3A%2F%2Fcdn.wallpaperhub.app%2Fcloudcache%2Fb%2Fd%2F7%2F6%2F4%2Fb%2Fbd764bb25d49a05105060185774ba14cd2c846f7.jpg&w=4500&q=100") no-repeat center center fixed;
-      background-size: cover;
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      overflow: hidden;
-    }
+        /* ====== Window Card mimic ====== */
+        .window-card {
+            background: var(--xp-gray);
+            border: 2px solid #000;
+            border-radius: var(--window-radius);
+            width: 100%;
+            max-width: 300px;
+            box-shadow: 4px 4px 0 rgba(0,0,0,.4);
+            margin: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .title-bar {
+            background: linear-gradient(to bottom, var(--xp-light-blue) 0%, var(--xp-blue) 100%);
+            color: #fff;
+            padding: .3rem .6rem;
+            font-weight: bold;
+            border-top-left-radius: var(--window-radius);
+            border-top-right-radius: var(--window-radius);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .title-bar .controls span {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-left: 4px;
+            background: #fff;
+            border: 1px solid #000;
+        }
+        .title-bar .controls span:nth-child(2) { background: #f00; }
+        .card-body { padding: 1rem; color: #000; }
 
-    h1 {
-      font-size: 3.5rem;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: fadeIn 1.5s ease-out;
-    }
-
-    p {
-      font-size: 1.2rem;
-      margin-top: 0.5rem;
-      animation: fadeIn 2s ease-out;
-    }
-
-    .cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-      margin: 2rem 0;
-      animation: fadeIn 2.5s ease-out;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 1.5rem;
-      width: 260px;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .buttons {
-      display: flex;
-      gap: 1rem;
-      margin-top: 2rem;
-      animation: fadeIn 3s ease-out;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .btn {
-      padding: 1rem 2rem;
-      border-radius: 10px;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(12px);
-      background: rgba(255, 255, 255, 0.08);
-      box-shadow: 0 0 10px rgba(255,255,255,0.15);
-      transition: all 0.3s ease;
-    }
-
-    .btn:hover {
-      background: rgba(255, 255, 255, 0.2);
-      box-shadow: 0 0 20px white;
-      transform: scale(1.05);
-    }
-
-    .download { background-color: rgba(0, 212, 255, 0.15); }
-    .contact { background-color: rgba(255, 0, 255, 0.15); }
-    .tool { background-color: rgba(57, 255, 20, 0.15); }
-
-    footer {
-      position: absolute;
-      bottom: 1rem;
-      font-size: 0.9rem;
-      text-shadow: 0 0 4px black;
-      animation: fadeIn 4s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+        /* ====== Responsive ====== */
+        @media (min-width: 640px) {
+            #features .cards { flex-direction: row; }
+        }
+    </style>
 </head>
 <body>
+    <div id="overlay"></div>
+    <header>
+        <div id="logo">NuvexaOS</div>
+        <nav>
+            <ul>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#download">Download</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <h1>NuvexaOS</h1>
-  <p>Blending retro nostalgia with modern cosmic beauty.</p>
+    <main>
+        <!-- Hero Section -->
+        <section id="hero">
+            <h1>Welcome to NuvexaOS</h1>
+            <p>The future‑ready OS sporting classic vibes.</p>
+            <a class="btn" href="#download">Download Now</a>
+            <a class="btn" href="#about">Learn More</a>
+        </section>
 
-  <div class="cards">
-    <div class="card">
-      <h3>⚡ Speed</h3>
-      <p>Fast boot, zero bloat.</p>
-    </div>
-    <div class="card">
-      <h3>🔐 Security</h3>
-      <p>Built on privacy-first, open-source tools.</p>
-    </div>
-    <div class="card">
-      <h3>✨ Design</h3>
-      <p>Minimal and powerful creator interface.</p>
-    </div>
-  </div>
+        <!-- Features Section -->
+        <section id="features">
+            <h2>Features</h2>
+            <div class="cards" style="display:flex;flex-wrap:wrap;justify-content:center;">
+                <!-- Card 1 -->
+                <div class="window-card">
+                    <div class="title-bar">
+                        <span>Fast Boot</span>
+                        <div class="controls"><span></span><span></span></div>
+                    </div>
+                    <div class="card-body">
+                        <p>Blazing fast startup times ensure you dive into productivity without delays.</p>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="window-card">
+                    <div class="title-bar">
+                        <span>Retro UI</span>
+                        <div class="controls"><span></span><span></span></div>
+                    </div>
+                    <div class="card-body">
+                        <p>Enjoy the nostalgia of classic interfaces paired with modern performance.</p>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="window-card">
+                    <div class="title-bar">
+                        <span>App Hub</span>
+                        <div class="controls"><span></span><span></span></div>
+                    </div>
+                    <div class="card-body">
+                        <p>Discover curated apps optimized for NuvexaOS in one convenient place.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <div class="buttons">
-    <a href="https://fromsmash.com/NuvexaOSlOW" class="btn download">⬇️ Download</a>
-    <a href="help.html" class="btn contact">❓ Help & Contact</a>
-    <a href="#" class="btn tool">⚙️ Install NuvexaOS Tool</a>
-  </div>
+        <!-- Download Section -->
+        <section id="download">
+            <h2>Get NuvexaOS Today</h2>
+            <p>Ready to experience the next‑gen OS wrapped in retro goodness?</p>
+            <a class="btn" href="#">Download ISO</a>
+            <a class="btn" href="#">Documentation</a>
+        </section>
 
-  <footer>© 2025 NuvexaOS — Crafted with retro heart & future soul.</footer>
+        <!-- About Section -->
+        <section id="about">
+            <h2>About NuvexaOS</h2>
+            <p>NuvexaOS merges timeless design aesthetics with cutting‑edge tech under the hood. Crafted by lovers of retro computing, we believe an OS should feel both familiar and thrillingly new.</p>
+        </section>
+    </main>
 
+    <footer style="text-align:center;padding:1rem 0;background:rgba(0,0,0,.6);">
+        © <span id="year"></span> NuvexaOS. All rights reserved.
+    </footer>
+
+    <script>
+        // Update footer year automatically
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>

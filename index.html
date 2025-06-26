@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NuvexaOS – Experience the Splash</title>
 
-  <!-- Google Fonts + Icons -->
+  <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
@@ -30,7 +30,7 @@
     color:var(--txt);
     overflow-x:hidden;
 
-    /* keep footer stuck to bottom */
+    /* stick footer to bottom */
     display:flex;
     flex-direction:column;
     min-height:100vh;
@@ -39,10 +39,10 @@
   /* ---------- FLOATING BLOBS ---------- */
   .blob{
     position:absolute;
-    width:60vmin;height:60vmin;
-    border-radius:50%;
-    background:radial-gradient(circle at 30% 30%,var(--c2),transparent 60%),
-               radial-gradient(circle at 70% 70%,var(--c3),transparent 60%);
+    width:60vmin;height:60vmin;border-radius:50%;
+    background:
+      radial-gradient(circle at 30% 30%,var(--c2),transparent 60%),
+      radial-gradient(circle at 70% 70%,var(--c3),transparent 60%);
     filter:blur(80px) saturate(140%);
     opacity:.6;
     animation:drift 25s infinite alternate ease-in-out;
@@ -58,8 +58,7 @@
 
   /* ---------- NAV ---------- */
   header{
-    position:fixed;top:0;left:0;
-    width:100%;z-index:10;
+    position:fixed;top:0;left:0;width:100%;z-index:10;
     padding:1.3rem 6vw;
     display:flex;justify-content:space-between;align-items:center;
     backdrop-filter:blur(14px);
@@ -81,11 +80,9 @@
 
   /* ---------- HERO ---------- */
   .hero{
-    flex:1;  /* allow hero to fill leftover height so footer stays bottom */
+    flex:1;                                   /* fills space so footer stays bottom */
     display:flex;flex-direction:column;justify-content:center;align-items:center;
-    text-align:center;
-    padding:0 8vw;
-    gap:2.2rem;
+    text-align:center;padding:0 8vw;gap:2.2rem;
   }
   h1{
     font-size:clamp(2.8rem,7vw,5.2rem);
@@ -93,18 +90,11 @@
     background:linear-gradient(120deg,var(--c1),var(--c2) 40%,var(--c3) 70%);
     -webkit-background-clip:text;color:transparent;
   }
-  p.tagline{
-    max-width:680px;
-    font-size:1.2rem;
-    opacity:.88;
-  }
+  p.tagline{max-width:680px;font-size:1.2rem;opacity:.88}
   .cta-btn{
-    padding:1rem 2.8rem;
-    font-size:1.15rem;
-    font-weight:700;
+    padding:1rem 2.8rem;font-size:1.15rem;font-weight:700;
     border:none;border-radius:14px;cursor:pointer;
-    background:linear-gradient(135deg,var(--c1),var(--c2));
-    color:#fff;
+    background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;
     box-shadow:0 12px 25px rgba(0,0,0,.4);
     transition:.3s transform ease,box-shadow .3s ease;
   }
@@ -116,12 +106,10 @@
   /* ---------- FOOTER ---------- */
   footer{
     text-align:center;
-    padding:3.5rem 8vw 4.5rem;
+    padding:1rem 8vw;      /* ↓ only 1 rem top & bottom */
     font-size:.85rem;
     opacity:.6;
-
-    /* keep it pushed down */
-    margin-top:auto;
+    margin-top:auto;       /* pushes footer to the bottom */
   }
   </style>
 </head>
@@ -141,7 +129,9 @@
 
   <!-- Hero -->
   <section class="hero">
-    <h1 class="animate__animated animate__fadeInUp animate__slow">Your computer, reborn.</h1>
+    <h1 class="animate__animated animate__fadeInUp animate__slow">
+      Your computer, reborn.
+    </h1>
     <p class="tagline animate__animated animate__fadeInUp animate__delay-1s">
       NuvexaOS boots in seconds, isolates every process for zero-trust security,<br>
       and surrounds it all with a mesmerizing gradient-splash UI.

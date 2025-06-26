@@ -5,124 +5,122 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NuvexaOS</title>
   <style>
-    /* Base reset */
+    /* Reset & base */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { height: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    html, body { height: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #1a1a1a; }
 
-    /* Background wallpaper */
+    /* Full-screen wallpaper */
     body {
       background: url('https://www.wallpaperhub.app/_next/image?url=https%3A%2F%2Fcdn.wallpaperhub.app%2Fcloudcache%2Fb%2Fd%2F7%2F6%2F4%2Fb%2Fbd764bb25d49a05105060185774ba14cd2c846f7.jpg&w=4500&q=100') no-repeat center center fixed;
       background-size: cover;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      animation: fadeIn 1.5s ease-in-out;
+      overflow: hidden;
     }
 
-    /* Frosted glass window container */
+    /* Window container */
     .window {
-      width: 600px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 8px;
-      backdrop-filter: blur(0px);
-      background: rgba(255, 255, 255, 0.05);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      width: 500px;
+      border-radius: 12px;
+      background: rgba(20, 20, 20, 0.3);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+      animation: fadeIn 1s ease-out;
       overflow: hidden;
-      animation: popUp 0.8s ease-out, glassy 1s ease-in-out 0.5s forwards;
     }
 
-    /* Title bar like Windows XP */
+    /* Title bar */
     .title-bar {
-      height: 32px;
-      background: linear-gradient(to right, #4a90e2, #357ab7);
+      height: 36px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
       display: flex;
       align-items: center;
-      padding: 0 8px;
-      color: #fff;
-      font-weight: bold;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      padding: 0 12px;
+      position: relative;
     }
-    .title-bar .title { flex: 1; }
-    .title-bar .buttons { display: flex; }
-    .btn {
-      width: 16px; height: 16px;
-      margin-left: 8px;
+    .title-bar .title {
+      flex: 1;
+      color: #eee;
+      font-weight: 600;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+    }
+    /* Retro control circles */
+    .controls {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 2px;
-      background: rgba(255, 255, 255, 0.2);
-      cursor: pointer;
-      transition: background 0.2s;
+      gap: 6px;
     }
-    .btn:hover { background: rgba(255, 255, 255, 0.4); }
-    .btn.close:hover { background: #e81123; }
+    .control {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+    .close { background: #ff5f56; }
+    .min { background: #ffbd2e; }
+    .max { background: #27c93f; }
 
-    /* Content area */
+    /* Content */
     .content {
-      padding: 20px;
-      color: #f0f0f0;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+      padding: 24px;
+      color: #f8f8f8;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    }
+    .content h1 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+    .content p {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 16px;
     }
 
-    /* Action buttons */
+    /* Buttons */
     .actions {
       display: flex;
-      gap: 10px;
-      margin-top: 20px;
+      gap: 12px;
+      margin-top: 16px;
     }
     .action-btn {
-      padding: 10px 20px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 4px;
-      backdrop-filter: blur(5px);
-      background: rgba(255, 255, 255, 0.1);
+      flex: 1;
+      text-align: center;
+      padding: 10px 0;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(8px);
       color: #fff;
+      font-weight: 500;
       text-decoration: none;
-      cursor: pointer;
-      transition: background 0.3s, backdrop-filter 0.3s;
+      transition: background 0.2s, transform 0.2s;
     }
     .action-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
     }
 
     /* Animations */
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes popUp {
-      0% { transform: scale(0.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    @keyframes glassy {
-      from {
-        backdrop-filter: blur(0px);
-        background: rgba(255, 255, 255, 0.05);
-      }
-      to {
-        backdrop-filter: blur(10px);
-        background: rgba(255, 255, 255, 0.1);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
   <div class="window">
     <div class="title-bar">
-      <div class="title">NuvexaOS</div>
-      <div class="buttons">
-        <div class="btn minimize">&minus;</div>
-        <div class="btn maximize">&#9633;</div>
-        <div class="btn close">&times;</div>
+      <div class="controls">
+        <div class="control close"></div>
+        <div class="control min"></div>
+        <div class="control max"></div>
       </div>
+      <div class="title">NuvexaOS</div>
     </div>
     <div class="content">
       <h1>Welcome to NuvexaOS</h1>
-      <p>Experience the nostalgia of Windows XP with a modern, glassy twist.</p>
-      <p>Enjoy smooth animations and frosted-glass UI elements.</p>
+      <p>NuvexaOS blends classic Windows XP charm with modern, glass-like UI elements and smooth animations.</p>
       <div class="actions">
         <a href="#" class="action-btn">Download</a>
         <a href="#about" class="action-btn">About</a>

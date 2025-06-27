@@ -3,102 +3,116 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NuvexaOS — Clean but Cool</title>
+  <title>NuvexaOS — Space Edition</title>
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet" />
-  <!-- Animate.css -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <!-- Font + Animate.css -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
   <style>
-  /* ------------- Theme vars ------------- */
+  /* --------- THEME --------- */
   :root{
-    --accent:#5b7bff;
-    --accent-dark:#4764ff;
-    --txt:#222;
+    --accent:#6e8dff;
+    --accent-dark:#3d59ff;
+    --txt:#fff;
+    --bg:#000;
   }
 
-  /* ------------- Global reset ------------- */
+  /* --------- GLOBAL RESET --------- */
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   body{
     font-family:"Inter",sans-serif;
     color:var(--txt);
+    background:var(--bg);
     min-height:100vh;
     display:flex;flex-direction:column;
     overflow-x:hidden;
-    position:relative;               /* for ::before background */
   }
 
-  /* ------------- ✨ Animated gradient background ------------- */
-  body::before{
-    content:"";
-    position:fixed;inset:0;z-index:-2;
-    background:linear-gradient(120deg,#f0f4ff 0%,#e9f2ff 30%,#fff2f8 60%,#fffceb 100%);
-    background-size:400% 400%;
-    animation:bgShift 15s ease-in-out infinite;
+  /* --------- STARFIELD LAYERS --------- */
+  .stars,
+  .stars2,
+  .stars3{
+    position:fixed;
+    top:0;left:0;right:0;bottom:0;
+    z-index:-3;               /* behind everything */
+    background:transparent;
+    animation:moveStars 60s linear infinite;
   }
-  @keyframes bgShift{
-    0%,100%{background-position:0% 50%}
-    50%    {background-position:100% 50%}
+  .stars{background-image:radial-gradient(1px 1px at 50% 50%,#fff 50%,transparent 51%);}
+  .stars2{background-image:radial-gradient(1px 1px at 50% 50%,#fff 50%,transparent 51%);
+          animation-duration:120s;opacity:.6;}
+  .stars3{background-image:radial-gradient(1px 1px at 50% 50%,#fff 50%,transparent 51%);
+          animation-duration:180s;opacity:.3;}
+
+  /* tile the tiny star dot using background-size */
+  .stars,
+  .stars2,
+  .stars3{background-size:2px 2px;} /* dense star field */
+
+  @keyframes moveStars{
+    from{background-position:0 0;}
+    to  {background-position:-10000px 5000px;}
   }
 
-  /* subtle noise layer */
-  body::after{
-    content:"";
-    position:fixed;inset:0;z-index:-1;
-    background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+XMXkAAAAASUVORK5CYII=");
-    opacity:.25;
-    mix-blend-mode:overlay;
-  }
-
-  /* ------------- Nav ------------- */
+  /* --------- NAV --------- */
   header{
     position:fixed;top:0;left:0;width:100%;z-index:10;
-    backdrop-filter:blur(10px);
-    background:rgba(255,255,255,.9);
-    border-bottom:1px solid #e4e7ee;
+    backdrop-filter:blur(6px);
+    background:rgba(0,0,0,.6);
+    border-bottom:1px solid rgba(255,255,255,.08);
     padding:1.1rem 6vw;
     display:flex;justify-content:space-between;align-items:center;
   }
   .logo{font-weight:900;font-size:1.2rem;color:var(--accent);}
   nav a{
-    text-decoration:none;font-weight:600;color:var(--txt);
+    color:#ddd;text-decoration:none;font-weight:600;
     padding:.5rem 1rem;border-radius:8px;transition:background .25s;
   }
-  nav a:hover{background:#f1f3fa}
+  nav a:hover{background:rgba(255,255,255,.12)}
 
-  /* ------------- Hero ------------- */
+  /* --------- HERO --------- */
   .hero{
-    flex:1;
+    flex:1; /* pushes footer down */
     display:flex;flex-direction:column;justify-content:center;align-items:center;
     text-align:center;padding:0 8vw;gap:2rem;
   }
   h1{
-    font-size:clamp(2.5rem,7vw,4.5rem);font-weight:900;line-height:1.1;
+    font-size:clamp(2.5rem,7vw,4.5rem);
+    font-weight:900;line-height:1.1;
   }
   h1 span{color:var(--accent)}
   p.tagline{max-width:680px;font-size:1.15rem;opacity:.85}
   .cta-btn{
-    padding:.95rem 2.6rem;font-size:1.05rem;font-weight:700;
-    color:#fff;background:var(--accent);border:none;border-radius:12px;cursor:pointer;
-    box-shadow:0 8px 16px rgba(91,123,255,.25);
+    padding:.95rem 2.6rem;font-size:1.05rem;font-weight:700;cursor:pointer;
+    border:none;border-radius:12px;
+    background:var(--accent);
+    color:#fff;
+    box-shadow:0 6px 14px rgba(110,141,255,.35);
     transition:.25s;
   }
   .cta-btn:hover{
     transform:translateY(-3px);
-    box-shadow:0 12px 24px rgba(91,123,255,.35);
+    box-shadow:0 10px 22px rgba(110,141,255,.45);
     background:var(--accent-dark);
   }
 
-  /* ------------- Footer ------------- */
+  /* --------- FOOTER --------- */
   footer{
-    text-align:center;padding:1rem 8vw;font-size:.85rem;color:#666;
-    border-top:1px solid #e4e7ee;margin-top:auto;
-    background:rgba(255,255,255,.9);backdrop-filter:blur(10px);
+    text-align:center;padding:1rem 8vw;
+    font-size:.85rem;color:#aaa;
+    border-top:1px solid rgba(255,255,255,.08);
+    background:rgba(0,0,0,.6);backdrop-filter:blur(6px);
+    margin-top:auto;            /* pin to bottom */
   }
   </style>
 </head>
 <body>
+
+  <!-- Starfield layers -->
+  <div class="stars"></div>
+  <div class="stars2"></div>
+  <div class="stars3"></div>
 
   <!-- Nav -->
   <header class="animate__animated animate__fadeInDown">
@@ -111,7 +125,7 @@
     <h1 class="animate__animated animate__fadeInUp">Your computer, <span>reborn</span>.</h1>
     <p class="tagline animate__animated animate__fadeInUp animate__delay-1s">
       NuvexaOS boots in seconds, isolates every process for zero-trust security,<br>
-      and gives you a sleek, distraction-free workspace.
+      and gives you a sleek workspace among the stars.
     </p>
     <button class="cta-btn animate__animated animate__fadeInUp animate__delay-2s">
       Download&nbsp;Beta&nbsp;ISO
@@ -119,7 +133,7 @@
   </section>
 
   <!-- Footer -->
-  <footer>© 2025 Nuvexa Labs · Built with ❤️ and clean design</footer>
+  <footer>© 2025 Nuvexa Labs · Built with ❤️ in the cosmos</footer>
 
 </body>
 </html>

@@ -1,72 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>NuvexaOS — Help & Docs</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NuvexaOS — Help & Docs</title>
 
-<!-- Font + Animate.css -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <!-- Favicon + social-share preview -->
+  <link rel="icon" type="image/png"
+        href="https://raw.githubusercontent.com/NuvexaOS/NuvexaOS.github.io/refs/heads/main/OS.png">
+  <meta property="og:image"
+        content="https://raw.githubusercontent.com/NuvexaOS/NuvexaOS.github.io/refs/heads/main/OS.png">
 
-<style>
-/* ---------- THEME ---------- */
-:root{--accent:#5f7cff;--accent-dark:#374eff;--txt:#fff;}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:"Inter",sans-serif;color:var(--txt);
-  background:#000;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;
-}
+  <!-- Fonts & Animate.css -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-/* ---------- NEBULA BLOBS (same as index) ---------- */
-body::before,body::after{
-  content:"";position:fixed;z-index:-4;pointer-events:none;
-  width:80vmax;height:80vmax;border-radius:50%;
-  filter:blur(120px) saturate(140%);
-  transform:translate(-40%,-40%);
-}
-body::before{top:0;left:0;background:radial-gradient(circle at 30% 30%,#7a2eff 0%,#0047ff 60%,transparent 80%);}
-body::after{bottom:-20vmax;right:-20vmax;background:radial-gradient(circle at 70% 70%,#00ffd5 0%,#0089ff 50%,transparent 80%);}
+  <style>
+  /* ── THEME ── */
+  :root{--accent:#5f7cff;--accent-dark:#374eff;--txt:#fff;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Inter",sans-serif;color:var(--txt);
+    background:#000;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;
+  }
 
-/* ---------- STAR CANVAS ---------- */
-#starCanvas{position:fixed;inset:0;z-index:-3;pointer-events:none}
+  /* ── NEBULA BLOBS ── */
+  body::before,body::after{
+    content:"";position:fixed;z-index:-4;pointer-events:none;
+    width:80vmax;height:80vmax;border-radius:50%;
+    filter:blur(120px) saturate(140%);transform:translate(-40%,-40%);
+  }
+  body::before{top:0;left:0;background:radial-gradient(circle at 30% 30%,#7a2eff 0%,#0047ff 60%,transparent 80%);}
+  body::after{bottom:-20vmax;right:-20vmax;background:radial-gradient(circle at 70% 70%,#00ffd5 0%,#0089ff 50%,transparent 80%);}
 
-/* ---------- NAV ---------- */
-header{
-  position:fixed;top:0;left:0;width:100%;z-index:10;
-  padding:1.2rem 6vw;display:flex;justify-content:space-between;align-items:center;background:transparent;
-}
-.logo{font-weight:900;font-size:1.2rem;color:var(--accent);}
-nav a{
-  color:#ccc;text-decoration:none;font-weight:600;padding:.45rem 1rem;border-radius:8px;transition:background .25s;
-}
-nav a.active{background:rgba(255,255,255,.25)}
-nav a:hover{background:rgba(255,255,255,.2)}
+  /* ── STAR CANVAS ── */
+  #starCanvas{position:fixed;inset:0;z-index:-3;pointer-events:none}
 
-/* ---------- MAIN ---------- */
-main{flex:1;padding:8rem 8vw 4rem;display:grid;gap:4rem;max-width:1000px;margin:auto;}
-section h2{font-size:2rem;margin-bottom:1rem;color:var(--accent);}
-section p,li{line-height:1.6;font-size:1.05rem;opacity:.9}
+  /* ── NAV ── */
+  header{
+    position:fixed;top:0;left:0;width:100%;z-index:10;
+    padding:1.2rem 6vw;display:flex;justify-content:space-between;align-items:center;background:transparent;
+  }
+  .logo{font-weight:900;font-size:1.2rem;color:var(--accent);}
+  nav a{
+    color:#ccc;text-decoration:none;font-weight:600;
+    padding:.45rem 1rem;border-radius:8px;transition:background .25s;
+  }
+  nav a.active{background:rgba(255,255,255,.25)}
+  nav a:hover{background:rgba(255,255,255,.2)}
 
-/* Lists */
-ul.check{list-style:none;padding-left:0}
-ul.check li::before{content:"✔";margin-right:.6rem;color:#0f0}
+  /* ── MAIN CONTENT ── */
+  main{flex:1;padding:8rem 8vw 4rem;max-width:1000px;margin:auto;display:grid;gap:4rem;}
+  section h2{font-size:2rem;margin-bottom:1rem;color:var(--accent);}
+  section p,li{line-height:1.6;font-size:1.05rem;opacity:.9}
+  ul.check{list-style:none;padding-left:0}
+  ul.check li::before{content:"✔";margin-right:.6rem;color:#0f0}
 
-/* ---------- ACCORDION FAQ ---------- */
-details{background:rgba(255,255,255,.05);border-radius:8px;padding:1rem 1.4rem;}
-details+details{margin-top:1rem;}
-details summary{cursor:pointer;font-weight:600;font-size:1.05rem;outline:none;}
-details[open]{box-shadow:0 0 0 1px rgba(255,255,255,.2);}
-details p{margin-top:.8rem;}
+  /* Accordion FAQ */
+  details{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:1rem 1.4rem;}
+  details+details{margin-top:1rem}
+  details summary{cursor:pointer;font-weight:600;font-size:1.05rem;outline:none}
+  details[open]{box-shadow:0 0 0 1px rgba(255,255,255,.2)}
+  details p{margin-top:.8rem}
 
-/* ---------- RETURN TOP LINK ---------- */
-.top-link{text-align:center;margin:3rem 0 1rem;font-size:.9rem;}
-.top-link a{color:#ccc;text-decoration:none;border-bottom:1px dashed #ccc;}
-.top-link a:hover{color:#fff;border-color:#fff}
+  /* Back-to-top */
+  .top-link{text-align:center;margin:3rem 0 1rem;font-size:.9rem;}
+  .top-link a{color:#ccc;text-decoration:none;border-bottom:1px dashed #ccc;}
+  .top-link a:hover{color:#fff;border-color:#fff}
 
-/* ---------- FOOTER ---------- */
-footer{text-align:center;padding:1rem 8vw;font-size:.85rem;color:#aaa;background:transparent;border-top:1px solid rgba(255,255,255,.15);}
-</style>
+  /* Footer */
+  footer{text-align:center;padding:1rem 8vw;font-size:.85rem;color:#aaa;margin-top:auto;background:transparent;border-top:1px solid rgba(255,255,255,.15);}
+  </style>
 </head>
 <body>
 
@@ -77,52 +81,50 @@ footer{text-align:center;padding:1rem 8vw;font-size:.85rem;color:#aaa;background
   <div class="logo">NuvexaOS</div>
   <nav>
     <a href="index.html">Home</a>
+    <a href="features.html">Features</a>
     <a href="help.html" class="active">Help</a>
   </nav>
 </header>
 
-<!-- MAIN CONTENT -->
+<!-- MAIN -->
 <main>
-  <!-- INTRO -->
+  <!-- Intro -->
   <section class="animate__animated animate__fadeInUp">
     <h2>Welcome to the NuvexaOS Help Center 👋</h2>
-    <p>
-      This page walks you through installation, core concepts, tips & tricks, and troubleshooting.
-      Whether you’re a casual user or a power tweaker, you’ll find answers here.
-    </p>
+    <p>This page walks you through installation, core concepts, tips &amp; tricks, and troubleshooting.</p>
   </section>
 
-  <!-- QUICK START -->
-  <section class="animate__animated animate__fadeInUp animate__delay-1s" id="quickstart">
+  <!-- Quick Start -->
+  <section class="animate__animated animate__fadeInUp animate__delay-1s">
     <h2>🚀 Quick Start</h2>
     <ol>
-      <li><b>Download the ISO</b> from the <i>Home</i> page.</li>
-      <li><b>Flash it</b> to a USB drive (we recommend <a style="color:#8cf" href="https://www.balena.io/etcher/">Etcher</a>).</li>
-      <li>Boot your PC from USB &rarr; select <b>“Install NuvexaOS”</b>.</li>
-      <li>Follow the wizard: choose disk&nbsp;↔&nbsp;username&nbsp;↔&nbsp;password.</li>
-      <li>Reboot &amp; enjoy your new cosmic desktop ✨.</li>
+      <li><b>Download the ISO</b> from the Home page.</li>
+      <li><b>Flash</b> it to USB (e.g. via <a style="color:#8cf" href="https://www.balena.io/etcher/">Etcher</a>).</li>
+      <li>Boot and select <b>Install NuvexaOS</b>.</li>
+      <li>Follow the installer (disk → user → password).</li>
+      <li>Reboot &amp; enjoy your cosmic desktop ✨.</li>
     </ol>
   </section>
 
-  <!-- CORE CONCEPTS -->
+  <!-- Core Concepts -->
   <section class="animate__animated animate__fadeInUp animate__delay-2s">
     <h2>🧠 Core Concepts</h2>
     <ul class="check">
-      <li><b>Micro-kernel&nbsp;2.0</b> — drivers/userspace are isolated; crashes never kill the OS.</li>
-      <li><b>Container-first apps</b> — each GUI app ships in its own sandbox for zero-trust security.</li>
-      <li><b>Hot-patching</b> — system libraries update without reboot (finally!).</li>
-      <li><b>Adaptive UI</b> — light, dark, or full neon detected by ambient-light sensor.</li>
+      <li><b>Micro-kernel 2.0</b> — drivers &amp; services stay sandboxed.</li>
+      <li><b>Container-first apps</b> — zero-trust security by default.</li>
+      <li><b>Hot-patching</b> — update system libs without reboot.</li>
+      <li><b>Adaptive UI</b> — theme shifts with ambient light.</li>
     </ul>
   </section>
 
-  <!-- POWER TIPS -->
+  <!-- Power Tips -->
   <section class="animate__animated animate__fadeInUp animate__delay-3s">
     <h2>⚡ Power Tips</h2>
     <ul class="check">
-      <li><kbd>Super + Space</kbd> toggles color-themes instantly.</li>
-      <li><kbd>Super + H/J/K/L</kbd> tiling manager moves windows à la Vim.</li>
-      <li><b>Snapshot Manager</b> in Settings &rarr; Backup &amp; Rollback like Time Machine.</li>
-      <li><b>Nux CLI</b> lets you script install apps: <code>nux install blender</code>.</li>
+      <li><kbd>Super + Space</kbd> toggles color themes.</li>
+      <li><kbd>Super + H/J/K/L</kbd> moves windows like Vim.</li>
+      <li><b>Snapshot Manager</b> = one-click rollback.</li>
+      <li><b>Nux CLI</b>: <code>nux install blender</code>.</li>
     </ul>
   </section>
 
@@ -130,55 +132,27 @@ footer{text-align:center;padding:1rem 8vw;font-size:.85rem;color:#aaa;background
   <section class="animate__animated animate__fadeInUp animate__delay-4s">
     <h2>❓ FAQ</h2>
 
-    <details>
-      <summary>Does NuvexaOS work on my old laptop?</summary>
-      <p>
-        If it can boot from a 64-bit UEFI stick and has at least 4 GB of RAM, you’re good. The kernel
-        scales down gracefully for older CPUs (SSE4.2 or newer).
-      </p>
-    </details>
-
-    <details>
-      <summary>Can I dual-boot with Windows or Linux?</summary>
-      <p>
-        Yep! The installer detects existing OSes and adds them to the COSMOS boot menu automatically.
-        Just be sure to <b>shrink</b> an existing partition first or have free space.
-      </p>
-    </details>
-
-    <details>
-      <summary>How do I update?</summary>
-      <p>
-        Updates arrive OTA weekly. You’ll get a toast; click “Apply”. Hot-patching means no reboot
-        unless a GPU driver changes.
-      </p>
-    </details>
-
-    <details>
-      <summary>I broke something. How do I recover?</summary>
-      <p>
-        Boot while holding <kbd>Shift</kbd> → choose <b>“Rollback”</b>. Pick any snapshot from the last 30 days.
-        Your personal files stay intact.
-      </p>
-    </details>
+    <details><summary>Does it run on old hardware?</summary><p>If it’s 64-bit UEFI and 4 GB RAM you’re good; SSE4.2 CPU or newer.</p></details>
+    <details><summary>Dual-boot support?</summary><p>Yes—installer detects other OSes and adds them to the boot menu.</p></details>
+    <details><summary>How do I update?</summary><p>OTA weekly patches; hot-patching means reboots are rare.</p></details>
+    <details><summary>I broke something. Recovery?</summary><p>Hold <kbd>Shift</kbd> during boot → choose a snapshot—your data stays.</p></details>
   </section>
 
-  <!-- RETURN TOP -->
+  <!-- Back to top -->
   <div class="top-link"><a href="#">↑ Back to top</a></div>
 </main>
 
 <!-- FOOTER -->
-<footer>© 2025 NuvexaOS - 2024</footer>
+<footer>© 2025 Nuvexa Labs · Built with ❤️ and star-dust</footer>
 
-<!-- ---------- JS: same star & shooting-star engine as index ---------- -->
+<!-- ── JS: stars + shooters (same engine as index) ── -->
 <script>
-const canvas = document.getElementById('starCanvas');
-const ctx    = canvas.getContext('2d');
-let w,h,stars=[],shooters=[];function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}
-addEventListener('resize',resize);resize();
-class Star{constructor(){this.reset()}reset(){this.x=Math.random()*w;this.y=Math.random()*h;this.s=Math.random()<.7?1:2;this.sp=.02+Math.random()*.05;this.al=.3+Math.random()*.7;this.t=0}upd(){this.x-=this.sp;this.y+=this.sp;if(this.x<0||this.y>h){this.x=Math.random()*w;this.y=0}this.t+=.05;this.al=.4+.3*Math.sin(this.t)}draw(){ctx.globalAlpha=this.al;ctx.fillStyle='#fff';ctx.fillRect(this.x,this.y,this.s,this.s)}}class Shoot{constructor(){this.reset()}reset(){this.x=Math.random()*w*0.8+w*.2;this.y=-20;this.len=150+Math.random()*120;this.sp=4+Math.random()*3;this.t=[];this.life=0;this.max=120}upd(){this.life++;this.x-=this.sp;this.y+=this.sp;this.t.push({x:this.x,y:this.y,l:0});this.t.forEach(e=>e.l++);if(this.t.length>10)this.t.shift();if(this.y>h+this.len||this.life>this.max)this.reset()}draw(){ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(this.x,this.y);ctx.lineTo(this.x-this.len*.2,this.y-this.len*.2);ctx.stroke();ctx.lineWidth=1;this.t.forEach(e=>{ctx.globalAlpha=1-e.l/10;ctx.beginPath();ctx.moveTo(e.x,e.y);ctx.lineTo(e.x-this.len*.2,e.y-this.len*.2);ctx.stroke()});ctx.globalAlpha=1}}
-function init(){stars=Array.from({length:160},()=>new Star());shooters=[new Shoot()]}init();
-function anim(){ctx.clearRect(0,0,w,h);stars.forEach(s=>{s.upd();s.draw()});if(Math.random()<.004&&shooters.length<3)shooters.push(new Shoot());shooters.forEach(s=>{s.upd();s.draw()});requestAnimationFrame(anim)}anim();
+const c=document.getElementById('starCanvas'),x=c.getContext('2d');let w,h,S=[],F=[];
+function R(){w=c.width=innerWidth;h=c.height=innerHeight}addEventListener('resize',R);R();
+class P{constructor(){this.q()}q(){this.X=Math.random()*w;this.Y=Math.random()*h;this.z=Math.random()<.7?1:2;this.v=.02+Math.random()*.05;this.t=0}u(){this.X-=this.v;this.Y+=this.v;if(this.X<0||this.Y>h){this.X=Math.random()*w;this.Y=0}this.t+=.05;this.a=.4+.3*Math.sin(this.t)}d(){x.globalAlpha=this.a;x.fillStyle='#fff';x.fillRect(this.X,this.Y,this.z,this.z)}}
+class L{constructor(){this.q()}q(){this.X=Math.random()*w*.8+w*.2;this.Y=-20;this.L=150+Math.random()*120;this.v=4+Math.random()*3;this.T=[];this.l=0;this.M=120}u(){this.l++;this.X-=this.v;this.Y+=this.v;this.T.push({X:this.X,Y:this.Y,l:0});this.T.forEach(t=>t.l++);if(this.T.length>10)this.T.shift();if(this.Y>h+this.L||this.l>this.M)this.q()}d(){x.strokeStyle='#fff';x.lineWidth=2;x.beginPath();x.moveTo(this.X,this.Y);x.lineTo(this.X-this.L*.2,this.Y-this.L*.2);x.stroke();x.lineWidth=1;this.T.forEach(t=>{x.globalAlpha=1-t.l/10;x.beginPath();x.moveTo(t.X,t.Y);x.lineTo(t.X-this.L*.2,t.Y-this.L*.2);x.stroke()});x.globalAlpha=1}}
+function init(){S=Array.from({length:160},()=>new P());F=[new L()]}init();
+(function anim(){x.clearRect(0,0,w,h);S.forEach(s=>{s.u();s.d()});if(Math.random()<.004&&F.length<3)F.push(new L());F.forEach(f=>{f.u();f.d()});requestAnimationFrame(anim)})();
 </script>
 
 </body>

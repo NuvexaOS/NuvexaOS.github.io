@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NuvexaOS — Quick-Start</title>
+
+  <!-- Favicon + social banner -->
+  <link rel="icon" type="image/png"
+        href="https://raw.githubusercontent.com/NuvexaOS/NuvexaOS.github.io/refs/heads/main/OS.png">
+  <meta property="og:image"
+        content="https://raw.githubusercontent.com/NuvexaOS/NuvexaOS.github.io/refs/heads/main/View.png">
+  <meta name="twitter:card"  content="summary_large_image">
+
+  <!-- Fonts + Animate.css -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <style>
+  :root{--accent:#5f7cff;--accent-dark:#374eff;--txt:#fff;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Inter",sans-serif;color:var(--txt);background:#000;
+       min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;}
+
+  /* nebula */
+  body::before,body::after{content:"";position:fixed;z-index:-4;pointer-events:none;
+    width:80vmax;height:80vmax;border-radius:50%;filter:blur(120px) saturate(140%);
+    transform:translate(-40%,-40%);}
+  body::before{top:0;left:0;background:radial-gradient(circle at 30% 30%,#7a2eff 0%,#0047ff 60%,transparent 80%);}
+  body::after{bottom:-20vmax;right:-20vmax;background:radial-gradient(circle at 70% 70%,#00ffd5 0%,#0089ff 50%,transparent 80%);}
+
+  #starCanvas{position:fixed;inset:0;z-index:-3;pointer-events:none}
+
+  /* nav */
+  header{position:fixed;top:0;left:0;width:100%;z-index:10;
+         padding:1.2rem 6vw;display:flex;justify-content:space-between;align-items:center;}
+  .logo{font-weight:900;font-size:1.2rem;color:var(--accent);}
+  nav a{color:#ccc;text-decoration:none;font-weight:600;
+        padding:.45rem 1rem;border-radius:8px;transition:background .25s;}
+  nav a:hover{background:rgba(255,255,255,.2)}
+  nav a.active{background:rgba(255,255,255,.25)}
+
+  /* content */
+  main{flex:1;max-width:900px;margin:8rem auto 4rem;padding:0 8vw;display:grid;gap:3.5rem;}
+  h1{font-size:clamp(2.4rem,6vw,3.6rem);font-weight:900;text-align:center;margin-bottom:1rem;}
+  h1 span{color:var(--accent)}
+  section h2{font-size:1.8rem;margin-bottom:.8rem;color:var(--accent);}
+  section p,li{font-size:1.05rem;line-height:1.6;opacity:.9}
+
+  ul.check{list-style:none;padding-left:0}
+  ul.check li::before{content:"✔";margin-right:.55rem;color:#0f0}
+
+  footer{text-align:center;padding:1rem 8vw;font-size:.85rem;color:#aaa;
+         border-top:1px solid rgba(255,255,255,.15);}
+  </style>
+</head>
+<body>
+
+<canvas id="starCanvas"></canvas>
+
+<header class="animate__animated animate__fadeInDown">
+  <div class="logo">NuvexaOS</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="features.html">Features</a>
+    <a href="quickstart.html" class="active">Quick-Start</a>
+    <a href="help.html">Help</a>
+  </nav>
+</header>
+
+<main class="animate__animated animate__fadeInUp">
+  <h1>Install <span>NuvexaOS</span> in 10 Minutes</h1>
+
+  <!-- Requirements -->
+  <section>
+    <h2>🛠 What you need</h2>
+    <ul class="check">
+      <li>64-bit CPU with SSE4.2 (2010-era or newer)</li>
+      <li>4 GB RAM (min 8 GB recommended)</li>
+      <li>8 GB USB 3.0 drive (will be erased)</li>
+      <li>ISO image from our <a style="color:#8cf" href="index.html#download">Download link</a></li>
+    </ul>
+  </section>
+
+  <!-- Flashing -->
+  <section>
+    <h2>💾 Flash the USB</h2>
+    <p>Pick <b>one</b> of these free tools:</p>
+    <ul class="check">
+      <li><b>balenaEtcher</b> (Win/macOS/Linux) — simplest 3-click workflow.</li>
+      <li><b>Rufus</b> (Windows only) — more options (UEFI, GPT, Secure Boot).</li>
+      <li><b>Ventoy</b> (advanced) — multi-ISO stick; just copy &amp; boot.</li>
+    </ul>
+    <p>Write the ISO → safely eject the USB.</p>
+  </section>
+
+  <!-- BIOS / Boot -->
+  <section>
+    <h2>🚀 Boot from USB</h2>
+    <ul class="check">
+      <li>Enter BIOS/UEFI (<kbd>F2</kbd>/<kbd>Del</kbd>/<kbd>F12</kbd> at power-on).</li>
+      <li>Set USB as first boot device.</li>
+      <li>🛈 If Secure Boot blocks the stick, disable Secure Boot temporarily.</li>
+    </ul>
+  </section>
+
+  <!-- Installer -->
+  <section>
+    <h2>🖥 Installer wizard</h2>
+    <ol>
+      <li>Select language &amp; keyboard.</li>
+      <li>Pick target disk (or custom partition setup).</li>
+      <li>Enter username &amp; password.</li>
+      <li>Click <b>Install</b>. Copying files takes ~2 min on SSD.</li>
+      <li>Remove USB → Reboot → Done!</li>
+    </ol>
+  </section>
+
+  <!-- Troubleshooting -->
+  <section>
+    <h2>🩺 Troubleshooting</h2>
+    <details><summary>No USB boot option?</summary><p>Enable “Legacy USB” or “UEFI USB” in BIOS. Some laptops list the stick only under “Hard Drive BBS Priorities”.</p></details>
+    <details><summary>Black screen after install</summary><p>Hold <kbd>Shift</kbd> at boot → pick “Safe Mode” → run <code>nux-driver --gpu</code> to switch to generic drivers, then reboot.</p></details>
+  </section>
+</main>
+
+<footer>© 2025 Nuvexa Labs · Reach the stars</footer>
+
+<!-- Starfield JS (same engine) -->
+<script>
+const c=document.getElementById('starCanvas'),x=c.getContext('2d');let W,H,S=[],M=[];
+function sz(){W=c.width=innerWidth;H=c.height=innerHeight}addEventListener('resize',sz);sz();
+class Star{constructor(){this.r()}r(){this.x=Math.random()*W;this.y=Math.random()*H;this.s=Math.random()<.7?1:2;this.v=.02+Math.random()*.05;this.t=0}
+u(){this.x-=this.v;this.y+=this.v;if(this.x<0||this.y>H){this.x=Math.random()*W;this.y=0}this.t+=.05;this.a=.4+.3*Math.sin(this.t)}
+d(){x.globalAlpha=this.a;x.fillStyle='#fff';x.fillRect(this.x,this.y,this.s,this.s)}}
+class Shot{constructor(){this.r()}r(){this.x=Math.random()*W*.8+W*.2;this.y=-20;this.l=150+Math.random()*120;this.v=4+Math.random()*3;this.T=[];this.a=0;this.m=120}
+u(){this.a++;this.x-=this.v;this.y+=this.v;this.T.push({x:this.x,y:this.y,a:0});this.T.forEach(t=>t.a++);if(this.T.length>10)this.T.shift();if(this.y>H+this.l||this.a>this.m)this.r()}
+d(){x.strokeStyle='#fff';x.lineWidth=2;x.beginPath();x.moveTo(this.x,this.y);x.lineTo(this.x-this.l*.2,this.y-this.l*.2);x.stroke();
+  x.lineWidth=1;this.T.forEach(t=>{x.globalAlpha=1-t.a/10;x.beginPath();x.moveTo(t.x,t.y);x.lineTo(t.x-this.l*.2,t.y-this.l*.2);x.stroke()});x.globalAlpha=1}}
+(function init(){S=Array.from({length:160},()=>new Star());M=[new Shot()]})();
+(function loop(){x.clearRect(0,0,W,H);S.forEach(s=>{s.u();s.d()});
+  if(Math.random()<.004&&M.length<3)M.push(new Shot());
+  M.forEach(m=>{m.u();m.d()});requestAnimationFrame(loop)})();
+</script>
+</body>
+</html>

@@ -3,84 +3,49 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>NuvexaOS — Starfield (Fixed)</title>
+<title>NuvexaOS — Twinkling Starfield</title>
 
 <!-- Font & Animate.css -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
 <style>
-/* ── THEME ── */
+/* ───── THEME ───── */
 :root{
   --accent:#5f7cff;
   --accent-dark:#374eff;
   --txt:#fff;
 }
-
-/* ── RESET / LAYOUT ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{
-  font-family:"Inter",sans-serif;
-  color:var(--txt);
-  background:#000;                /* TRUE BLACK */
-  min-height:100vh;
-  display:flex;flex-direction:column;
-  overflow-x:hidden;
+  font-family:"Inter",sans-serif;color:var(--txt);
+  background:#000;                    /* true black */
+  min-height:100vh;display:flex;flex-direction:column;overflow:hidden;
 }
 
-/* ── SPARSE STARFIELD ── */
-.star-layer{
-  position:fixed;inset:0;z-index:-3;pointer-events:none;
-  animation:drift linear infinite;
+/* ───── STAR CONTAINER & STAR STYLE ───── */
+#stars-wrapper{position:fixed;inset:0;z-index:-3;pointer-events:none;}
+.star{
+  position:absolute;border-radius:50%;
+  background:#fff;
+  animation:twinkle linear infinite;
+}
+@keyframes twinkle{
+  0%,100%{opacity:.8;transform:scale(1);}
+  50%   {opacity:.1;transform:scale(.5);}
 }
 
-/* layer 1 – tiny dots, far apart */
-.star-layer.l1{
-  background:
-    radial-gradient(1px 1px at 50% 50%, #ffffff 100%, transparent 0);
-  background-size:120px 120px;     /* sparse */
-  opacity:0.55;
-  animation-duration:180s;
-}
-
-/* layer 2 – medium stars */
-.star-layer.l2{
-  background:
-    radial-gradient(2px 2px at 50% 50%, #ffffff 100%, transparent 0);
-  background-size:200px 200px;
-  opacity:0.35;
-  animation-duration:240s;
-}
-
-/* layer 3 – a few bigger bright stars */
-.star-layer.l3{
-  background:
-    radial-gradient(3px 3px at 50% 50%, #ffffff 100%, transparent 0);
-  background-size:350px 350px;
-  opacity:0.25;
-  animation-duration:300s;
-}
-
-@keyframes drift{
-  from{transform:translate3d(0,0,0)}
-  to  {transform:translate3d(-3000px,1500px,0)}
-}
-
-/* ── NAV ── */
+/* ───── NAV ───── */
 header{
   position:fixed;top:0;left:0;width:100%;z-index:10;
-  padding:1.2rem 6vw;
-  display:flex;justify-content:space-between;align-items:center;
+  padding:1.2rem 6vw;display:flex;justify-content:space-between;align-items:center;
   background:transparent;
 }
 .logo{font-weight:900;font-size:1.2rem;color:var(--accent);}
-nav a{
-  color:#ccc;text-decoration:none;font-weight:600;
-  padding:.45rem 1rem;border-radius:8px;transition:background .25s;
-}
+nav a{color:#ccc;text-decoration:none;font-weight:600;padding:.45rem 1rem;border-radius:8px;transition:background .25s;}
 nav a:hover{background:rgba(255,255,255,.2)}
 
-/* ── HERO ── */
+/* ───── HERO ───── */
 .hero{
   flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;
   text-align:center;padding:0 8vw;gap:2.2rem;
@@ -90,29 +55,18 @@ h1 span{color:var(--accent)}
 p.tagline{max-width:680px;font-size:1.15rem;opacity:.85}
 .cta-btn{
   padding:1rem 2.6rem;font-size:1.05rem;font-weight:700;border:none;border-radius:12px;cursor:pointer;
-  background:var(--accent);color:#fff;
-  box-shadow:0 6px 14px rgba(95,124,255,.4);transition:.25s;
+  background:var(--accent);color:#fff;box-shadow:0 6px 14px rgba(95,124,255,.4);transition:.25s;
 }
-.cta-btn:hover{
-  transform:translateY(-4px);
-  background:var(--accent-dark);
-  box-shadow:0 10px 24px rgba(95,124,255,.5);
-}
+.cta-btn:hover{transform:translateY(-4px);background:var(--accent-dark);box-shadow:0 10px 24px rgba(95,124,255,.5);}
 
-/* ── FOOTER ── */
-footer{
-  text-align:center;padding:1rem 8vw;font-size:.85rem;color:#aaa;
-  margin-top:auto;border-top:1px solid rgba(255,255,255,.15);
-  background:transparent;
-}
+/* ───── FOOTER ───── */
+footer{text-align:center;padding:1rem 8vw;font-size:.85rem;color:#aaa;margin-top:auto;background:transparent;border-top:1px solid rgba(255,255,255,.15);}
 </style>
 </head>
 <body>
 
-<!-- ★ Star layers -->
-<div class="star-layer l1"></div>
-<div class="star-layer l2"></div>
-<div class="star-layer l3"></div>
+<!-- ★ dynamic starfield container -->
+<div id="stars-wrapper"></div>
 
 <!-- Nav -->
 <header class="animate__animated animate__fadeInDown">
@@ -134,6 +88,32 @@ footer{
 
 <!-- Footer -->
 <footer>© 2025 Nuvexa Labs · Built with ❤️ in the cosmos</footer>
+
+<!-- ───── JS: generate & animate stars ───── -->
+<script>
+(function makeStars(){
+  const wrapper = document.getElementById('stars-wrapper');
+  const STAR_COUNT = 200;                    // overall density
+  const sizes = [1,2,2,3];                   // mix of radii (bias towards small)
+  for(let i=0;i<STAR_COUNT;i++){
+    const s = document.createElement('div');
+    const radius = sizes[Math.floor(Math.random()*sizes.length)];
+    const duration = 4 + Math.random()*6;    // 4-10 s twinkle cycle
+    const delay = Math.random()*10;          // random offset
+    s.className = 'star';
+    s.style.width = s.style.height = radius + 'px';
+    s.style.left = Math.random()*100 + 'vw';
+    s.style.top  = Math.random()*100 + 'vh';
+    s.style.animationDuration = duration + 's';
+    s.style.animationDelay = -delay + 's';   // start at random phase
+    // 10 % of stars get a faint blue or yellow tint
+    const tintChance = Math.random();
+    if(tintChance<.05)      s.style.background = '#88aaff';
+    else if(tintChance<.10) s.style.background = '#ffd9a3';
+    wrapper.appendChild(s);
+  }
+})();
+</script>
 
 </body>
 </html>

@@ -1,138 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Help & Contact — NuvexaOS</title>
-  <link rel="icon" href="https://raw.githubusercontent.com/NuvexaOS/NuvexaOS.github.io/refs/heads/main/guest.png" />
-  <style>
-    :root {
-      --text: #ffffff;
-      --accent: #00d4ff;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NuvexaOS — Help & Docs</title>
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-    }
+<!-- Font + Animate.css -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-    body {
-      height: 100vh;
-      background: url("https://www.wallpaperhub.app/_next/image?url=https%3A%2F%2Fcdn.wallpaperhub.app%2Fcloudcache%2Fb%2Fd%2F7%2F6%2F4%2Fb%2Fbd764bb25d49a05105060185774ba14cd2c846f7.jpg&w=4500&q=100") no-repeat center center fixed;
-      background-size: cover;
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
+<style>
+/* ---------- THEME ---------- */
+:root{--accent:#5f7cff;--accent-dark:#374eff;--txt:#fff;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"Inter",sans-serif;color:var(--txt);
+  background:#000;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;
+}
 
-    h1 {
-      font-size: 3rem;
-      background: linear-gradient(90deg, var(--accent), #ff00ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: fadeIn 1s ease-out;
-    }
+/* ---------- NEBULA BLOBS (same as index) ---------- */
+body::before,body::after{
+  content:"";position:fixed;z-index:-4;pointer-events:none;
+  width:80vmax;height:80vmax;border-radius:50%;
+  filter:blur(120px) saturate(140%);
+  transform:translate(-40%,-40%);
+}
+body::before{top:0;left:0;background:radial-gradient(circle at 30% 30%,#7a2eff 0%,#0047ff 60%,transparent 80%);}
+body::after{bottom:-20vmax;right:-20vmax;background:radial-gradient(circle at 70% 70%,#00ffd5 0%,#0089ff 50%,transparent 80%);}
 
-    .form-container {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      padding: 2rem;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 500px;
-      margin-top: 2rem;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-      animation: fadeIn 2s ease-out;
-    }
+/* ---------- STAR CANVAS ---------- */
+#starCanvas{position:fixed;inset:0;z-index:-3;pointer-events:none}
 
-    input, textarea {
-      width: 100%;
-      padding: 0.8rem;
-      margin: 0.5rem 0;
-      border: none;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      font-size: 1rem;
-      outline: none;
-    }
+/* ---------- NAV ---------- */
+header{
+  position:fixed;top:0;left:0;width:100%;z-index:10;
+  padding:1.2rem 6vw;display:flex;justify-content:space-between;align-items:center;background:transparent;
+}
+.logo{font-weight:900;font-size:1.2rem;color:var(--accent);}
+nav a{
+  color:#ccc;text-decoration:none;font-weight:600;padding:.45rem 1rem;border-radius:8px;transition:background .25s;
+}
+nav a.active{background:rgba(255,255,255,.25)}
+nav a:hover{background:rgba(255,255,255,.2)}
 
-    textarea {
-      resize: vertical;
-      height: 120px;
-    }
+/* ---------- MAIN ---------- */
+main{flex:1;padding:8rem 8vw 4rem;display:grid;gap:4rem;max-width:1000px;margin:auto;}
+section h2{font-size:2rem;margin-bottom:1rem;color:var(--accent);}
+section p,li{line-height:1.6;font-size:1.05rem;opacity:.9}
 
-    .btn {
-      padding: 0.8rem 2rem;
-      margin-top: 1rem;
-      border-radius: 10px;
-      border: none;
-      font-weight: bold;
-      color: white;
-      cursor: pointer;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(12px);
-      transition: 0.3s;
-    }
+/* Lists */
+ul.check{list-style:none;padding-left:0}
+ul.check li::before{content:"✔";margin-right:.6rem;color:#0f0}
 
-    .btn:hover {
-      background: rgba(255, 255, 255, 0.25);
-      box-shadow: 0 0 12px white;
-      transform: scale(1.05);
-    }
+/* ---------- ACCORDION FAQ ---------- */
+details{background:rgba(255,255,255,.05);border-radius:8px;padding:1rem 1.4rem;}
+details+details{margin-top:1rem;}
+details summary{cursor:pointer;font-weight:600;font-size:1.05rem;outline:none;}
+details[open]{box-shadow:0 0 0 1px rgba(255,255,255,.2);}
+details p{margin-top:.8rem;}
 
-    .back-link {
-      margin-top: 1.5rem;
-      color: white;
-      text-decoration: none;
-      display: inline-block;
-      padding: 0.6rem 1.2rem;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(12px);
-      transition: 0.3s;
-      animation: fadeIn 3s ease-out;
-    }
+/* ---------- RETURN TOP LINK ---------- */
+.top-link{text-align:center;margin:3rem 0 1rem;font-size:.9rem;}
+.top-link a{color:#ccc;text-decoration:none;border-bottom:1px dashed #ccc;}
+.top-link a:hover{color:#fff;border-color:#fff}
 
-    .back-link:hover {
-      background: rgba(255, 255, 255, 0.25);
-      box-shadow: 0 0 10px white;
-    }
-
-    footer {
-      position: absolute;
-      bottom: 1rem;
-      font-size: 0.85rem;
-      color: white;
-      text-shadow: 0 0 4px black;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+/* ---------- FOOTER ---------- */
+footer{text-align:center;padding:1rem 8vw;font-size:.85rem;color:#aaa;background:transparent;border-top:1px solid rgba(255,255,255,.15);}
+</style>
 </head>
 <body>
 
-  <h1>Contact & Support</h1>
+<canvas id="starCanvas"></canvas>
 
-  <div class="form-container">
-    <form onsubmit="event.preventDefault(); alert('Message sent successfully!'); this.reset();">
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
-      <textarea placeholder="Write your message here..." required></textarea>
-      <button type="submit" class="btn">Send Message</button>
-    </form>
-    <a href="index.html" class="back-link">⬅️ Back to Home</a>
-  </div>
+<!-- NAV -->
+<header class="animate__animated animate__fadeInDown">
+  <div class="logo">NuvexaOS</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="help.html" class="active">Help</a>
+  </nav>
+</header>
 
-  <footer>© 2025 NuvexaOS — We’ve got your back!</footer>
+<!-- MAIN CONTENT -->
+<main>
+  <!-- INTRO -->
+  <section class="animate__animated animate__fadeInUp">
+    <h2>Welcome to the NuvexaOS Help Center 👋</h2>
+    <p>
+      This page walks you through installation, core concepts, tips & tricks, and troubleshooting.
+      Whether you’re a casual user or a power tweaker, you’ll find answers here.
+    </p>
+  </section>
+
+  <!-- QUICK START -->
+  <section class="animate__animated animate__fadeInUp animate__delay-1s" id="quickstart">
+    <h2>🚀 Quick Start</h2>
+    <ol>
+      <li><b>Download the ISO</b> from the <i>Home</i> page.</li>
+      <li><b>Flash it</b> to a USB drive (we recommend <a style="color:#8cf" href="https://www.balena.io/etcher/">Etcher</a>).</li>
+      <li>Boot your PC from USB &rarr; select <b>“Install NuvexaOS”</b>.</li>
+      <li>Follow the wizard: choose disk&nbsp;↔&nbsp;username&nbsp;↔&nbsp;password.</li>
+      <li>Reboot &amp; enjoy your new cosmic desktop ✨.</li>
+    </ol>
+  </section>
+
+  <!-- CORE CONCEPTS -->
+  <section class="animate__animated animate__fadeInUp animate__delay-2s">
+    <h2>🧠 Core Concepts</h2>
+    <ul class="check">
+      <li><b>Micro-kernel&nbsp;2.0</b> — drivers/userspace are isolated; crashes never kill the OS.</li>
+      <li><b>Container-first apps</b> — each GUI app ships in its own sandbox for zero-trust security.</li>
+      <li><b>Hot-patching</b> — system libraries update without reboot (finally!).</li>
+      <li><b>Adaptive UI</b> — light, dark, or full neon detected by ambient-light sensor.</li>
+    </ul>
+  </section>
+
+  <!-- POWER TIPS -->
+  <section class="animate__animated animate__fadeInUp animate__delay-3s">
+    <h2>⚡ Power Tips</h2>
+    <ul class="check">
+      <li><kbd>Super + Space</kbd> toggles color-themes instantly.</li>
+      <li><kbd>Super + H/J/K/L</kbd> tiling manager moves windows à la Vim.</li>
+      <li><b>Snapshot Manager</b> in Settings &rarr; Backup &amp; Rollback like Time Machine.</li>
+      <li><b>Nux CLI</b> lets you script install apps: <code>nux install blender</code>.</li>
+    </ul>
+  </section>
+
+  <!-- FAQ -->
+  <section class="animate__animated animate__fadeInUp animate__delay-4s">
+    <h2>❓ FAQ</h2>
+
+    <details>
+      <summary>Does NuvexaOS work on my old laptop?</summary>
+      <p>
+        If it can boot from a 64-bit UEFI stick and has at least 4 GB of RAM, you’re good. The kernel
+        scales down gracefully for older CPUs (SSE4.2 or newer).
+      </p>
+    </details>
+
+    <details>
+      <summary>Can I dual-boot with Windows or Linux?</summary>
+      <p>
+        Yep! The installer detects existing OSes and adds them to the COSMOS boot menu automatically.
+        Just be sure to <b>shrink</b> an existing partition first or have free space.
+      </p>
+    </details>
+
+    <details>
+      <summary>How do I update?</summary>
+      <p>
+        Updates arrive OTA weekly. You’ll get a toast; click “Apply”. Hot-patching means no reboot
+        unless a GPU driver changes.
+      </p>
+    </details>
+
+    <details>
+      <summary>I broke something. How do I recover?</summary>
+      <p>
+        Boot while holding <kbd>Shift</kbd> → choose <b>“Rollback”</b>. Pick any snapshot from the last 30 days.
+        Your personal files stay intact.
+      </p>
+    </details>
+  </section>
+
+  <!-- RETURN TOP -->
+  <div class="top-link"><a href="#">↑ Back to top</a></div>
+</main>
+
+<!-- FOOTER -->
+<footer>© 2025 Nuvexa Labs · Built with ❤️ and star-dust</footer>
+
+<!-- ---------- JS: same star & shooting-star engine as index ---------- -->
+<script>
+const canvas = document.getElementById('starCanvas');
+const ctx    = canvas.getContext('2d');
+let w,h,stars=[],shooters=[];function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}
+addEventListener('resize',resize);resize();
+class Star{constructor(){this.reset()}reset(){this.x=Math.random()*w;this.y=Math.random()*h;this.s=Math.random()<.7?1:2;this.sp=.02+Math.random()*.05;this.al=.3+Math.random()*.7;this.t=0}upd(){this.x-=this.sp;this.y+=this.sp;if(this.x<0||this.y>h){this.x=Math.random()*w;this.y=0}this.t+=.05;this.al=.4+.3*Math.sin(this.t)}draw(){ctx.globalAlpha=this.al;ctx.fillStyle='#fff';ctx.fillRect(this.x,this.y,this.s,this.s)}}class Shoot{constructor(){this.reset()}reset(){this.x=Math.random()*w*0.8+w*.2;this.y=-20;this.len=150+Math.random()*120;this.sp=4+Math.random()*3;this.t=[];this.life=0;this.max=120}upd(){this.life++;this.x-=this.sp;this.y+=this.sp;this.t.push({x:this.x,y:this.y,l:0});this.t.forEach(e=>e.l++);if(this.t.length>10)this.t.shift();if(this.y>h+this.len||this.life>this.max)this.reset()}draw(){ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(this.x,this.y);ctx.lineTo(this.x-this.len*.2,this.y-this.len*.2);ctx.stroke();ctx.lineWidth=1;this.t.forEach(e=>{ctx.globalAlpha=1-e.l/10;ctx.beginPath();ctx.moveTo(e.x,e.y);ctx.lineTo(e.x-this.len*.2,e.y-this.len*.2);ctx.stroke()});ctx.globalAlpha=1}}
+function init(){stars=Array.from({length:160},()=>new Star());shooters=[new Shoot()]}init();
+function anim(){ctx.clearRect(0,0,w,h);stars.forEach(s=>{s.upd();s.draw()});if(Math.random()<.004&&shooters.length<3)shooters.push(new Shoot());shooters.forEach(s=>{s.upd();s.draw()});requestAnimationFrame(anim)}anim();
+</script>
 
 </body>
 </html>

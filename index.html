@@ -3,90 +3,98 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NuvexaOS — Clean & Light</title>
+  <title>NuvexaOS — Clean but Cool</title>
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet" />
-  <!-- Animate.css for simple entry effects -->
+  <!-- Animate.css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
   <style>
-  /* ==== Theme vars ==== */
+  /* ------------- Theme vars ------------- */
   :root{
     --accent:#5b7bff;
-    --accent-light:#a9b7ff;
+    --accent-dark:#4764ff;
     --txt:#222;
-    --bg:#fff;
   }
 
-  /* ==== Global reset ==== */
+  /* ------------- Global reset ------------- */
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   body{
     font-family:"Inter",sans-serif;
-    background:var(--bg);
     color:var(--txt);
-    display:flex;flex-direction:column;min-height:100vh;  /* footer pin */
+    min-height:100vh;
+    display:flex;flex-direction:column;
     overflow-x:hidden;
+    position:relative;               /* for ::before background */
   }
 
-  /* ==== Nav ==== */
+  /* ------------- ✨ Animated gradient background ------------- */
+  body::before{
+    content:"";
+    position:fixed;inset:0;z-index:-2;
+    background:linear-gradient(120deg,#f0f4ff 0%,#e9f2ff 30%,#fff2f8 60%,#fffceb 100%);
+    background-size:400% 400%;
+    animation:bgShift 15s ease-in-out infinite;
+  }
+  @keyframes bgShift{
+    0%,100%{background-position:0% 50%}
+    50%    {background-position:100% 50%}
+  }
+
+  /* subtle noise layer */
+  body::after{
+    content:"";
+    position:fixed;inset:0;z-index:-1;
+    background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+XMXkAAAAASUVORK5CYII=");
+    opacity:.25;
+    mix-blend-mode:overlay;
+  }
+
+  /* ------------- Nav ------------- */
   header{
     position:fixed;top:0;left:0;width:100%;z-index:10;
-    background:rgba(255,255,255,0.9);backdrop-filter:blur(8px);
+    backdrop-filter:blur(10px);
+    background:rgba(255,255,255,.9);
     border-bottom:1px solid #e4e7ee;
     padding:1.1rem 6vw;
     display:flex;justify-content:space-between;align-items:center;
   }
-  .logo{
-    font-weight:900;font-size:1.2rem;
-    color:var(--accent);
-  }
+  .logo{font-weight:900;font-size:1.2rem;color:var(--accent);}
   nav a{
-    text-decoration:none;
-    font-weight:600;
-    color:var(--txt);
-    padding:.5rem 1rem;
-    border-radius:8px;
-    transition:background .25s;
+    text-decoration:none;font-weight:600;color:var(--txt);
+    padding:.5rem 1rem;border-radius:8px;transition:background .25s;
   }
   nav a:hover{background:#f1f3fa}
 
-  /* ==== Hero ==== */
+  /* ------------- Hero ------------- */
   .hero{
-    flex:1;                   /* so footer sticks bottom */
+    flex:1;
     display:flex;flex-direction:column;justify-content:center;align-items:center;
-    text-align:center;padding:0 8vw;
-    gap:2rem;
+    text-align:center;padding:0 8vw;gap:2rem;
   }
   h1{
-    font-size:clamp(2.5rem,7vw,4.5rem);
-    font-weight:900;
-    line-height:1.1;
+    font-size:clamp(2.5rem,7vw,4.5rem);font-weight:900;line-height:1.1;
   }
   h1 span{color:var(--accent)}
-  p.tagline{max-width:680px;font-size:1.15rem;opacity:.8}
+  p.tagline{max-width:680px;font-size:1.15rem;opacity:.85}
   .cta-btn{
-    padding:.95rem 2.6rem;
-    font-size:1.05rem;font-weight:700;
-    color:#fff;background:var(--accent);
-    border:none;border-radius:12px;cursor:pointer;
+    padding:.95rem 2.6rem;font-size:1.05rem;font-weight:700;
+    color:#fff;background:var(--accent);border:none;border-radius:12px;cursor:pointer;
     box-shadow:0 8px 16px rgba(91,123,255,.25);
-    transition:transform .25s,box-shadow .25s,background .25s;
+    transition:.25s;
   }
   .cta-btn:hover{
     transform:translateY(-3px);
     box-shadow:0 12px 24px rgba(91,123,255,.35);
-    background:#4764ff;
+    background:var(--accent-dark);
   }
 
-  /* ==== Footer ==== */
+  /* ------------- Footer ------------- */
   footer{
-    text-align:center;
-    padding:1rem 8vw;
-    font-size:.85rem;
-    color:#666;
-    border-top:1px solid #e4e7ee;
-    margin-top:auto;          /* push to bottom */
+    text-align:center;padding:1rem 8vw;font-size:.85rem;color:#666;
+    border-top:1px solid #e4e7ee;margin-top:auto;
+    background:rgba(255,255,255,.9);backdrop-filter:blur(10px);
   }
   </style>
 </head>
@@ -95,27 +103,23 @@
   <!-- Nav -->
   <header class="animate__animated animate__fadeInDown">
     <div class="logo">NuvexaOS</div>
-    <nav>
-      <a href="features.html">Overview</a>
-    </nav>
+    <nav><a href="features.html">Overview</a></nav>
   </header>
 
   <!-- Hero -->
   <section class="hero">
     <h1 class="animate__animated animate__fadeInUp">Your computer, <span>reborn</span>.</h1>
     <p class="tagline animate__animated animate__fadeInUp animate__delay-1s">
-      NuvexaOS boots in seconds, keeps every process isolated for zero-trust security,<br>
+      NuvexaOS boots in seconds, isolates every process for zero-trust security,<br>
       and gives you a sleek, distraction-free workspace.
     </p>
     <button class="cta-btn animate__animated animate__fadeInUp animate__delay-2s">
-      Download Beta ISO
+      Download&nbsp;Beta&nbsp;ISO
     </button>
   </section>
 
   <!-- Footer -->
-  <footer>
-    © 2025 Nuvexa Labs · Built with ❤️ and clean design
-  </footer>
+  <footer>© 2025 Nuvexa Labs · Built with ❤️ and clean design</footer>
 
 </body>
 </html>

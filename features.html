@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NuvexaOS — Features</title>
+
+<!-- Font + Animate.css -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<style>
+/* ---------- THEME ---------- */
+:root{--accent:#5f7cff;--accent-dark:#374eff;--txt:#fff;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"Inter",sans-serif;color:var(--txt);
+  background:#000;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;
+}
+/* ---------- Nebula blobs (same as other pages) ---------- */
+body::before,body::after{
+  content:"";position:fixed;z-index:-4;pointer-events:none;
+  width:80vmax;height:80vmax;border-radius:50%;
+  filter:blur(120px) saturate(140%);transform:translate(-40%,-40%);
+}
+body::before{top:0;left:0;background:radial-gradient(circle at 30% 30%,#7a2eff 0%,#0047ff 60%,transparent 80%);}
+body::after{bottom:-20vmax;right:-20vmax;background:radial-gradient(circle at 70% 70%,#00ffd5 0%,#0089ff 50%,transparent 80%);}
+/* ---------- Star canvas ---------- */
+#starCanvas{position:fixed;inset:0;z-index:-3;pointer-events:none}
+
+/* ---------- NAV ---------- */
+header{
+  position:fixed;top:0;left:0;width:100%;z-index:10;
+  padding:1.2rem 6vw;display:flex;justify-content:space-between;align-items:center;background:transparent;
+}
+.logo{font-weight:900;font-size:1.2rem;color:var(--accent);}
+nav a{
+  color:#ccc;text-decoration:none;font-weight:600;padding:.45rem 1rem;border-radius:8px;transition:background .25s;
+}
+nav a.active{background:rgba(255,255,255,.25)}
+nav a:hover{background:rgba(255,255,255,.2)}
+
+/* ---------- HERO / INTRO ---------- */
+.intro{
+  flex:0 0 auto;padding:7.5rem 8vw 5rem;text-align:center;
+}
+.intro h1{font-size:clamp(2.8rem,7vw,4.8rem);font-weight:900;margin-bottom:.7rem;}
+.intro h1 span{color:var(--accent)}
+.intro p{font-size:1.2rem;max-width:720px;margin:0 auto;opacity:.85}
+
+/* ---------- FEATURE CARDS GRID ---------- */
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.2rem;
+  padding:0 8vw 6rem;
+}
+.card{
+  background:rgba(255,255,255,.05);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.12);
+  padding:2.4rem 2rem;border-radius:16px;text-align:center;
+  transition:transform .35s,box-shadow .35s;
+}
+.card:hover{transform:translateY(-6px) rotateX(4deg) rotateY(-2deg);box-shadow:0 12px 28px rgba(0,0,0,.4);}
+.card i{
+  font-size:2.3rem;margin-bottom:1rem;color:var(--accent);
+}
+.card h3{font-size:1.3rem;margin-bottom:.6rem;}
+.card p{font-size:.97rem;opacity:.9;line-height:1.55;}
+
+/* ---------- DEEP DIVE SECTIONS ---------- */
+section.deep{max-width:900px;margin:0 auto 5rem;padding:0 8vw;}
+section.deep h2{font-size:2rem;margin-bottom:1rem;color:var(--accent);}
+section.deep p,section.deep li{font-size:1.05rem;line-height:1.6;opacity:.9}
+ul.bullet{padding-left:1.2rem}
+ul.bullet li{list-style:disc}
+
+/* ---------- FOOTER ---------- */
+footer{text-align:center;padding:1rem 8vw;font-size:.85rem;color:#aaa;margin-top:auto;background:transparent;border-top:1px solid rgba(255,255,255,.15);}
+</style>
+</head>
+<body>
+
+<canvas id="starCanvas"></canvas>
+
+<!-- NAV -->
+<header class="animate__animated animate__fadeInDown">
+  <div class="logo">NuvexaOS</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="features.html" class="active">Features</a>
+    <a href="help.html">Help</a>
+  </nav>
+</header>
+
+<!-- INTRO HERO -->
+<div class="intro animate__animated animate__fadeInUp">
+  <h1>Explore the <span>Power</span> of NuvexaOS</h1>
+  <p>The next-gen desktop OS engineered for speed, security, and sheer wow-factor.</p>
+</div>
+
+<!-- FEATURE CARD GRID -->
+<div class="grid">
+  <div class="card animate__animated animate__zoomIn">
+    <i class="fas fa-bolt"></i>
+    <h3>Instant Boot</h3>
+    <p>Micro-kernel 2.0 gets you from cold power-on to desktop in <b>&lt; 4 s</b>.</p>
+  </div>
+  <div class="card animate__animated animate__zoomIn" style="animation-delay:.1s">
+    <i class="fas fa-lock"></i>
+    <h3>Zero-Trust Security</h3>
+    <p>Every app runs in its own container; system calls are ACL-checked in real-time.</p>
+  </div>
+  <div class="card animate__animated animate__zoomIn" style="animation-delay:.2s">
+    <i class="fas fa-sync-alt"></i>
+    <h3>Hot-Patch Updates</h3>
+    <p>Kernel, drivers, libraries—patched live. Reboot only when you <i>want</i> to.</p>
+  </div>
+  <div class="card animate__animated animate__zoomIn" style="animation-delay:.3s">
+    <i class="fas fa-palette"></i>
+    <h3>Adaptive UI</h3>
+    <p>Light, dark, or full-neon themes auto-switch based on ambient-light sensor.</p>
+  </div>
+  <div class="card animate__animated animate__zoomIn" style="animation-delay:.4s">
+    <i class="fas fa-rocket"></i>
+    <h3>GPU First</h3>
+    <p>Wayland 2 renderer offloads compositing to your GPU for buttery 144 Hz motions.</p>
+  </div>
+  <div class="card animate__animated animate__zoomIn" style="animation-delay:.5s">
+    <i class="fas fa-history"></i>
+    <h3>Snapshots &amp; Rollback</h3>
+    <p>One-click restore to any of the last <b>30 days</b>—no data loss, no panic.</p>
+  </div>
+</div>
+
+<!-- DEEP DIVE -->
+<section class="deep animate__animated animate__fadeInUp">
+  <h2>Why It Feels So Fast</h2>
+  <p>
+    Traditional monolithic kernels juggle drivers, memory, scheduling and more inside one space—great for 1991, not so much today.  
+    NuvexaOS flips that by running drivers and system services in isolated <b>micro-servers</b>. If your Wi-Fi driver seg-faults, your desktop is still alive.
+  </p>
+  <ul class="bullet">
+    <li><b>Pre-emptive zero-copy</b> channels slash context-switch overhead.</li>
+    <li><b>MsgQ batching</b> coalesces interrupts—lower latency on AMD &amp; Intel CPUs.</li>
+    <li><b>zRAM 2</b> transparently compresses idle pages, saving up to 40 % RAM.</li>
+  </ul>
+</section>
+
+<section class="deep animate__animated animate__fadeInUp animate__delay-1s">
+  <h2>Security That Doesn’t Nag</h2>
+  <p>
+    Forget root passwords on every sudo. The <b>Nux Policy Engine</b> evaluates app manifests
+    once at launch, then silently enforces them via eBPF filters. Less “Allow/Deny?” pop-ups, more coding—or gaming.
+  </p>
+  <ul class="bullet">
+    <li>Per-app <b>VPN routing</b></li>
+    <li>Automatic <b>key-rotation</b> for SSH/PGP</li>
+    <li>Kernel-level <b>anti-cheat bypass</b> for online games (so BattleEye’s happy)</li>
+  </ul>
+</section>
+
+<section class="deep animate__animated animate__fadeInUp animate__delay-2s">
+  <h2>Design Language: HoloGlass™</h2>
+  <p>
+    Windows float like glass shards lit by distant nebulae. Yet everything stays crisp on SDR
+    and HDR monitors thanks to dynamic tone-mapping. Oh, and yes—animations are 120 Hz-ready.
+  </p>
+</section>
+
+<!-- BACK TO TOP -->
+<div style="text-align:center;margin-bottom:3rem;">
+  <a href="#" style="color:#ccc;text-decoration:none;border-bottom:1px dashed #ccc;">↑ Back to top</a>
+</div>
+
+<!-- FOOTER -->
+<footer>© 2025 Nuvexa Labs · All the stars belong to you</footer>
+
+<!-- ---------- JS: same star & shooting-star engine ---------- -->
+<script>
+const canvas=document.getElementById('starCanvas'),ctx=canvas.getContext('2d');let w,h,s=[],shoot=[];function rs(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}addEventListener('resize',rs);rs();
+class Star{constructor(){this.rst()}rst(){this.x=Math.random()*w;this.y=Math.random()*h;this.sz=Math.random()<.7?1:2;this.sp=.02+Math.random()*.05;this.t=0}up(){this.x-=this.sp;this.y+=this.sp;if(this.x<0||this.y>h){this.x=Math.random()*w;this.y=0}this.t+=.05;this.al=.4+.3*Math.sin(this.t)}dr(){ctx.globalAlpha=this.al;ctx.fillStyle='#fff';ctx.fillRect(this.x,this.y,this.sz,this.sz)}}class Shoot{constructor(){this.rst()}rst(){this.x=Math.random()*w*0.8+w*.2;this.y=-20;this.len=150+Math.random()*120;this.sp=4+Math.random()*3;this.tr=[];this.l=0;this.ml=120}up(){this.l++;this.x-=this.sp;this.y+=this.sp;this.tr.push({x:this.x,y:this.y,l:0});this.tr.forEach(t=>t.l++);if(this.tr.length>10)this.tr.shift();if(this.y>h+this.len||this.l>this.ml)this.rst()}dr(){ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(this.x,this.y);ctx.lineTo(this.x-this.len*.2,this.y-this.len*.2);ctx.stroke();ctx.lineWidth=1;this.tr.forEach(t=>{ctx.globalAlpha=1-t.l/10;ctx.beginPath();ctx.moveTo(t.x,t.y);ctx.lineTo(t.x-this.len*.2,t.y-this.len*.2);ctx.stroke()});ctx.globalAlpha=1}}
+function init(){s=Array.from({length:160},()=>new Star());shoot=[new Shoot()]}init();
+(function anim(){ctx.clearRect(0,0,w,h);s.forEach(st=>{st.up();st.dr()});if(Math.random()<.004&&shoot.length<3)shoot.push(new Shoot());shoot.forEach(sh=>{sh.up();sh.dr()});requestAnimationFrame(anim)})();
+</script>
+</body>
+</html>

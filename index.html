@@ -3,48 +3,47 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>NuvexaOS — Drifting Starfield</title>
+<title>NuvexaOS — Cosmic Nebula</title>
 
 <!-- Font & Animate.css -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
 <style>
-/* ───────── THEME ───────── */
+/* ——— THEME ——— */
 :root{
   --accent:#5f7cff;
   --accent-dark:#374eff;
   --txt:#fff;
 }
 
-/* ───────── GLOBAL ───────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{
   font-family:"Inter",sans-serif;color:var(--txt);
-  background:#000;                        /* space black */
+  background:#000;                       /* pitch-black space */
   min-height:100vh;display:flex;flex-direction:column;overflow:hidden;
 }
 
-/* ───────── STAR BASE STYLE ───────── */
-#stars-wrapper{position:fixed;inset:0;z-index:-3;pointer-events:none;}
-.star{
-  position:absolute;border-radius:50%;background:#fff;
-  animation-name:twinkle, drift;
-  animation-timing-function:linear,linear;
-  animation-iteration-count:infinite,infinite;
+/* ——— COLOR NEBULAS (just two big blurred blobs) ——— */
+body::before,body::after{
+  content:"";position:fixed;z-index:-4;pointer-events:none;
+  width:80vmax;height:80vmax;border-radius:50%;
+  filter:blur(120px) saturate(140%);
+  transform:translate(-40%, -40%);
 }
-/* twinkle keyframes */
-@keyframes twinkle{
-  0%,100%{opacity:.9;transform:scale(1)}
-  50%    {opacity:.25;transform:scale(.6)}
+body::before{
+  background:radial-gradient(circle at 30% 30%,#7a2eff 0%,#0047ff 60%,transparent 80%);
+  top:0;left:0;
 }
-/* drift keyframes: slow diagonal left→down */
-@keyframes drift{
-  from{transform:translate(0,0)}
-  to  {transform:translate(-200vw,200vh)}  /* long path → wrap late */
+body::after{
+  background:radial-gradient(circle at 70% 70%,#00ffd5 0%,#0089ff 50%,transparent 80%);
+  bottom:-20vmax;right:-20vmax;
 }
 
-/* ───────── NAV ───────── */
+/* ——— STAR CANVAS ——— */
+#starCanvas{position:fixed;inset:0;z-index:-3;pointer-events:none}
+
+/* ——— NAV ——— */
 header{
   position:fixed;top:0;left:0;width:100%;z-index:10;
   padding:1.2rem 6vw;display:flex;justify-content:space-between;align-items:center;
@@ -54,7 +53,7 @@ header{
 nav a{color:#ccc;text-decoration:none;font-weight:600;padding:.45rem 1rem;border-radius:8px;transition:background .25s;}
 nav a:hover{background:rgba(255,255,255,.2)}
 
-/* ───────── HERO ───────── */
+/* ——— HERO ——— */
 .hero{
   flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;
   text-align:center;padding:0 8vw;gap:2.2rem;
@@ -67,14 +66,14 @@ p.tagline{max-width:680px;font-size:1.15rem;opacity:.85}
   background:var(--accent);color:#fff;box-shadow:0 6px 14px rgba(95,124,255,.4);transition:.25s;}
 .cta-btn:hover{transform:translateY(-4px);background:var(--accent-dark);box-shadow:0 10px 24px rgba(95,124,255,.5);}
 
-/* ───────── FOOTER ───────── */
+/* ——— FOOTER ——— */
 footer{text-align:center;padding:1rem 8vw;font-size:.85rem;color:#aaa;margin-top:auto;background:transparent;border-top:1px solid rgba(255,255,255,.15);}
 </style>
 </head>
 <body>
 
-<!-- ★ dynamic starfield -->
-<div id="stars-wrapper"></div>
+<!-- ★ star canvas -->
+<canvas id="starCanvas"></canvas>
 
 <!-- Nav -->
 <header class="animate__animated animate__fadeInDown">
@@ -97,37 +96,102 @@ footer{text-align:center;padding:1rem 8vw;font-size:.85rem;color:#aaa;margin-top
 <!-- Footer -->
 <footer>© 2025 Nuvexa Labs · Built with ❤️ in the cosmos</footer>
 
-<!-- ───────── JS: build moving twinkling stars ───────── -->
+<!-- ——— JS: draw stars + shooting stars ——— -->
 <script>
-(function makeStars(){
-  const wrapper = document.getElementById('stars-wrapper');
-  const STAR_COUNT = 160;                // tweak density here
-  const radii     = [1,1,1,2,2,3];       // weight toward smaller stars
-  for(let i=0;i<STAR_COUNT;i++){
-    const star = document.createElement('div');
-    const r    = radii[Math.floor(Math.random()*radii.length)];
-    const xPos = Math.random()*100;      // vw
-    const yPos = Math.random()*100;      // vh
-    const twinkleDur = 3 + Math.random()*5;   // 3-8 s
-    const driftDur   = 30 + Math.random()*60; // 30-90 s
-    const offset     = Math.random()*driftDur * -1; // random start phase
+const canvas = document.getElementById('starCanvas');
+const ctx     = canvas.getContext('2d');
+let w, h, stars = [], shooting = [];
 
-    star.className = 'star';
-    star.style.width = star.style.height = r + 'px';
-    star.style.left  = xPos + 'vw';
-    star.style.top   = yPos + 'vh';
+function resize(){
+  w = canvas.width  = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+window.addEventListener('resize',resize); resize();
 
-    star.style.animationDuration = `${twinkleDur}s, ${driftDur}s`;
-    star.style.animationDelay    = `0s, ${offset}s`;
-
-    // occasional colored stars
-    const tint = Math.random();
-    if(tint < .04)      star.style.background = '#8bb8ff'; // blue
-    else if(tint < .08) star.style.background = '#ffd9a3'; // pale gold
-
-    wrapper.appendChild(star);
+class Star{
+  constructor(){
+    this.reset();
   }
-})();
+  reset(){
+    this.x = Math.random()*w;
+    this.y = Math.random()*h;
+    this.size = Math.random()<0.7 ? 1 : 2;            // 70 % small, 30 % medium
+    this.speed = 0.02 + Math.random()*0.05;           // drifting speed
+    this.alpha = 0.1 + Math.random()*0.9;
+    this.twinkle = 0;
+  }
+  update(){
+    this.x -= this.speed;
+    this.y += this.speed;
+    // wrap
+    if(this.x<0||this.y>h){this.x=Math.random()*w;this.y=0;}
+    // twinkle
+    this.twinkle += 0.05 + Math.random()*0.05;
+    this.alpha = 0.3 + Math.sin(this.twinkle)*0.4;
+  }
+  draw(){
+    ctx.globalAlpha = this.alpha;
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(this.x,this.y,this.size,this.size);
+  }
+}
+
+class ShootingStar{
+  constructor(){
+    this.reset();
+  }
+  reset(){
+    this.x = Math.random()*w*0.8 + w*0.2;
+    this.y = -10;
+    this.len = 200 + Math.random()*100;
+    this.speed = 4 + Math.random()*3;
+    this.trail = [];
+    this.life = 0;
+    this.maxLife = 120; // frames
+  }
+  update(){
+    this.life++;
+    this.x -= this.speed;
+    this.y += this.speed;
+    this.trail.push({x:this.x,y:this.y,life:0});
+    this.trail.forEach(t=>t.life++);
+    if(this.trail.length>10) this.trail.shift();
+    if(this.y>h+this.len || this.life>this.maxLife) this.reset();
+  }
+  draw(){
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(this.x,this.y);
+    ctx.lineTo(this.x+this.len*-0.2, this.y-this.len*0.2);
+    ctx.stroke();
+    // trail
+    ctx.lineWidth = 1;
+    this.trail.forEach(t=>{
+      ctx.globalAlpha = 1 - t.life/10;
+      ctx.beginPath();
+      ctx.moveTo(t.x,t.y);
+      ctx.lineTo(t.x+this.len*-0.2, t.y-this.len*0.2);
+      ctx.stroke();
+    });
+    ctx.globalAlpha = 1;
+  }
+}
+
+function init(){
+  stars = Array.from({length:200},()=>new Star());
+  shooting = [new ShootingStar()];
+}
+init();
+
+function animate(){
+  ctx.clearRect(0,0,w,h);
+  stars.forEach(s=>{s.update();s.draw();});
+  if(Math.random()<0.005 && shooting.length<3) shooting.push(new ShootingStar()); // spawn occasionally
+  shooting.forEach(s=>{s.update();s.draw();});
+  requestAnimationFrame(animate);
+}
+animate();
 </script>
 
 </body>

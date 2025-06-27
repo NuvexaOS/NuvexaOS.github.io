@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png"
         href="https://raw.githubusercontent.com/NuvexaOS/NuvexaOS.github.io/refs/heads/main/OS.png">
 
-  <!-- Social-share banner (only for Discord/Twitter embeds) -->
+  <!-- Social-share banner (embeds only) -->
   <meta property="og:image"
         content="https://raw.githubusercontent.com/NuvexaOS/NuvexaOS.github.io/refs/heads/main/View.png">
   <meta property="og:image:type"   content="image/png">
@@ -40,11 +40,9 @@
 
   /* Nav */
   header{position:fixed;top:0;left:0;width:100%;z-index:10;
-         padding:1.2rem 6vw;
-         display:flex;justify-content:space-between;align-items:center;}
+         padding:1.2rem 6vw;display:flex;justify-content:space-between;align-items:center;}
   .logo{font-weight:900;font-size:1.2rem;color:var(--accent);}
-  nav a{color:#ccc;text-decoration:none;font-weight:600;
-        padding:.45rem 1rem;border-radius:8px;transition:background .25s;}
+  nav a{color:#ccc;text-decoration:none;font-weight:600;padding:.45rem 1rem;border-radius:8px;transition:background .25s;}
   nav a:hover{background:rgba(255,255,255,.2)}
 
   /* Hero */
@@ -67,7 +65,6 @@
                background:var(--accent-dark);color:#fff;
                box-shadow:0 10px 24px rgba(95,124,255,.5);}
 
-  /* Footer */
   footer{text-align:center;padding:1rem 8vw;font-size:.85rem;color:#aaa;
          margin-top:auto;border-top:1px solid rgba(255,255,255,.15);}
   </style>
@@ -95,8 +92,9 @@
     <button class="btn primary animate__animated animate__fadeInUp animate__delay-2s">
       Install&nbsp;NuvexaOS
     </button>
+    <!-- UPDATED LINK ↓ -->
     <a class="btn ghost animate__animated animate__fadeInUp animate__delay-2s"
-       href="help/#quickstart">
+       href="https://nuvexaos.github.io/quickstart.html">
       How&nbsp;to&nbsp;Install
     </a>
   </div>
@@ -115,12 +113,12 @@ class Star{constructor(){this.init()}init(){this.x=Math.random()*W;this.y=Math.r
   dr(){ctx.globalAlpha=this.a;ctx.fillStyle='#fff';ctx.fillRect(this.x,this.y,this.s,this.s)}}
 class Meteor{constructor(){this.init()}init(){this.x=Math.random()*W*.8+W*.2;this.y=-20;
   this.len=150+Math.random()*120;this.v=4+Math.random()*3;this.tr=[];this.l=0;this.m=120}
-  up(){this.l++;this.x-=this.v;this.y+=this.v;this.tr.push({x:this.x,y:this.y,a:0});
-      this.tr.forEach(t=>t.a++);if(this.tr.length>10)this.tr.shift();
+  up(){this.l++;this.x-=this.v;this.y+=this.v;this.tr.push({x:this.x,y:this.y,l:0});
+      this.tr.forEach(t=>t.l++);if(this.tr.length>10)this.tr.shift();
       if(this.y>H+this.len||this.l>this.m)this.init()}
   dr(){ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.beginPath();
       ctx.moveTo(this.x,this.y);ctx.lineTo(this.x-this.len*.2,this.y-this.len*.2);ctx.stroke();
-      ctx.lineWidth=1;this.tr.forEach(t=>{ctx.globalAlpha=1-t.a/10;ctx.beginPath();
+      ctx.lineWidth=1;this.tr.forEach(t=>{ctx.globalAlpha=1-t.l/10;ctx.beginPath();
       ctx.moveTo(t.x,t.y);ctx.lineTo(t.x-this.len*.2,t.y-this.len*.2);ctx.stroke()});ctx.globalAlpha=1}}
 (function init(){ST=Array.from({length:160},()=>new Star());SH=[new Meteor()]})();
 (function loop(){ctx.clearRect(0,0,W,H);ST.forEach(s=>{s.up();s.dr()});

@@ -3,39 +3,48 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>NuvexaOS — Twinkling Starfield</title>
+<title>NuvexaOS — Drifting Starfield</title>
 
 <!-- Font & Animate.css -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
 <style>
-/* ───── THEME ───── */
+/* ───────── THEME ───────── */
 :root{
   --accent:#5f7cff;
   --accent-dark:#374eff;
   --txt:#fff;
 }
+
+/* ───────── GLOBAL ───────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{
   font-family:"Inter",sans-serif;color:var(--txt);
-  background:#000;                    /* true black */
+  background:#000;                        /* space black */
   min-height:100vh;display:flex;flex-direction:column;overflow:hidden;
 }
 
-/* ───── STAR CONTAINER & STAR STYLE ───── */
+/* ───────── STAR BASE STYLE ───────── */
 #stars-wrapper{position:fixed;inset:0;z-index:-3;pointer-events:none;}
 .star{
-  position:absolute;border-radius:50%;
-  background:#fff;
-  animation:twinkle linear infinite;
+  position:absolute;border-radius:50%;background:#fff;
+  animation-name:twinkle, drift;
+  animation-timing-function:linear,linear;
+  animation-iteration-count:infinite,infinite;
 }
+/* twinkle keyframes */
 @keyframes twinkle{
-  0%,100%{opacity:.8;transform:scale(1);}
-  50%   {opacity:.1;transform:scale(.5);}
+  0%,100%{opacity:.9;transform:scale(1)}
+  50%    {opacity:.25;transform:scale(.6)}
+}
+/* drift keyframes: slow diagonal left→down */
+@keyframes drift{
+  from{transform:translate(0,0)}
+  to  {transform:translate(-200vw,200vh)}  /* long path → wrap late */
 }
 
-/* ───── NAV ───── */
+/* ───────── NAV ───────── */
 header{
   position:fixed;top:0;left:0;width:100%;z-index:10;
   padding:1.2rem 6vw;display:flex;justify-content:space-between;align-items:center;
@@ -45,7 +54,7 @@ header{
 nav a{color:#ccc;text-decoration:none;font-weight:600;padding:.45rem 1rem;border-radius:8px;transition:background .25s;}
 nav a:hover{background:rgba(255,255,255,.2)}
 
-/* ───── HERO ───── */
+/* ───────── HERO ───────── */
 .hero{
   flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;
   text-align:center;padding:0 8vw;gap:2.2rem;
@@ -55,17 +64,16 @@ h1 span{color:var(--accent)}
 p.tagline{max-width:680px;font-size:1.15rem;opacity:.85}
 .cta-btn{
   padding:1rem 2.6rem;font-size:1.05rem;font-weight:700;border:none;border-radius:12px;cursor:pointer;
-  background:var(--accent);color:#fff;box-shadow:0 6px 14px rgba(95,124,255,.4);transition:.25s;
-}
+  background:var(--accent);color:#fff;box-shadow:0 6px 14px rgba(95,124,255,.4);transition:.25s;}
 .cta-btn:hover{transform:translateY(-4px);background:var(--accent-dark);box-shadow:0 10px 24px rgba(95,124,255,.5);}
 
-/* ───── FOOTER ───── */
+/* ───────── FOOTER ───────── */
 footer{text-align:center;padding:1rem 8vw;font-size:.85rem;color:#aaa;margin-top:auto;background:transparent;border-top:1px solid rgba(255,255,255,.15);}
 </style>
 </head>
 <body>
 
-<!-- ★ dynamic starfield container -->
+<!-- ★ dynamic starfield -->
 <div id="stars-wrapper"></div>
 
 <!-- Nav -->
@@ -89,28 +97,35 @@ footer{text-align:center;padding:1rem 8vw;font-size:.85rem;color:#aaa;margin-top
 <!-- Footer -->
 <footer>© 2025 Nuvexa Labs · Built with ❤️ in the cosmos</footer>
 
-<!-- ───── JS: generate & animate stars ───── -->
+<!-- ───────── JS: build moving twinkling stars ───────── -->
 <script>
 (function makeStars(){
   const wrapper = document.getElementById('stars-wrapper');
-  const STAR_COUNT = 200;                    // overall density
-  const sizes = [1,2,2,3];                   // mix of radii (bias towards small)
+  const STAR_COUNT = 160;                // tweak density here
+  const radii     = [1,1,1,2,2,3];       // weight toward smaller stars
   for(let i=0;i<STAR_COUNT;i++){
-    const s = document.createElement('div');
-    const radius = sizes[Math.floor(Math.random()*sizes.length)];
-    const duration = 4 + Math.random()*6;    // 4-10 s twinkle cycle
-    const delay = Math.random()*10;          // random offset
-    s.className = 'star';
-    s.style.width = s.style.height = radius + 'px';
-    s.style.left = Math.random()*100 + 'vw';
-    s.style.top  = Math.random()*100 + 'vh';
-    s.style.animationDuration = duration + 's';
-    s.style.animationDelay = -delay + 's';   // start at random phase
-    // 10 % of stars get a faint blue or yellow tint
-    const tintChance = Math.random();
-    if(tintChance<.05)      s.style.background = '#88aaff';
-    else if(tintChance<.10) s.style.background = '#ffd9a3';
-    wrapper.appendChild(s);
+    const star = document.createElement('div');
+    const r    = radii[Math.floor(Math.random()*radii.length)];
+    const xPos = Math.random()*100;      // vw
+    const yPos = Math.random()*100;      // vh
+    const twinkleDur = 3 + Math.random()*5;   // 3-8 s
+    const driftDur   = 30 + Math.random()*60; // 30-90 s
+    const offset     = Math.random()*driftDur * -1; // random start phase
+
+    star.className = 'star';
+    star.style.width = star.style.height = r + 'px';
+    star.style.left  = xPos + 'vw';
+    star.style.top   = yPos + 'vh';
+
+    star.style.animationDuration = `${twinkleDur}s, ${driftDur}s`;
+    star.style.animationDelay    = `0s, ${offset}s`;
+
+    // occasional colored stars
+    const tint = Math.random();
+    if(tint < .04)      star.style.background = '#8bb8ff'; // blue
+    else if(tint < .08) star.style.background = '#ffd9a3'; // pale gold
+
+    wrapper.appendChild(star);
   }
 })();
 </script>

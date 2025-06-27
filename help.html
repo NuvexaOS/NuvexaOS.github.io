@@ -39,15 +39,14 @@
   nav a:hover{background:rgba(255,255,255,.2)}
   nav a.active{background:rgba(255,255,255,.25)}
 
-  /* content */
+  /* content blocks */
   main{flex:1;max-width:900px;margin:8rem auto 4rem;padding:0 8vw;display:grid;gap:3.5rem;}
-  h2{font-size:1.9rem;margin-bottom:.9rem;color:var(--accent);}
+  h2{font-size:1.95rem;margin-bottom:.9rem;color:var(--accent);}
   p,li{font-size:1.05rem;line-height:1.6;opacity:.9}
   ul.check{list-style:none;padding-left:0}
   ul.check li::before{content:"✔";margin-right:.55rem;color:#0f0}
   details{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:1rem 1.4rem;}
-  details+details{margin-top:1rem}details summary{cursor:pointer;font-weight:600;}
-  details[open]{box-shadow:0 0 0 1px rgba(255,255,255,.2)}details p{margin-top:.7rem}
+  details+details{margin-top:1rem}details summary{cursor:pointer;font-weight:600;}details[open]{box-shadow:0 0 0 1px rgba(255,255,255,.2)}details p{margin-top:.7rem}
 
   footer{text-align:center;padding:1rem 8vw;font-size:.85rem;color:#aaa;
          border-top:1px solid rgba(255,255,255,.15);}
@@ -68,11 +67,49 @@
 </header>
 
 <main class="animate__animated animate__fadeInUp">
+
+  <!-- Why NuvexaOS -->
   <section>
-    <h2>Welcome to NuvexaOS Help 👋</h2>
-    <p>This page covers installation tips, core concepts, power tricks and troubleshooting.</p>
+    <h2>✨ Why choose NuvexaOS?</h2>
+    <ul class="check">
+      <li><b>4-second cold boot</b> – micro-kernel starts only the services you need.</li>
+      <li><b>Zero-trust containers</b> – malware can’t escape its sandbox.</li>
+      <li><b>Live updates</b> – apply security patches without rebooting.</li>
+      <li><b>Adaptive HoloGlass™ UI</b> – melts into dark or neon depending on lighting.</li>
+    </ul>
   </section>
 
+  <!-- What makes it different -->
+  <section>
+    <h2>🧠 What makes it different?</h2>
+    <p><b>Micro-kernel 2.0.</b> Drivers and services run as user-space “mini-servers”.  
+       If a GPU driver crashes, your desktop stays alive – the driver restarts in isolation.</p>
+    <p><b>Policy Engine.</b> Every app ships with a manifest (files, network, devices).  
+       The kernel’s eBPF layer enforces it – so no more pop-ups, just silent safety.</p>
+    <p><b>Hot-patching everywhere.</b> Kernel, Mesa, AMD/NVIDIA blobs, even libc – all patched on the fly.</p>
+  </section>
+
+  <!-- Use cases -->
+  <section>
+    <h2>🚀 Real-world use-cases</h2>
+    <ul class="check">
+      <li><b>Gaming</b> – Wayland 2 compositor + Feral Gamemode yields +12 % FPS in Apex vs Windows 11.</li>
+      <li><b>Developers</b> – Podman-native; type <code>podman compose up</code> and every container appears as a desktop window.</li>
+      <li><b>Content creators</b> – Blender Cycles gets +18 % render speed thanks to low-latency scheduler.</li>
+    </ul>
+  </section>
+
+  <!-- Performance numbers -->
+  <section>
+    <h2>📊 Performance at a glance</h2>
+    <ul class="check">
+      <li>Boot time: <b>3.9 s</b> (ThinkPad T14, NVMe SSD)</li>
+      <li>Idle RAM footprint: <b>590 MB</b></li>
+      <li>Window manager latency: <b>4 ms</b> (vs 14 ms on GNOME Wayland)</li>
+    </ul>
+  </section>
+
+  <!-- Power Tips (kept) -->
   <section>
     <h2>⚡ Power Tips</h2>
     <ul class="check">
@@ -83,10 +120,12 @@
     </ul>
   </section>
 
+  <!-- FAQ (kept) -->
   <section>
     <h2>❓ FAQ</h2>
     <details><summary>Does it run on old laptops?</summary><p>Anything 64-bit with SSE4.2 and 4 GB RAM works.</p></details>
-    <details><summary>Dual-boot support?</summary><p>Yes — the installer autodetects Windows & Linux and adds entries.</p></details>
+    <details><summary>Dual-boot support?</summary><p>Yes — the installer autodetects Windows &amp; Linux and adds entries.</p></details>
+    <details><summary>Where do updates come from?</summary><p>We push signed delta patches weekly; the Policy Engine applies them live.</p></details>
   </section>
 </main>
 

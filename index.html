@@ -1,139 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NuvexaOS — Space Edition</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NuvexaOS — Night-Sky Edition</title>
 
-  <!-- Font + Animate.css -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<!-- Font & Animate.css -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-  <style>
-  /* --------- THEME --------- */
-  :root{
-    --accent:#6e8dff;
-    --accent-dark:#3d59ff;
-    --txt:#fff;
-    --bg:#000;
-  }
+<style>
+/* ─── THEME ─── */
+:root{
+  --accent:#6e8dff;
+  --accent-dark:#3d59ff;
+  --txt:#fff;
+}
 
-  /* --------- GLOBAL RESET --------- */
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  body{
-    font-family:"Inter",sans-serif;
-    color:var(--txt);
-    background:var(--bg);
-    min-height:100vh;
-    display:flex;flex-direction:column;
-    overflow-x:hidden;
-  }
+/* ─── GLOBAL RESET ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"Inter",sans-serif;
+  color:var(--txt);
+  background:#000;                  /* pure black everywhere */
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  overflow-x:hidden;
+}
 
-  /* --------- STARFIELD LAYERS --------- */
-  .stars,
-  .stars2,
-  .stars3{
-    position:fixed;
-    top:0;left:0;right:0;bottom:0;
-    z-index:-3;               /* behind everything */
-    background:transparent;
-    animation:moveStars 60s linear infinite;
-  }
-  .stars{background-image:radial-gradient(1px 1px at 50% 50%,#fff 50%,transparent 51%);}
-  .stars2{background-image:radial-gradient(1px 1px at 50% 50%,#fff 50%,transparent 51%);
-          animation-duration:120s;opacity:.6;}
-  .stars3{background-image:radial-gradient(1px 1px at 50% 50%,#fff 50%,transparent 51%);
-          animation-duration:180s;opacity:.3;}
+/* ─── STARFIELD (three parallax layers) ─── */
+.star-layer{
+  position:fixed;inset:0;z-index:-3;      /* behind everything */
+  background-repeat:repeat;
+  animation:scrollStars linear infinite;
+}
+.star-layer:nth-child(1){background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2'%3E%3Ccircle cx='1' cy='1' r='1' fill='white'/%3E%3C/svg%3E");background-size:2px 2px;animation-duration:60s;}
+.star-layer:nth-child(2){background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2'%3E%3Ccircle cx='1' cy='1' r='1' fill='white'/%3E%3C/svg%3E");background-size:3px 3px;animation-duration:120s;opacity:.7;}
+.star-layer:nth-child(3){background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2'%3E%3Ccircle cx='1' cy='1' r='1' fill='white'/%3E%3C/svg%3E");background-size:4px 4px;animation-duration:180s;opacity:.4;}
 
-  /* tile the tiny star dot using background-size */
-  .stars,
-  .stars2,
-  .stars3{background-size:2px 2px;} /* dense star field */
+@keyframes scrollStars{
+  from{background-position:0 0}
+  to  {background-position:-10000px 5000px}
+}
 
-  @keyframes moveStars{
-    from{background-position:0 0;}
-    to  {background-position:-10000px 5000px;}
-  }
+/* ─── NAV ─── */
+header{
+  position:fixed;top:0;left:0;width:100%;z-index:10;
+  padding:1.1rem 6vw;
+  display:flex;justify-content:space-between;align-items:center;
+  background:transparent;             /* no bar tint */
+}
+.logo{font-weight:900;font-size:1.2rem;color:var(--accent);}
+nav a{
+  color:#ddd;text-decoration:none;font-weight:600;
+  padding:.5rem 1rem;border-radius:8px;transition:background .25s;}
+nav a:hover{background:rgba(255,255,255,.15)}
 
-  /* --------- NAV --------- */
-  header{
-    position:fixed;top:0;left:0;width:100%;z-index:10;
-    backdrop-filter:blur(6px);
-    background:rgba(0,0,0,.6);
-    border-bottom:1px solid rgba(255,255,255,.08);
-    padding:1.1rem 6vw;
-    display:flex;justify-content:space-between;align-items:center;
-  }
-  .logo{font-weight:900;font-size:1.2rem;color:var(--accent);}
-  nav a{
-    color:#ddd;text-decoration:none;font-weight:600;
-    padding:.5rem 1rem;border-radius:8px;transition:background .25s;
-  }
-  nav a:hover{background:rgba(255,255,255,.12)}
+/* ─── HERO ─── */
+.hero{
+  flex:1;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  text-align:center;padding:0 8vw;gap:2rem;
+}
+h1{font-size:clamp(2.5rem,7vw,4.5rem);font-weight:900;line-height:1.1;}
+h1 span{color:var(--accent)}
+p.tagline{max-width:680px;font-size:1.15rem;opacity:.85}
+.cta-btn{
+  padding:.95rem 2.6rem;font-size:1.05rem;font-weight:700;cursor:pointer;
+  border:none;border-radius:12px;background:var(--accent);color:#fff;
+  box-shadow:0 6px 14px rgba(110,141,255,.35);transition:.25s;}
+.cta-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 22px rgba(110,141,255,.45);
+  background:var(--accent-dark);
+}
 
-  /* --------- HERO --------- */
-  .hero{
-    flex:1; /* pushes footer down */
-    display:flex;flex-direction:column;justify-content:center;align-items:center;
-    text-align:center;padding:0 8vw;gap:2rem;
-  }
-  h1{
-    font-size:clamp(2.5rem,7vw,4.5rem);
-    font-weight:900;line-height:1.1;
-  }
-  h1 span{color:var(--accent)}
-  p.tagline{max-width:680px;font-size:1.15rem;opacity:.85}
-  .cta-btn{
-    padding:.95rem 2.6rem;font-size:1.05rem;font-weight:700;cursor:pointer;
-    border:none;border-radius:12px;
-    background:var(--accent);
-    color:#fff;
-    box-shadow:0 6px 14px rgba(110,141,255,.35);
-    transition:.25s;
-  }
-  .cta-btn:hover{
-    transform:translateY(-3px);
-    box-shadow:0 10px 22px rgba(110,141,255,.45);
-    background:var(--accent-dark);
-  }
-
-  /* --------- FOOTER --------- */
-  footer{
-    text-align:center;padding:1rem 8vw;
-    font-size:.85rem;color:#aaa;
-    border-top:1px solid rgba(255,255,255,.08);
-    background:rgba(0,0,0,.6);backdrop-filter:blur(6px);
-    margin-top:auto;            /* pin to bottom */
-  }
-  </style>
+/* ─── FOOTER ─── */
+footer{
+  text-align:center;padding:1rem 8vw;
+  font-size:.85rem;color:#aaa;margin-top:auto;
+  background:transparent;border-top:1px solid rgba(255,255,255,.15);
+}
+</style>
 </head>
 <body>
 
-  <!-- Starfield layers -->
-  <div class="stars"></div>
-  <div class="stars2"></div>
-  <div class="stars3"></div>
+<!-- Star layers -->
+<div class="star-layer"></div>
+<div class="star-layer"></div>
+<div class="star-layer"></div>
 
-  <!-- Nav -->
-  <header class="animate__animated animate__fadeInDown">
-    <div class="logo">NuvexaOS</div>
-    <nav><a href="features.html">Overview</a></nav>
-  </header>
+<!-- Nav -->
+<header class="animate__animated animate__fadeInDown">
+  <div class="logo">NuvexaOS</div>
+  <nav><a href="features.html">Overview</a></nav>
+</header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <h1 class="animate__animated animate__fadeInUp">Your computer, <span>reborn</span>.</h1>
-    <p class="tagline animate__animated animate__fadeInUp animate__delay-1s">
-      NuvexaOS boots in seconds, isolates every process for zero-trust security,<br>
-      and gives you a sleek workspace among the stars.
-    </p>
-    <button class="cta-btn animate__animated animate__fadeInUp animate__delay-2s">
-      Download&nbsp;Beta&nbsp;ISO
-    </button>
-  </section>
+<!-- Hero -->
+<section class="hero">
+  <h1 class="animate__animated animate__fadeInUp">Your computer, <span>reborn</span>.</h1>
+  <p class="tagline animate__animated animate__fadeInUp animate__delay-1s">
+    NuvexaOS boots in seconds, isolates every process for zero-trust security,<br>
+    and gives you a sleek workspace among the stars.
+  </p>
+  <button class="cta-btn animate__animated animate__fadeInUp animate__delay-2s">
+    Download Beta ISO
+  </button>
+</section>
 
-  <!-- Footer -->
-  <footer>© 2025 Nuvexa Labs · Built with ❤️ in the cosmos</footer>
-
+<!-- Footer -->
+<footer>© 2025 Nuvexa Labs · Built with ❤️ in the cosmos</footer>
 </body>
 </html>

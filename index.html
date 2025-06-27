@@ -51,6 +51,17 @@
   }
   nav a:hover{background:rgba(255,255,255,.2)}
 
+  /* ——— NEW: BANNER STYLE ——— */
+  .banner-img{
+    display:block;
+    width:100%;
+    max-height:260px;                 /* adjust if you want shorter/taller */
+    object-fit:cover;
+    margin-top:80px;                  /* pushes it below the fixed nav */
+    border-top:1px solid rgba(255,255,255,.15);
+    border-bottom:1px solid rgba(255,255,255,.15);
+  }
+
   /* ——— HERO ——— */
   .hero{
     flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;
@@ -90,6 +101,11 @@
   </nav>
 </header>
 
+<!-- NEW BANNER (nothing else changed) -->
+<img src="https://raw.githubusercontent.com/NuvexaOS/NuvexaOS.github.io/refs/heads/main/View.png"
+     alt="NuvexaOS banner"
+     class="banner-img">
+
 <!-- HERO -->
 <section class="hero">
   <h1 class="animate__animated animate__fadeInUp">Your computer, <span>reborn</span>.</h1>
@@ -107,6 +123,7 @@
 
 <!-- ——— JS: stars + shooting stars ——— -->
 <script>
+/* (same starfield code you already had) */
 const canvas=document.getElementById('starCanvas'),ctx=canvas.getContext('2d');let w,h,stars=[],shoot=[];
 function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}
 addEventListener('resize',resize);resize();
